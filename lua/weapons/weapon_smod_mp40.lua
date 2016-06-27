@@ -59,10 +59,10 @@ SWEP.IronSightsAng 			= Vector(0, 0, 0)
 
 SWEP.DamageFalloff			= 1000
 
-SWEP.MeleeSoundMiss			= nil
-SWEP.MeleeSoundWallHit		= nil
-SWEP.MeleeSoundFleshSmall	= nil
-SWEP.MeleeSoundFleshLarge	= nil
+SWEP.MeleeSoundMiss			= Sound("weapons/foot/foot_fire.wav")
+SWEP.MeleeSoundWallHit		= Sound("weapons/foot/foot_kickwall.wav")
+SWEP.MeleeSoundFleshSmall	= Sound("weapons/foot/foot_kickbody.wav")
+SWEP.MeleeSoundFleshLarge	= Sound("weapons/foot/foot_kickbody.wav")
 
 SWEP.HasSpecialFire			= true
 
