@@ -9,7 +9,7 @@ SWEP.Base					= "weapon_cs_base"
 SWEP.WeaponType				= "Primary"
 
 SWEP.Cost					= 2500
-SWEP.MoveSpeed				= 221
+SWEP.CSSMoveSpeed				= 221
 
 SWEP.Spawnable				= true
 SWEP.AdminOnly				= false
@@ -78,8 +78,8 @@ function SWEP:SpecialFire()
 	
 	--if not self:CanShoot() then return end
 	
-	if self:Clip1() < 10 then return end
-	self:TakePrimaryAmmo(10)
+	if self:Clip1() < 1 then return end
+	self:TakePrimaryAmmo(1)
 	self.Owner:SetAnimation(PLAYER_ATTACK1)
 	self:WeaponAnimation(self:Clip1(),ACT_VM_SECONDARYATTACK)
 
@@ -88,9 +88,9 @@ function SWEP:SpecialFire()
 			self:AddRecoil() -- Predict
 		end
 
-		local Damage = self.Primary.Damage*10
-		local Shots = 1
-		local Cone = self:HandleCone(0)
+		local Damage = self.Primary.Damage/3
+		local Shots = 3
+		local Cone = self:HandleCone(SWEP.Primary.Cone)
 		local Source = self.Owner:GetShootPos()
 		local Direction = self.Owner:GetAimVector()
 		
@@ -100,10 +100,10 @@ function SWEP:SpecialFire()
 		
 		self:EmitGunSound("beta/fire1.wav")
 		
-		self:ShootBullet(Damage*0.5,Shots,Cone,Source,Direction,self.EnableTracer)
+		self:ShootBullet(Damage,Shots,Cone,Source,Direction,self.EnableTracer)
 		self:AddHeat(Damage,Shots)
 	end
 	
-	self:SetNextPrimaryFire(CurTime() + self.Primary.Delay*10*2)
+	self:SetNextPrimaryFire(CurTime() + 0.2)
 	
 end

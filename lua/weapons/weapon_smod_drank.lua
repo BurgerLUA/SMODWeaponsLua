@@ -4,7 +4,7 @@ SWEP.Base					= "weapon_cs_base"
 SWEP.WeaponType				= "Free"
 
 SWEP.Cost					= 1500
-SWEP.MoveSpeed				= 250
+SWEP.CSSMoveSpeed			= 250
 
 SWEP.Spawnable				= true
 SWEP.AdminOnly				= false
@@ -62,7 +62,7 @@ function SWEP:PrimaryAttack()
 
 	self:WeaponDelay() -- don't predict, has delay
 	
-	self.MoveSpeed = 0
+	self.CSSMoveSpeed = 1
 	
 	self:WeaponAnimation(self:Clip1(),ACT_VM_PRIMARYATTACK)
 	self.Owner:SetAnimation(PLAYER_ATTACK1)
@@ -73,7 +73,7 @@ function SWEP:PrimaryAttack()
 	
 		timer.Simple(1, function()
 		
-			self.MoveSpeed = 250
+			self.CSSMoveSpeed = 250
 		
 			if self:IsValid() and self.Owner:IsValid() and self.Owner:Alive() and self.Owner:GetActiveWeapon() == self then
 		

@@ -9,7 +9,7 @@ SWEP.Base					= "weapon_cs_base"
 SWEP.WeaponType				= "Free"
 
 SWEP.Cost					= 0
-SWEP.MoveSpeed				= 300
+SWEP.CSSMoveSpeed				= 300
 
 SWEP.Spawnable				= true
 SWEP.AdminOnly				= false
@@ -115,9 +115,9 @@ function SWEP:SpareThink()
 
 	if self.Owner:KeyDown(IN_ATTACK2) then
 		self:SetNextPrimaryFire(CurTime() + self.IronSightTime*2)
-		self.MoveSpeed				= 300*0.25
+		self.CSSMoveSpeed				= 300*0.25
 	else
-		self.MoveSpeed				= 300
+		self.CSSMoveSpeed				= 300
 	end
 
 	if SERVER then
