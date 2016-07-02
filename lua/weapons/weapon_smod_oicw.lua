@@ -50,7 +50,7 @@ SWEP.HasSilencer 			= false
 SWEP.HasDoubleZoom			= false
 SWEP.HasSideRecoil			= true
 SWEP.HasDownRecoil			= false
-SWEP.HasSpecialFire			= true
+SWEP.HasSpecialFire			= false
 
 SWEP.BurstOverride			= 3
 SWEP.BurstConeMul			= 1
