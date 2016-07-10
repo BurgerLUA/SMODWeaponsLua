@@ -19,6 +19,7 @@ SWEP.SlotPos				= 1
 
 SWEP.ViewModel 				= "models/weapons/v_sword.mdl"
 SWEP.WorldModel				= "models/weapons/w_sword.mdl"
+SWEP.UseHands				= true
 SWEP.VModelFlip 			= false
 SWEP.HoldType				= "melee2"
 
@@ -102,6 +103,12 @@ end
 function SWEP:Reload()
 	--PrintTable(GetActivities(self))
 	--PrintTable(self:GetSequenceList())
+	--[[
+	local Viewmodel = self.Owner:GetViewModel()
+	PrintTable(Viewmodel:GetMaterials())
+	
+	Viewmodel:SetSubMaterial(2 - 1,"models/effects/vol_light001")
+	--]]
 end
 
 
@@ -165,18 +172,6 @@ function SWEP:Deploy()
 	self:SetNextPrimaryFire(CurTime() + self.Owner:GetViewModel():SequenceDuration())	
 	
 	return true
-end
-
-function GetActivities( ent )
-  local k, v, t
-
-  t = { }
-
-  for k, v in ipairs( ent:GetSequenceList( ) ) do
-    table.insert( t, { id = k, act = ent:GetSequenceActivity( k ), actname = ent:GetSequenceActivityName( k ) } )
-  end
-
-  return t
 end
 
 function SWEP:BlockDamage(Damage)
@@ -245,8 +240,6 @@ function KATANA_ScalePlayerDamage(victim,hitgroup,dmginfo)
 				local Yaw = math.abs(NewAngles.y)
 				
 				if Yaw < 30 then
-
-					--print(Damage)
 					
 					if Damage > 1 then
 						Weapon:ShootBullet(Damage, 1, 0.025, victim:GetShootPos(), victim:GetAimVector(), true)

@@ -25,8 +25,6 @@ function ENT:Initialize()
 			phys:SetVelocity( self:GetUp()*3000 )
 		end
 		
-		print(self.Owner)
-		
 		SafeRemoveEntityDelayed(self,60)
 		
 	end
