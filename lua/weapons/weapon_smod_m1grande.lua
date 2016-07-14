@@ -73,7 +73,7 @@ SWEP.IronSightTime			= 0.25
 SWEP.IronSightsPos 			= Vector(-4.95, 0, 2)
 SWEP.IronSightsAng 			= Vector(0, 0.025, 0)
 
-SWEP.DamageFalloff			= 1000
+SWEP.DamageFalloff			= 2000
 
 SWEP.DisableReloadUntilEmpty = true
 

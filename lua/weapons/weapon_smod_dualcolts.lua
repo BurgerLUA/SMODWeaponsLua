@@ -37,7 +37,7 @@ SWEP.Primary.Automatic 		= false
 SWEP.EnableTracer			= false
 
 SWEP.RecoilMul				= 1
-SWEP.SideRecoilMul			= 0.1
+SWEP.SideRecoilMul			= -1
 SWEP.VelConeMul				= 2
 SWEP.HeatMul				= 0.5
 
@@ -63,3 +63,5 @@ SWEP.IronSightsPos 			= Vector(0.75, 5, 2)
 SWEP.IronSightsAng 			= Vector(0, 0, 0)
 
 SWEP.DamageFalloff			= 1000
+
+SWEP.SideRecoilBasedOnDual	= true

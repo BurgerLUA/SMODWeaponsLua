@@ -9,7 +9,7 @@ SWEP.Base					= "weapon_cs_base"
 SWEP.WeaponType				= "Free"
 
 SWEP.Cost					= 0
-SWEP.CSSMoveSpeed				= 300
+SWEP.CSSMoveSpeed			= 220
 
 SWEP.Spawnable				= true
 SWEP.AdminOnly				= false
@@ -29,7 +29,7 @@ if CLIENT then
 	language.Add("smod_weeb_ammo","Weeb")
 end
 
-SWEP.Primary.Damage			= 50
+SWEP.Primary.Damage			= 60
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.ClipSize		= 100
 SWEP.Primary.SpareClip		= 0
@@ -122,9 +122,9 @@ function SWEP:SpareThink()
 
 	if self.Owner:KeyDown(IN_ATTACK2) then
 		self:SetNextPrimaryFire(CurTime() + self.IronSightTime*2)
-		self.CSSMoveSpeed				= 300*0.25
+		self.CSSMoveSpeed				= 220*0.25
 	else
-		self.CSSMoveSpeed				= 300
+		self.CSSMoveSpeed				= 220
 	end
 
 	if SERVER then

@@ -188,6 +188,11 @@ end
 
 function ENT:Detonate(pos)
 
+	if not pos then
+		SafeRemoveEntity(self)
+		return 
+	end
+
 	if self.Detonated then return end
 	
 	self.Detonated = true
