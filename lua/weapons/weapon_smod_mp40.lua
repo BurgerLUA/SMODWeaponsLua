@@ -77,9 +77,8 @@ function SWEP:SpecialFire()
 	self:SetNextPrimaryFire(CurTime() + 0.75)
 	self.Owner:SetAnimation(PLAYER_ATTACK1)
 	self:WeaponAnimation(self:Clip1(),ACT_VM_SECONDARYATTACK)
-	
-	--if IsFirstTimePredicted() then
-		self:NewSwing(75)
-	--end
+	self:NewSwing(75)
+	self.Owner:DoAnimationEvent( ACT_GMOD_GESTURE_MELEE_SHOVE_2HAND )
+
 
 end
