@@ -22,7 +22,7 @@ SWEP.WorldModel				= "models/weapons/w_m60.mdl"
 SWEP.VModelFlip 			= false
 SWEP.HoldType				= "shotgun"
 
-SWEP.Primary.Damage			= 40
+SWEP.Primary.Damage			= 35
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= Sound("weapons/m60/fire1.wav")
 SWEP.Primary.Cone			= 0.0075

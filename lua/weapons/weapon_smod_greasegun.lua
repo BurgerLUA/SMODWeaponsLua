@@ -22,20 +22,20 @@ SWEP.WorldModel				= "models/weapons/w_grease.mdl"
 SWEP.VModelFlip 			= false
 SWEP.HoldType				= "smg"
 
-SWEP.Primary.Damage			= 30
+SWEP.Primary.Damage			= 25
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= Sound("weapons/grease/greasegun_shoot.wav")
-SWEP.Primary.Cone			= 0.0075
+SWEP.Primary.Cone			= 0.01
 SWEP.Primary.ClipSize		= 30
 SWEP.Primary.SpareClip		= 60
 SWEP.Primary.Delay			= 1/(450/60)
 SWEP.Primary.Ammo			= "css_45acp"
 SWEP.Primary.Automatic 		= true
 
-SWEP.RecoilMul				= 0.5
+SWEP.RecoilMul				= 1
 SWEP.SideRecoilMul			= 0.25
 SWEP.VelConeMul				= 0.5
-SWEP.HeatMul				= 0.5
+SWEP.HeatMul				= 1
 
 SWEP.HasScope 				= false
 SWEP.ZoomAmount 			= 0.5
@@ -57,4 +57,4 @@ SWEP.IronSightTime			= 0.125
 SWEP.IronSightsPos 			= Vector(-4, 0, 1)
 SWEP.IronSightsAng 			= Vector(0, 0, 0)
 
-SWEP.DamageFalloff			= 1000
+SWEP.DamageFalloff			= 800

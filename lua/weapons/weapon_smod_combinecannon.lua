@@ -22,7 +22,7 @@ SWEP.WorldModel				= "models/weapons/w_pulsemg.mdl"
 SWEP.VModelFlip 			= false
 SWEP.HoldType				= "smg"
 
-SWEP.Primary.Damage			= 25
+SWEP.Primary.Damage			= 20
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= Sound("Weapon_PulseMG.Single")
 SWEP.Primary.Cone			= 0.005
@@ -58,6 +58,8 @@ SWEP.IronSightsPos 			= Vector(-3, 0, 1)
 SWEP.IronSightsAng 			= Vector(0, 0, -7)
 
 SWEP.DamageFalloff			= 1000
-SWEP.HasBuildUp				= false
 
 SWEP.TracerName 			= "AR2Tracer"
+
+SWEP.BuildUpAmount			= 30
+SWEP.HasBuildUp				= true
