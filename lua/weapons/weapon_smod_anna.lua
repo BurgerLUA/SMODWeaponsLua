@@ -8,6 +8,9 @@ SWEP.PrintName				= "MODEL 1892"
 SWEP.Base					= "weapon_cs_base"
 SWEP.WeaponType				= "Primary"
 
+SWEP.Cost					= 2350
+SWEP.CSSMoveSpeed			= 220
+
 SWEP.Spawnable				= true
 SWEP.AdminOnly				= false
 
@@ -30,7 +33,7 @@ if CLIENT then
 	language.Add("ex_4440_ammo",".44-40")
 end
 
-SWEP.Primary.Damage			= 95
+SWEP.Primary.Damage			= 75
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= Sound("Weapon_SMODAnnabelle.Single")
 SWEP.Primary.Cone			= 0

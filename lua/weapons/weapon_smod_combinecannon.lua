@@ -9,7 +9,7 @@ SWEP.Base					= "weapon_cs_base"
 SWEP.WeaponType				= "Primary"
 
 SWEP.Cost					= 2500
-SWEP.CSSMoveSpeed				= 170
+SWEP.CSSMoveSpeed			= 150
 
 SWEP.Spawnable				= true
 SWEP.AdminOnly				= false
@@ -32,10 +32,10 @@ SWEP.Primary.Delay			= 1/(800/60)
 SWEP.Primary.Ammo			= "ar2"
 SWEP.Primary.Automatic 		= true
 
-SWEP.RecoilMul				= 0.75
+SWEP.RecoilMul				= 1
 SWEP.SideRecoilMul			= 1
 SWEP.VelConeMul				= 2
-SWEP.HeatMul				= 0.25
+SWEP.HeatMul				= 1
 
 SWEP.HasScope 				= false
 SWEP.ZoomAmount 			= 0.5
@@ -59,7 +59,4 @@ SWEP.IronSightsAng 			= Vector(0, 0, -7)
 
 SWEP.DamageFalloff			= 1000
 
-SWEP.TracerName 			= "AR2Tracer"
-
-SWEP.BuildUpAmount			= 30
-SWEP.HasBuildUp				= true
+SWEP.DamageType				= 2

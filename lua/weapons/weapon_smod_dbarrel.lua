@@ -9,7 +9,7 @@ SWEP.Base					= "weapon_cs_base"
 SWEP.WeaponType				= "Primary"
 
 SWEP.Cost					= 1700
-SWEP.CSSMoveSpeed				= 230
+SWEP.CSSMoveSpeed			= 220
 
 SWEP.Spawnable				= true
 SWEP.AdminOnly				= false

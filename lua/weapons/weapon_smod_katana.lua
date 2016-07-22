@@ -6,10 +6,10 @@ end
 SWEP.Category				= "Extra Weapons"
 SWEP.PrintName				= "KATANA"
 SWEP.Base					= "weapon_cs_base"
-SWEP.WeaponType				= "Free"
+SWEP.WeaponType				= "Melee"
 
 SWEP.Cost					= 0
-SWEP.CSSMoveSpeed			= 220
+SWEP.CSSMoveSpeed			= 230
 
 SWEP.Spawnable				= true
 SWEP.AdminOnly				= false
@@ -67,9 +67,10 @@ SWEP.IronSightTime			= 0.125
 SWEP.IronSightsPos 			= Vector(0, 0, 0)
 SWEP.IronSightsAng 			= Vector(0, 0, -45)
 
-SWEP.DamageFalloff			= 1000
-
+SWEP.DamageFalloff			= 60
+SWEP.MeleeRange				= 60
 SWEP.EnableBlocking			= true
+SWEP.MeleeDelay				= 0.1
 
 function SWEP:PrimaryAttack()
 
@@ -80,13 +81,11 @@ function SWEP:PrimaryAttack()
 	
 	if not self:GetIsLeftFire() then
 		self:SendSequence("hitcenter3")
-		--self:SendSequence("misscenter1")
 		self:SetIsLeftFire(true)
 		self:SetNextPrimaryFire(CurTime() + self.Primary.Delay*0.5)
 		self:SetNextSecondaryFire(CurTime() + self.Primary.Delay)
 	else
 		self:SendSequence("hitcenter2")
-		--self:SendSequence("misscenter2")
 		self:SetIsLeftFire(false)
 		self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
 		self:SetNextSecondaryFire(CurTime() + self.Primary.Delay)
@@ -96,26 +95,17 @@ function SWEP:PrimaryAttack()
 		self:AddDurability(-1)
 	end
 	
-	--PrintTable(self.Owner:GetSequenceList())
-	
 end
 
 function SWEP:Reload()
-	--PrintTable(GetActivities(self))
-	--PrintTable(self:GetSequenceList())
-	--[[
-	local Viewmodel = self.Owner:GetViewModel()
-	PrintTable(Viewmodel:GetMaterials())
-	
-	Viewmodel:SetSubMaterial(2 - 1,"models/effects/vol_light001")
-	--]]
+	PrintTable(GetActivities(self))
 end
 
 
 function SWEP:SpareThink()
 
 	if self:GetNextPrimaryFire() + self.Primary.Delay <= CurTime() then
-		if not self:GetIsLeftFire() then
+		if self:GetIsLeftFire() then
 			self:SetIsLeftFire(false)
 		end
 	end
@@ -166,6 +156,7 @@ end
 
 function SWEP:Deploy()
 
+	self:CheckInventory()
 	self:EmitGunSound(Sound("Weapon_SMODSword.Deploy"))
 	self.Owner:DrawViewModel(true)
 	self:SendWeaponAnim(ACT_VM_DRAW)
@@ -174,7 +165,7 @@ function SWEP:Deploy()
 	return true
 end
 
-function SWEP:BlockDamage(Damage)
+function SWEP:BlockDamage(Damage,Attacker)
 	self.Owner:SetAnimation(PLAYER_ATTACK1)
 	self:SendWeaponAnim(ACT_VM_HITCENTER)
 	self:EmitGunSound(self.MeleeSoundMiss)
@@ -242,7 +233,7 @@ function KATANA_ScalePlayerDamage(victim,hitgroup,dmginfo)
 				if Yaw < 30 then
 					
 					if Damage > 1 then
-						Weapon:ShootBullet(Damage, 1, 0.025, victim:GetShootPos(), victim:GetAimVector(), true)
+						Weapon:ShootBullet(Damage, 1, 0.025, victim:GetShootPos(), victim:GetAimVector(), self.Owner)
 					end
 					
 					Weapon:BlockDamage(Damage)

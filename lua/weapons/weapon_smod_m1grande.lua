@@ -9,7 +9,7 @@ SWEP.Base					= "weapon_cs_base"
 SWEP.WeaponType				= "Primary"
 
 SWEP.Cost					= 2750
-SWEP.CSSMoveSpeed				= 230
+SWEP.CSSMoveSpeed			= 220
 
 SWEP.Spawnable				= true
 SWEP.AdminOnly				= false
@@ -40,7 +40,7 @@ SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= Sound("Weapon_Garand.Fire")
 SWEP.Primary.Cone			= 0.0025
 SWEP.Primary.ClipSize		= 8
-SWEP.Primary.SpareClip		= 8*4
+SWEP.Primary.SpareClip		= 8*5
 SWEP.Primary.Delay			= 1/6
 SWEP.Primary.Ammo			= "smod_3006"
 SWEP.Primary.Automatic 		= false
