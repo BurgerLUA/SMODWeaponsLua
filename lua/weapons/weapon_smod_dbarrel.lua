@@ -5,7 +5,7 @@ end
 
 SWEP.Category				= "Extra Weapons"
 SWEP.PrintName				= "DOUBLE BARREL"
-SWEP.Base					= "weapon_cs_base"
+SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
 
 SWEP.Cost					= 1700
@@ -29,12 +29,12 @@ SWEP.Primary.Cone			= 0.05
 SWEP.Primary.ClipSize		= 2
 SWEP.Primary.SpareClip		= 32
 SWEP.Primary.Delay			= 0.1
-SWEP.Primary.Ammo			= "css_12gauge"
+SWEP.Primary.Ammo			= "bb_12gauge"
 SWEP.Primary.Automatic 		= false
 
 SWEP.RecoilMul				= 1
 SWEP.SideRecoilMul			= 1
-SWEP.VelConeMul				= 1.25
+SWEP.MoveConeMul				= 1.25
 SWEP.HeatMul				= 1
 
 SWEP.BurstOverride			= 2

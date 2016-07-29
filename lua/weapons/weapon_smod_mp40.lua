@@ -5,7 +5,7 @@ end
 
 SWEP.Category				= "Extra Weapons"
 SWEP.PrintName				= "MP40"
-SWEP.Base					= "weapon_cs_base"
+SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
 
 SWEP.Cost					= 1500
@@ -29,12 +29,12 @@ SWEP.Primary.Cone			= 0.006
 SWEP.Primary.ClipSize		= 32
 SWEP.Primary.SpareClip		= 32*4
 SWEP.Primary.Delay			= 1/(500/60)
-SWEP.Primary.Ammo			= "css_9mm"
+SWEP.Primary.Ammo			= "bb_9mm"
 SWEP.Primary.Automatic 		= true
 
 SWEP.RecoilMul				= 1
 SWEP.SideRecoilMul			= 0.25
-SWEP.VelConeMul				= 0.5
+SWEP.MoveConeMul				= 0.5
 SWEP.HeatMul				= 1
 
 SWEP.HasScope 				= false

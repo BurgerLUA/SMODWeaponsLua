@@ -5,7 +5,7 @@ end
 
 SWEP.Category				= "Extra Weapons"
 SWEP.PrintName				= "SVD-63"
-SWEP.Base					= "weapon_cs_base"
+SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
 
 SWEP.Cost					= 5000
@@ -29,12 +29,12 @@ SWEP.Primary.Cone			= 0
 SWEP.Primary.ClipSize		= 10
 SWEP.Primary.SpareClip		= 10*4
 SWEP.Primary.Delay			= 0.75
-SWEP.Primary.Ammo			= "css_762mm"
+SWEP.Primary.Ammo			= "bb_762mm"
 SWEP.Primary.Automatic 		= true
 
 SWEP.RecoilMul 				= 1
 SWEP.SideRecoilMul			= 0.5
-SWEP.VelConeMul				= 2
+SWEP.MoveConeMul				= 2
 SWEP.HeatMul				= 1
 
 SWEP.HasScope 				= true

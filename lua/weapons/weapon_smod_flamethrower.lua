@@ -5,7 +5,7 @@ end
 
 SWEP.Category				= "Extra Weapons"
 SWEP.PrintName				= "FLAMETHROWER"
-SWEP.Base					= "weapon_cs_base"
+SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
 
 SWEP.Cost					= 2000
@@ -40,7 +40,7 @@ SWEP.Primary.Automatic 		= true
 
 SWEP.RecoilMul				= 1
 SWEP.SideRecoilMul			= 0.25
-SWEP.VelConeMul				= 1.25
+SWEP.MoveConeMul				= 1.25
 SWEP.HeatMul				= 0.5
 
 SWEP.BurstConeMul			= 0.5

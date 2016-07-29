@@ -5,7 +5,7 @@ end
 
 SWEP.Category				= "Extra Weapons"
 SWEP.PrintName				= "KATANA"
-SWEP.Base					= "weapon_cs_base"
+SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Melee"
 
 SWEP.Cost					= 0
@@ -191,7 +191,7 @@ function KATANA_ScalePlayerDamage(victim,hitgroup,dmginfo)
 		if attacker:IsPlayer() and attacker:GetActiveWeapon() and attacker:GetActiveWeapon():IsValid() then
 			WeaponAttacker = attacker:GetActiveWeapon()
 			
-			if WeaponAttacker:IsScripted() and (WeaponAttacker.Base == "weapon_cs_base" or WeaponAttacker.BurgerBase) then
+			if WeaponAttacker:IsScripted() and (WeaponAttacker.Base == "weapon_burger_core_base" or WeaponAttacker.BurgerBase) then
 				if WeaponAttacker.Primary.NumShots > 1 then
 					ShouldProceed = false
 				end

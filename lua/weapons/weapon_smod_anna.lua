@@ -5,7 +5,7 @@ end
 
 SWEP.Category				= "Extra Weapons"
 SWEP.PrintName				= "MODEL 1892"
-SWEP.Base					= "weapon_cs_base"
+SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
 
 SWEP.Cost					= 2350
@@ -47,7 +47,7 @@ SWEP.Primary.Automatic 		= false
 
 SWEP.RecoilMul				= 0.3
 SWEP.SideRecoilMul			= 0.5
-SWEP.VelConeMul				= 0.75
+SWEP.MoveConeMul				= 0.75
 SWEP.HeatMul				= 1
 SWEP.CoolMul				= 2.25
 

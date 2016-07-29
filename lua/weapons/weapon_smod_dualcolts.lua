@@ -5,7 +5,7 @@ end
 
 SWEP.Category				= "Extra Weapons"
 SWEP.PrintName				= "COLT AKIMBO"
-SWEP.Base					= "weapon_cs_base"
+SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Secondary"
 
 SWEP.Cost					= 1500
@@ -30,14 +30,14 @@ SWEP.Primary.Cone			= 0.01
 SWEP.Primary.ClipSize		= 14
 SWEP.Primary.SpareClip		= 14*4
 SWEP.Primary.Delay			= 1/10
-SWEP.Primary.Ammo			= "css_45acp"
+SWEP.Primary.Ammo			= "bb_45acp"
 SWEP.Primary.Automatic 		= false
 
 SWEP.EnableTracer			= false
 
 SWEP.RecoilMul				= 1
 SWEP.SideRecoilMul			= -1
-SWEP.VelConeMul				= 2
+SWEP.MoveConeMul				= 2
 SWEP.HeatMul				= 0.5
 
 SWEP.HasScope 				= false

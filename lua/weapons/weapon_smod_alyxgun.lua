@@ -5,7 +5,7 @@ end
 
 SWEP.Category				= "Extra Weapons"
 SWEP.PrintName				= "ALYXGUN"
-SWEP.Base					= "weapon_cs_base"
+SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Secondary"
 
 SWEP.Cost					= 2350
@@ -29,12 +29,12 @@ SWEP.Primary.Cone			= 0.0035
 SWEP.Primary.ClipSize		= 30
 SWEP.Primary.SpareClip		= 30*3
 SWEP.Primary.Delay			= 1/(800/60)
-SWEP.Primary.Ammo			= "css_57mm"
+SWEP.Primary.Ammo			= "bb_57mm"
 SWEP.Primary.Automatic 		= true
 
 SWEP.RecoilMul				= 1.5
 SWEP.SideRecoilMul			= 0.75
-SWEP.VelConeMul				= 0.5
+SWEP.MoveConeMul				= 0.5
 SWEP.HeatMul				= 1.5
 
 SWEP.HasScope 				= false

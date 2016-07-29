@@ -5,7 +5,7 @@ end
 
 SWEP.Category				= "Extra Weapons"
 SWEP.PrintName				= "M4A1 MARKSMAN"
-SWEP.Base					= "weapon_cs_base"
+SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
 
 SWEP.Cost					= 2500
@@ -29,12 +29,12 @@ SWEP.Primary.Cone			= 0.00125
 SWEP.Primary.ClipSize		= 30
 SWEP.Primary.SpareClip		= 90
 SWEP.Primary.Delay			= 1/15
-SWEP.Primary.Ammo			= "css_556mm"
+SWEP.Primary.Ammo			= "bb_556mm"
 SWEP.Primary.Automatic 		= false
 
 SWEP.RecoilMul				= 0.5
 SWEP.SideRecoilMul			= 0.5
-SWEP.VelConeMul				= 2
+SWEP.MoveConeMul				= 2
 SWEP.HeatMul				= 0.5
 SWEP.CoolMul				= 2
 

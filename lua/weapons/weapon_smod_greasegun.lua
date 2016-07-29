@@ -5,7 +5,7 @@ end
 
 SWEP.Category				= "Extra Weapons"
 SWEP.PrintName				= "GREASEGUN"
-SWEP.Base					= "weapon_cs_base"
+SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
 
 SWEP.Cost					= 1500
@@ -29,12 +29,12 @@ SWEP.Primary.Cone			= 0.01
 SWEP.Primary.ClipSize		= 30
 SWEP.Primary.SpareClip		= 60
 SWEP.Primary.Delay			= 1/(450/60)
-SWEP.Primary.Ammo			= "css_45acp"
+SWEP.Primary.Ammo			= "bb_45acp"
 SWEP.Primary.Automatic 		= true
 
 SWEP.RecoilMul				= 1
 SWEP.SideRecoilMul			= 0.25
-SWEP.VelConeMul				= 0.5
+SWEP.MoveConeMul				= 0.5
 SWEP.HeatMul				= 1
 
 SWEP.HasScope 				= false

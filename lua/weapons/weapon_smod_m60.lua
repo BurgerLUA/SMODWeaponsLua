@@ -5,7 +5,7 @@ end
 
 SWEP.Category				= "Extra Weapons"
 SWEP.PrintName				= "M60"
-SWEP.Base					= "weapon_cs_base"
+SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
 
 SWEP.Cost					= 2500
@@ -29,12 +29,12 @@ SWEP.Primary.Cone			= 0.0075
 SWEP.Primary.ClipSize		= 100
 SWEP.Primary.SpareClip		= 200
 SWEP.Primary.Delay			= 1/(500/60)
-SWEP.Primary.Ammo			= "css_762mm"
+SWEP.Primary.Ammo			= "bb_762mm"
 SWEP.Primary.Automatic 		= true
 
 SWEP.RecoilMul				= 1
 SWEP.SideRecoilMul			= 0.25
-SWEP.VelConeMul				= 5
+SWEP.MoveConeMul				= 5
 SWEP.HeatMul				= 0.25
 SWEP.CoolMul				= 2
 

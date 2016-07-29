@@ -5,7 +5,7 @@ end
 
 SWEP.Category				= "Extra Weapons"
 SWEP.PrintName				= "M1 GARAND"
-SWEP.Base					= "weapon_cs_base"
+SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
 
 SWEP.Cost					= 2750
@@ -49,7 +49,7 @@ SWEP.LastBulletSound		= Sound("Weapon_Garand.ClipDing")
 
 SWEP.RecoilMul				= 1
 SWEP.SideRecoilMul			= 0.25
-SWEP.VelConeMul				= 2
+SWEP.MoveConeMul				= 2
 SWEP.HeatMul				= 2
 
 SWEP.HasScope 				= false

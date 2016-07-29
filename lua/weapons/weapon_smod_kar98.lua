@@ -5,7 +5,7 @@ end
 
 SWEP.Category				= "Extra Weapons"
 SWEP.PrintName				= "KARABINER 98K"
-SWEP.Base					= "weapon_cs_base"
+SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
 
 SWEP.Cost					= 2750
@@ -45,7 +45,7 @@ SWEP.Primary.Automatic 		= false
 
 SWEP.RecoilMul				= 0.2
 SWEP.SideRecoilMul			= 0.25
-SWEP.VelConeMul				= 2
+SWEP.MoveConeMul				= 2
 SWEP.HeatMul				= 5
 
 SWEP.HasScope 				= false

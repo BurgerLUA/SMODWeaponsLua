@@ -5,7 +5,7 @@ end
 
 SWEP.Category				= "Extra Weapons"
 SWEP.PrintName				= "CZ 52"
-SWEP.Base					= "weapon_cs_base"
+SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Secondary"
 
 SWEP.Cost					= 1500
@@ -30,12 +30,12 @@ SWEP.Primary.Cone			= 0.005
 SWEP.Primary.ClipSize		= 8
 SWEP.Primary.SpareClip		= 8*4
 SWEP.Primary.Delay			= 0.15
-SWEP.Primary.Ammo			= "css_45acp"
+SWEP.Primary.Ammo			= "bb_45acp"
 SWEP.Primary.Automatic 		= false
 
 SWEP.RecoilMul				= 1
 SWEP.SideRecoilMul			= 1
-SWEP.VelConeMul				= 1
+SWEP.MoveConeMul				= 1
 SWEP.HeatMul				= 1
 
 SWEP.HasScope 				= false

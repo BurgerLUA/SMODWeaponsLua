@@ -1,6 +1,6 @@
 SWEP.Category				= "Extra Weapons"
 SWEP.PrintName				= "PURPLE DRANK"
-SWEP.Base					= "weapon_cs_base"
+SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Free"
 
 SWEP.Cost					= 1500
@@ -29,7 +29,7 @@ SWEP.Primary.Automatic 		= false
 
 SWEP.RecoilMul				= 1
 SWEP.SideRecoilMul			= 0.1
-SWEP.VelConeMul				= 0.5
+SWEP.MoveConeMul				= 0.5
 SWEP.HeatMul				= 1
 
 SWEP.HasScope 				= false

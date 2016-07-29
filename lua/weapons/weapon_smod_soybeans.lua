@@ -5,7 +5,7 @@ end
 
 SWEP.Category				= "Extra Weapons"
 SWEP.PrintName				= "SOY BEANS"
-SWEP.Base					= "weapon_cs_base"
+SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Free"
 
 SWEP.Cost					= 1500
@@ -44,7 +44,7 @@ SWEP.EnableTracers			= false
 
 SWEP.RecoilMul 				= -0.1
 SWEP.SideRecoilMul			= 1
-SWEP.VelConeMul				= 1
+SWEP.MoveConeMul				= 1
 SWEP.HeatMul				= 1
 
 SWEP.HasScope 				= false
