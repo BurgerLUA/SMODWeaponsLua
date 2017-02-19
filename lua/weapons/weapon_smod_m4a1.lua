@@ -34,7 +34,7 @@ SWEP.Primary.Automatic 		= false
 
 SWEP.RecoilMul				= 0.5
 SWEP.SideRecoilMul			= 0.5
-SWEP.MoveConeMul				= 2
+SWEP.MoveConeMul			= 2
 SWEP.HeatMul				= 0.5
 SWEP.CoolMul				= 2
 
@@ -53,9 +53,9 @@ SWEP.HasDownRecoil			= false
 
 SWEP.BurstOverride			= 3
 SWEP.BurstConeMul			= 1
-SWEP.BurstSpeedOverride 	= 2
-SWEP.BurstRecoilMul			= 1
-SWEP.BurstHeatMul			= 0.5
+SWEP.BurstSpeedOverride 	= 1
+SWEP.BurstRecoilMul			= 2
+SWEP.BurstHeatMul			= 1
 
 SWEP.HasIronSights 			= true
 SWEP.EnableIronCross		= true
