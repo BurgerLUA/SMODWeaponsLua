@@ -61,6 +61,13 @@ SWEP.IronSightTime			= 0.125
 SWEP.IronSightsPos 			= Vector(0.75, 5, 2)
 SWEP.IronSightsAng 			= Vector(0, 0, 0)
 
+SWEP.BurstSpeedAbs			= 1/5
+SWEP.BurstOverride			= 2
+SWEP.BurstSpeedOverride		= 0
+
 SWEP.DamageFalloff			= 1000
 
 SWEP.SideRecoilBasedOnDual	= true
+
+
+
