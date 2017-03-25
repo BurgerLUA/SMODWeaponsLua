@@ -11,7 +11,7 @@ SWEP.WeaponType				= "Free"
 SWEP.Cost					= 1500
 SWEP.CSSMoveSpeed			= 250
 
-SWEP.Spawnable				= true
+SWEP.Spawnable				= false
 SWEP.AdminOnly				= false
 
 SWEP.Slot					= 4

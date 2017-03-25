@@ -53,7 +53,7 @@ function ENT:PhysicsCollide(data, physobj)
 	
 	if self.Hit then return end
 
-	if data.HitEntity:GetClass() == "worldspawn" or data.HitEntity:GetPhysicsObject():IsValid() or data.HitEntity:GetClass() == "player" then 
+	if data.HitEntity:GetClass() == "worldspawn" or data.HitEntity:GetPhysicsObject():IsValid() then 
 		if data.HitEntity:GetClass() == self:GetClass() then return end
 	
 		self.HitP = data.HitPos

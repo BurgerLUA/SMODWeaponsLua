@@ -31,26 +31,35 @@ game.AddAmmoType({
 	tracer = TRACER_LINE_AND_WHIZ
 })
 
+game.AddAmmoType({
+	name = "smod_3006_crap",
+	dmgtype = DMG_BULLET,
+	tracer = TRACER_LINE_AND_WHIZ
+})
+
 if CLIENT then 
 	language.Add("smod_3006_ammo",".30-06 Springfield")
+	language.Add("smod_3006_crap_ammo",".30-06 Surplus")
 end
 
-SWEP.Primary.Damage			= 55
+SWEP.Primary.Damage			= 45
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= Sound("Weapon_Garand.Fire")
 SWEP.Primary.Cone			= 0.0025
 SWEP.Primary.ClipSize		= 8
-SWEP.Primary.SpareClip		= 8*5
-SWEP.Primary.Delay			= 1/6
+SWEP.Primary.SpareClip		= 8*10
+SWEP.Primary.Delay			= 1/10
 SWEP.Primary.Ammo			= "smod_3006"
 SWEP.Primary.Automatic 		= false
 
 SWEP.LastBulletSound		= Sound("Weapon_Garand.ClipDing")
 
-SWEP.RecoilMul				= 1
-SWEP.SideRecoilMul			= 0.25
-SWEP.MoveConeMul				= 2
-SWEP.HeatMul				= 2
+SWEP.RecoilMul				= 1.5
+SWEP.SideRecoilMul			= 0.5
+SWEP.MoveConeMul			= 2
+SWEP.HeatMul				= 3
+SWEP.CoolMul				= 0.75
+
 
 SWEP.HasScope 				= false
 SWEP.ZoomAmount 			= 1
@@ -97,4 +106,34 @@ function SWEP:SpecialFire()
 	self.Owner:DoAnimationEvent( ACT_GMOD_GESTURE_MELEE_SHOVE_2HAND )
 	self:NewSwing(75)
 
+end
+
+SWEP.SpecialAmmo			= {"smod_3006","smod_3006_crap"}
+
+function SWEP:SpecialDamage(damage)
+	if self:GetPrimaryAmmo() == game.GetAmmoID("smod_3006_crap") then
+		damage = damage*0.6
+	end
+	return damage
+end
+
+function SWEP:SpecialFalloff(falloff)
+	if self:GetPrimaryAmmo() == game.GetAmmoID("smod_3006_crap") then
+		falloff = falloff*0.75
+	end
+	return falloff
+end
+
+function SWEP:SpecialRecoil(recoil)
+	if self:GetPrimaryAmmo() == game.GetAmmoID("smod_3006_crap") then
+		recoil = recoil * 2
+	end
+	return recoil
+end
+
+function SWEP:SpecialConePre(cone)
+	if self:GetPrimaryAmmo() == game.GetAmmoID("smod_3006_crap") then
+		cone = cone*3
+	end
+	return cone
 end

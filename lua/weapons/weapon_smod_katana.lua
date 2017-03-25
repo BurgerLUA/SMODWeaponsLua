@@ -47,7 +47,7 @@ SWEP.Secondary.Automatic 	= false
 
 SWEP.RecoilMul				= 1
 SWEP.HasScope 				= false
-SWEP.ZoomAmount 			= 1
+SWEP.ZoomAmount 			= 0.1
 SWEP.HasCrosshair 			= true
 SWEP.HasCSSZoom 			= false
 
@@ -67,7 +67,7 @@ SWEP.IronSightTime			= 0.125
 SWEP.IronSightsPos 			= Vector(0, 0, 0)
 SWEP.IronSightsAng 			= Vector(0, 0, -45)
 
-SWEP.DamageFalloff			= 60
+SWEP.DamageFalloff			= 1000
 SWEP.MeleeRange				= 60
 SWEP.EnableBlocking			= true
 SWEP.MeleeDelay				= 0.1
@@ -77,30 +77,66 @@ function SWEP:PrimaryAttack()
 	if self:IsUsing() then return end
 	if self:GetNextPrimaryFire() > CurTime() then return end
 	if self.Owner:KeyDown(IN_ATTACK2) then return end
-	self.Owner:SetAnimation(PLAYER_ATTACK1)
+	
+	--self.Owner:SetAnimation(PLAYER_ATTACK1)
 	
 	if not self:GetIsLeftFire() then
 		self:SendSequence("hitcenter3")
+		local SequenceDelay = self:SendSequencePlayer("h_left_t1")
+		self:SetNextIdle(CurTime() + SequenceDelay )
 		self:SetIsLeftFire(true)
-		self:SetNextPrimaryFire(CurTime() + self.Primary.Delay*0.5)
-		self:SetNextSecondaryFire(CurTime() + self.Primary.Delay)
+		self:SetNextPrimaryFire(CurTime() + SequenceDelay)
+		self:SetNextSecondaryFire(CurTime() + SequenceDelay)
 	else
 		self:SendSequence("hitcenter2")
+		local SequenceDelay = self:SendSequencePlayer("h_right_t1")
+		self:SetNextIdle(CurTime() + SequenceDelay )
 		self:SetIsLeftFire(false)
-		self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
-		self:SetNextSecondaryFire(CurTime() + self.Primary.Delay)
+		self:SetNextPrimaryFire(CurTime() + SequenceDelay)
+		self:SetNextSecondaryFire(CurTime() + SequenceDelay)
 	end
+	
+	--if SERVER then
+		
+	--end
+	
 
 	if self:NewSwing(self.Primary.Damage*0.75 + (self.Primary.Damage*0.25*self:Clip1()*0.01) ) then
 		self:AddDurability(-1)
 	end
 	
+	
+	
+	
+	
+end
+
+
+
+
+
+
+SWEP.HasIdle = true
+
+function SWEP:IdleThink()
+	if self.HasIdle then
+		if self:GetNextIdle() <= CurTime() and self:GetNextPrimaryFire() <= CurTime() then
+			if not self:IsBusy() then
+				--self:SendWeaponAnim(ACT_VM_IDLE)
+	
+				local Seq = self.Owner:LookupSequence("h_run_mod")
+				local SeqDur = self.Owner:SequenceDuration(Seq)
+				self.Owner:AddVCDSequenceToGestureSlot( GESTURE_SLOT_ATTACK_AND_RELOAD, Seq, 0, true )
+				self:SetNextIdle(CurTime() + SeqDur)
+				
+			end
+		end
+	end
 end
 
 function SWEP:Reload()
-	PrintTable(GetActivities(self))
+	--PrintTable(GetActivities(self))
 end
-
 
 function SWEP:SpareThink()
 
@@ -233,7 +269,7 @@ function KATANA_ScalePlayerDamage(victim,hitgroup,dmginfo)
 				if Yaw < 30 then
 					
 					if Damage > 1 then
-						Weapon:ShootBullet(Damage, 1, 0.025, victim:GetShootPos(), victim:GetAimVector(), self.Owner)
+						Weapon:ShootBullet(Damage, 1, 0.025, victim:GetShootPos(), victim:GetAimVector(), attacker)
 					end
 					
 					Weapon:BlockDamage(Damage)

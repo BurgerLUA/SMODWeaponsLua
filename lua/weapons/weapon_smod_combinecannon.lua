@@ -9,7 +9,7 @@ SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
 
 SWEP.Cost					= 2500
-SWEP.CSSMoveSpeed			= 150
+SWEP.CSSMoveSpeed			= 200
 
 SWEP.Spawnable				= true
 SWEP.AdminOnly				= false
@@ -22,19 +22,19 @@ SWEP.WorldModel				= "models/weapons/w_pulsemg.mdl"
 SWEP.VModelFlip 			= false
 SWEP.HoldType				= "smg"
 
-SWEP.Primary.Damage			= 20
+SWEP.Primary.Damage			= 26
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= Sound("Weapon_PulseMG.Single")
-SWEP.Primary.Cone			= 0.005
+SWEP.Primary.Cone			= 0.01
 SWEP.Primary.ClipSize		= 90
 SWEP.Primary.SpareClip		= 90*4
 SWEP.Primary.Delay			= 1/(800/60)
 SWEP.Primary.Ammo			= "ar2"
 SWEP.Primary.Automatic 		= true
 
-SWEP.RecoilMul				= 1
+SWEP.RecoilMul				= 0.5
 SWEP.SideRecoilMul			= 1
-SWEP.MoveConeMul				= 2
+SWEP.MoveConeMul			= 2
 SWEP.HeatMul				= 1
 
 SWEP.HasScope 				= false
@@ -57,6 +57,6 @@ SWEP.IronSightTime			= 0.25
 SWEP.IronSightsPos 			= Vector(-3, 0, 1)
 SWEP.IronSightsAng 			= Vector(0, 0, -7)
 
-SWEP.DamageFalloff			= 1000
+SWEP.DamageFalloff			= 1500
 
 SWEP.DamageType				= 2

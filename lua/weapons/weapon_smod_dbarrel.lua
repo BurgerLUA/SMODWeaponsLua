@@ -22,23 +22,22 @@ SWEP.WorldModel				= "models/weapons/w_sawedoff.mdl"
 SWEP.VModelFlip 			= false
 SWEP.HoldType				= "ar2"
 
-SWEP.Primary.Damage			= (56*2) / 12
-SWEP.Primary.NumShots		= 12
+SWEP.Primary.Damage			= (56*2) / 4
+SWEP.Primary.NumShots		= 4
 SWEP.Primary.Sound			= Sound("Weapon_Sawedoff.Single")
 SWEP.Primary.Cone			= 0.05
 SWEP.Primary.ClipSize		= 2
 SWEP.Primary.SpareClip		= 32
-SWEP.Primary.Delay			= 0.1
+SWEP.Primary.Delay			= 0.2
 SWEP.Primary.Ammo			= "bb_12gauge"
-SWEP.Primary.Automatic 		= false
+SWEP.Primary.Automatic 		= true
 
 SWEP.RecoilMul				= 1
 SWEP.SideRecoilMul			= 1
-SWEP.MoveConeMul				= 1.25
+SWEP.MoveConeMul			= 1.25
 SWEP.HeatMul				= 1
 
 SWEP.BurstOverride			= 2
-SWEP.BurstSpeedOverride 	= 0.1
 
 SWEP.HasScope 				= false
 SWEP.ZoomAmount 			= 0.25
@@ -47,7 +46,7 @@ SWEP.HasCSSZoom 			= false
 
 SWEP.HasPumpAction 			= false
 SWEP.HasBoltAction 			= false
-SWEP.HasBurstFire 			= true
+SWEP.HasBurstFire 			= false
 SWEP.HasSilencer 			= false
 SWEP.HasDoubleZoom			= false
 SWEP.HasSideRecoil			= false
@@ -65,3 +64,4 @@ SWEP.AddFOV					= 20
 SWEP.DamageFalloff			= 250
 
 SWEP.PenetrationLossScale	= 0.25
+

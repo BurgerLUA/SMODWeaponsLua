@@ -22,21 +22,21 @@ SWEP.WorldModel				= "models/weapons/w_m4a1.mdl"
 SWEP.ViewModelFlip 			= true
 SWEP.HoldType				= "ar2"
 
-SWEP.Primary.Damage			= 25
+SWEP.Primary.Damage			= 30
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= Sound("weapons/m4a1/m4sil-1.wav")
 SWEP.Primary.Cone			= 0.00125
 SWEP.Primary.ClipSize		= 30
 SWEP.Primary.SpareClip		= 90
-SWEP.Primary.Delay			= 1/15
+SWEP.Primary.Delay			= 1/10
 SWEP.Primary.Ammo			= "bb_556mm"
 SWEP.Primary.Automatic 		= false
 
-SWEP.RecoilMul				= 0.5
-SWEP.SideRecoilMul			= 0.5
+SWEP.RecoilMul				= 3
+SWEP.SideRecoilMul			= 1
 SWEP.MoveConeMul			= 2
 SWEP.HeatMul				= 0.5
-SWEP.CoolMul				= 2
+SWEP.CoolMul				= 0.5
 
 SWEP.HasScope 				= false
 SWEP.ZoomAmount 			= 1
@@ -49,12 +49,12 @@ SWEP.HasBurstFire 			= true
 SWEP.HasSilencer 			= false
 SWEP.HasDoubleZoom			= false
 SWEP.HasSideRecoil			= true
-SWEP.HasDownRecoil			= false
+SWEP.HasDownRecoil			= true
 
 SWEP.BurstOverride			= 3
-SWEP.BurstConeMul			= 1
-SWEP.BurstSpeedOverride 	= 1
-SWEP.BurstRecoilMul			= 2
+SWEP.BurstConeMul			= 2
+SWEP.BurstSpeedOverride 	= 0.5
+SWEP.BurstRecoilMul			= 0.25
 SWEP.BurstHeatMul			= 1
 
 SWEP.HasIronSights 			= true

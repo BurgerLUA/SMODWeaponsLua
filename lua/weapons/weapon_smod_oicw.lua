@@ -22,19 +22,19 @@ SWEP.WorldModel				= "models/weapons/w_oicw.mdl"
 SWEP.VModelFlip 			= false
 SWEP.HoldType				= "ar2"
 
-SWEP.Primary.Damage			= 20
+SWEP.Primary.Damage			= 30
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= Sound("Weapon_OICW.Single")
-SWEP.Primary.Cone			= 0.0075
+SWEP.Primary.Cone			= 0.001
 SWEP.Primary.ClipSize		= 30
 SWEP.Primary.SpareClip		= 90
-SWEP.Primary.Delay			= 1/(800/60)
+SWEP.Primary.Delay			= 1/(600/60)
 SWEP.Primary.Ammo			= "bb_556mm"
 SWEP.Primary.Automatic 		= true
 
 SWEP.RecoilMul				= 1
 SWEP.SideRecoilMul			= 0.5
-SWEP.MoveConeMul				= 2
+SWEP.MoveConeMul			= 2
 SWEP.HeatMul				= 1
 SWEP.CoolMul				= 0.5
 
@@ -45,7 +45,7 @@ SWEP.HasCSSZoom 			= false
 
 SWEP.HasPumpAction 			= false
 SWEP.HasBoltAction 			= false
-SWEP.HasBurstFire 			= false
+SWEP.HasBurstFire 			= true
 SWEP.HasSilencer 			= false
 SWEP.HasDoubleZoom			= false
 SWEP.HasSideRecoil			= true
@@ -53,57 +53,96 @@ SWEP.HasDownRecoil			= false
 SWEP.HasSpecialFire			= false
 
 SWEP.BurstOverride			= 3
-SWEP.BurstConeMul			= 1
-SWEP.BurstSpeedOverride 	= 1
+SWEP.BurstConeMul			= 2
+SWEP.BurstSpeedOverride 	= 2
 SWEP.BurstRecoilMul			= 0.5
 SWEP.BurstHeatMul			= 0.5
+SWEP.BurstCoolMul			= 0.75
 
 SWEP.HasIronSights 			= false
 SWEP.EnableIronCross		= false
 SWEP.HasGoodSights			= false
-SWEP.IronSightTime			= 0
-SWEP.IronSightsPos 			= Vector(-10, 0, -10)
+SWEP.IronSightsPos 			= Vector(-10, -10, 3)
 SWEP.IronSightsAng 			= Vector(0, 0, 0)
+
+SWEP.IronSightTime			= 0.25
+SWEP.ZoomDelay				= 0.25
 
 SWEP.ColorOverlay			= Color(0,255,0,20)
 
 SWEP.DamageFalloff			= 4000
 
-function SWEP:SpecialFire()
+SWEP.ShootOffsetStrength	= Angle(0.25,0.25,0)
 
-	if not self:CanPrimaryAttack() then	return end
-	if self:IsBusy() then return end
-	if self:GetNextPrimaryFire() > CurTime() then return end
-	
-	
-	--if not self:CanShoot() then return end
-	
-	if self:Clip1() < 1 then return end
-	self:TakePrimaryAmmo(1)
-	self.Owner:SetAnimation(PLAYER_ATTACK1)
-	self:WeaponAnimation(self:Clip1(),ACT_VM_SECONDARYATTACK)
-
-	if (IsFirstTimePredicted() or game.SinglePlayer()) then
-		if (CLIENT or game.SinglePlayer()) then 
-			self:AddRecoil() -- Predict
-		end
-
-		local Damage = self.Primary.Damage/3
-		local Shots = 3
-		local Cone = self:HandleCone(SWEP.Primary.Cone)
-		local Source = self.Owner:GetShootPos()
-		local Direction = self.Owner:GetAimVector()
-		
-		if self.Owner:IsPlayer() then
-			Direction = (self.Owner:EyeAngles() + self.Owner:GetPunchAngle()):Forward()
-		end
-		
-		self:EmitGunSound("beta/fire1.wav")
-		
-		self:ShootBullet(Damage,Shots,Cone,Source,Direction,self.EnableTracer)
-		self:AddHeat(Damage,Shots)
+function SWEP:SpecialConePre(Cone,IsCrosshair)
+	if self:GetPrimaryAmmo() == game.GetAmmoID("bb_762mm") then
+		Cone = Cone*0.1
 	end
-	
-	self:SetNextPrimaryFire(CurTime() + 0.2)
+	return Cone
+end
+
+
+function SWEP:SpecialConePost(Cone,IsCrosshair)
+
+	local NewCone = Cone*self:GetCoolDown()*0.5
+
+	Cone = math.min(0.1,math.max(NewCone,Cone))
+
+	return Cone
+end
+
+
+SWEP.SpecialAmmo			= {"bb_556mm","bb_762mm"}
+
+function SWEP:SpecialGiveAmmo()
+	self.Owner:GiveAmmo(30,"bb_762mm",false)
+end
+
+function SWEP:HandleShootAnimations()
+	if self:GetPrimaryAmmo() == game.GetAmmoID("bb_762mm") then
+		self:WeaponAnimation(self:Clip1(),ACT_VM_SECONDARYATTACK)
+	else
+		self:WeaponAnimation(self:Clip1(),ACT_VM_PRIMARYATTACK)
+	end
+end
+
+function SWEP:SpecialDamage(damage)
+	if self:GetPrimaryAmmo() == game.GetAmmoID("bb_762mm") then
+		damage = 85
+	end
+	return damage
+end
+
+function SWEP:SpecialFalloff(falloff)
+	if self:GetPrimaryAmmo() == game.GetAmmoID("bb_762mm") then
+		falloff = 8000
+	end
+	return falloff
+end
+
+function SWEP:SpecialRecoil(recoil)
+	if self:GetPrimaryAmmo() == game.GetAmmoID("bb_762mm") then
+		recoil = recoil * 4
+	end
+	return recoil
+end
+
+function SWEP:SpecialDelay(delay)
+
+	if self:GetPrimaryAmmo() == game.GetAmmoID("bb_762mm") then
+		delay = 0.4
+	end
+
+	return delay
 	
 end
+
+function SWEP:SpareThink()
+
+	if self:GetPrimaryAmmo() == game.GetAmmoID("bb_762mm") and self:GetIsBurst() then
+		self:SetIsBurst( false )
+	end
+
+end
+
+

@@ -26,19 +26,22 @@ SWEP.UseHands				= false
 SWEP.Primary.Damage			= 45
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= Sound("weapons/colts/fire.wav")
-SWEP.Primary.Cone			= 0.01
+SWEP.Primary.Cone			= 0.005
 SWEP.Primary.ClipSize		= 14
 SWEP.Primary.SpareClip		= 14*4
 SWEP.Primary.Delay			= 1/10
 SWEP.Primary.Ammo			= "bb_45acp"
 SWEP.Primary.Automatic 		= false
 
-SWEP.EnableTracer			= false
+SWEP.EnableTracer			= true
 
 SWEP.RecoilMul				= 1
 SWEP.SideRecoilMul			= -1
-SWEP.MoveConeMul				= 2
-SWEP.HeatMul				= 0.5
+SWEP.MoveConeMul			= 2
+SWEP.HeatMul				= 3
+SWEP.CoolMul				= 0
+SWEP.CoolSpeedMul			= 0.5
+
 
 SWEP.HasScope 				= false
 SWEP.ZoomAmount 			= 0.5
@@ -65,7 +68,7 @@ SWEP.BurstSpeedAbs			= 1/5
 SWEP.BurstOverride			= 2
 SWEP.BurstSpeedOverride		= 0
 
-SWEP.DamageFalloff			= 1000
+SWEP.DamageFalloff			= 2000
 
 SWEP.SideRecoilBasedOnDual	= true
 
