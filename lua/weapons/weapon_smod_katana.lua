@@ -82,16 +82,18 @@ function SWEP:PrimaryAttack()
 	
 	if not self:GetIsLeftFire() then
 		self:SendSequence("hitcenter3")
-		local SequenceDelay = self:SendSequencePlayer("h_left_t1")
-		self:SetNextIdle(CurTime() + SequenceDelay )
+		--local SequenceDelay = self:SendSequencePlayer("h_left_t1")
+		--self:SetNextIdle(CurTime() + SequenceDelay )
 		self:SetIsLeftFire(true)
+		local SequenceDelay = 1
 		self:SetNextPrimaryFire(CurTime() + SequenceDelay)
 		self:SetNextSecondaryFire(CurTime() + SequenceDelay)
 	else
 		self:SendSequence("hitcenter2")
-		local SequenceDelay = self:SendSequencePlayer("h_right_t1")
-		self:SetNextIdle(CurTime() + SequenceDelay )
+		--local SequenceDelay = self:SendSequencePlayer("h_right_t1")
+		--self:SetNextIdle(CurTime() + SequenceDelay )
 		self:SetIsLeftFire(false)
+		local SequenceDelay = 0.5
 		self:SetNextPrimaryFire(CurTime() + SequenceDelay)
 		self:SetNextSecondaryFire(CurTime() + SequenceDelay)
 	end
@@ -111,13 +113,9 @@ function SWEP:PrimaryAttack()
 	
 end
 
+SWEP.HasIdle = false
 
-
-
-
-
-SWEP.HasIdle = true
-
+--[[
 function SWEP:IdleThink()
 	if self.HasIdle then
 		if self:GetNextIdle() <= CurTime() and self:GetNextPrimaryFire() <= CurTime() then
@@ -133,6 +131,7 @@ function SWEP:IdleThink()
 		end
 	end
 end
+--]]
 
 function SWEP:Reload()
 	--PrintTable(GetActivities(self))

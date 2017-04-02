@@ -54,12 +54,11 @@ SWEP.Primary.Automatic 		= false
 
 SWEP.LastBulletSound		= Sound("Weapon_Garand.ClipDing")
 
-SWEP.RecoilMul				= 1.5
+SWEP.RecoilMul				= 1
 SWEP.SideRecoilMul			= 0.5
-SWEP.MoveConeMul			= 2
-SWEP.HeatMul				= 3
-SWEP.CoolMul				= 0.75
-
+SWEP.MoveConeMul			= 1.5
+SWEP.HeatMul				= 1.5
+SWEP.CoolMul				= 0.6
 
 SWEP.HasScope 				= false
 SWEP.ZoomAmount 			= 1
@@ -109,6 +108,10 @@ function SWEP:SpecialFire()
 end
 
 SWEP.SpecialAmmo			= {"smod_3006","smod_3006_crap"}
+
+function SWEP:SpecialGiveAmmo()
+	self.Owner:GiveAmmo(80,"smod_3006_crap",false)
+end
 
 function SWEP:SpecialDamage(damage)
 	if self:GetPrimaryAmmo() == game.GetAmmoID("smod_3006_crap") then
