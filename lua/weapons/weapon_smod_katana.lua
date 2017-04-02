@@ -33,7 +33,8 @@ SWEP.Primary.Damage			= 60
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.ClipSize		= 100
 SWEP.Primary.SpareClip		= 0
-SWEP.Primary.Delay			= 0.75
+SWEP.Primary.Cone			= 0.025
+SWEP.Primary.Delay			= 0.5
 SWEP.Primary.Ammo			= "smod_weeb"
 SWEP.Primary.Automatic 		= true 
 
@@ -63,6 +64,8 @@ SWEP.MeleeSoundWallHit		= Sound("Weapon_SMODSword.HitWall")
 SWEP.MeleeSoundFleshSmall	= Sound("Weapon_SMODSword.Hit")
 SWEP.MeleeSoundFleshLarge	= Sound("Weapon_SMODSword.Stab")
 
+SWEP.MoveConeMul			= 0
+
 SWEP.IronSightTime			= 0.125
 SWEP.IronSightsPos 			= Vector(0, 0, 0)
 SWEP.IronSightsAng 			= Vector(0, 0, -45)
@@ -85,7 +88,7 @@ function SWEP:PrimaryAttack()
 		--local SequenceDelay = self:SendSequencePlayer("h_left_t1")
 		--self:SetNextIdle(CurTime() + SequenceDelay )
 		self:SetIsLeftFire(true)
-		local SequenceDelay = 1
+		local SequenceDelay = self:GetDelay()
 		self:SetNextPrimaryFire(CurTime() + SequenceDelay)
 		self:SetNextSecondaryFire(CurTime() + SequenceDelay)
 	else
@@ -93,45 +96,24 @@ function SWEP:PrimaryAttack()
 		--local SequenceDelay = self:SendSequencePlayer("h_right_t1")
 		--self:SetNextIdle(CurTime() + SequenceDelay )
 		self:SetIsLeftFire(false)
-		local SequenceDelay = 0.5
+		local SequenceDelay = self:GetDelay()
 		self:SetNextPrimaryFire(CurTime() + SequenceDelay)
 		self:SetNextSecondaryFire(CurTime() + SequenceDelay)
 	end
-	
-	--if SERVER then
-		
-	--end
-	
 
-	if self:NewSwing(self.Primary.Damage*0.75 + (self.Primary.Damage*0.25*self:Clip1()*0.01) ) then
-		self:AddDurability(-1)
-	end
-	
-	
-	
-	
-	
+	self:NewSwing(self.Primary.Damage*0.75 + (self.Primary.Damage*0.25*self:Clip1()*0.01) )
+
 end
 
-SWEP.HasIdle = false
-
---[[
-function SWEP:IdleThink()
-	if self.HasIdle then
-		if self:GetNextIdle() <= CurTime() and self:GetNextPrimaryFire() <= CurTime() then
-			if not self:IsBusy() then
-				--self:SendWeaponAnim(ACT_VM_IDLE)
-	
-				local Seq = self.Owner:LookupSequence("h_run_mod")
-				local SeqDur = self.Owner:SequenceDuration(Seq)
-				self.Owner:AddVCDSequenceToGestureSlot( GESTURE_SLOT_ATTACK_AND_RELOAD, Seq, 0, true )
-				self:SetNextIdle(CurTime() + SeqDur)
-				
-			end
-		end
+function SWEP:SpecialDelay(Delay)
+	if self:GetIsLeftFire() then
+		Delay = Delay * 0.75
+	else
+		Delay = Delay * 1.25
 	end
+
+	return Delay
 end
---]]
 
 function SWEP:Reload()
 	--PrintTable(GetActivities(self))
@@ -268,7 +250,7 @@ function KATANA_ScalePlayerDamage(victim,hitgroup,dmginfo)
 				if Yaw < 30 then
 					
 					if Damage > 1 then
-						Weapon:ShootBullet(Damage, 1, 0.025, victim:GetShootPos(), victim:GetAimVector(), attacker)
+						Weapon:ShootBullet(Damage, 1, self.Primary.Cone, victim:GetShootPos(), victim:GetAimVector(), attacker)
 					end
 					
 					Weapon:BlockDamage(Damage)
@@ -285,9 +267,3 @@ function KATANA_ScalePlayerDamage(victim,hitgroup,dmginfo)
 end
 
 hook.Add("ScalePlayerDamage","KATANA_ScalePlayerDamage",KATANA_ScalePlayerDamage)
-
-
-
-
-
-
