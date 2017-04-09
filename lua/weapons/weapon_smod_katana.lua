@@ -250,7 +250,7 @@ function KATANA_ScalePlayerDamage(victim,hitgroup,dmginfo)
 				if Yaw < 30 then
 					
 					if Damage > 1 then
-						Weapon:ShootBullet(Damage, 1, self.Primary.Cone, victim:GetShootPos(), victim:GetAimVector(), attacker)
+						Weapon:ShootBullet(Damage, 1, Weapon:HandleCone(Weapon.Primary.Cone,false), victim:GetShootPos(), victim:GetAimVector(), attacker)
 					end
 					
 					Weapon:BlockDamage(Damage)

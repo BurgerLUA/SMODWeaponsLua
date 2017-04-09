@@ -28,17 +28,17 @@ SWEP.Primary.Sound			= Sound("Weapon_SVD.Fire")
 SWEP.Primary.Cone			= 0
 SWEP.Primary.ClipSize		= 10
 SWEP.Primary.SpareClip		= 10*4
-SWEP.Primary.Delay			= 0.75
+SWEP.Primary.Delay			= 0.5
 SWEP.Primary.Ammo			= "bb_762mm"
 SWEP.Primary.Automatic 		= true
 
-SWEP.RecoilMul 				= 1
+SWEP.RecoilMul 				= 0.5
 SWEP.SideRecoilMul			= 0.5
-SWEP.MoveConeMul				= 2
+SWEP.MoveConeMul			= 2
 SWEP.HeatMul				= 1
 
 SWEP.HasScope 				= true
-SWEP.ZoomAmount 			= 11
+SWEP.ZoomAmount 			= 9
 SWEP.HasCrosshair 			= false
 SWEP.HasCSSZoom 			= false
 
@@ -53,10 +53,15 @@ SWEP.HasDownRecoil			= false
 SWEP.HasIronSights 			= false
 SWEP.EnableIronCross		= false
 SWEP.HasGoodSights			= false
-SWEP.IronSightTime			= 0.125
-SWEP.IronSightsPos 			= Vector(-5.921, 0, 1.679)
+SWEP.IronSightTime			= 0.25
+SWEP.IronSightsPos 			= Vector(-3.921, 0, 1)
 SWEP.IronSightsAng 			= Vector(0, 0, 0)
+
+SWEP.AddFOV					= 20
 
 SWEP.DamageFalloff			= 4000
 
-SWEP.CustomScope = Material("vgui/svdscope2")
+SWEP.ZoomDelay				= 0.25
+
+SWEP.CustomScope 			= Material("vgui/svdscope2")
+SWEP.CustomScopeSizeMul 	= 0.75
