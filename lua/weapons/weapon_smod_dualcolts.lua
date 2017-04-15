@@ -42,7 +42,6 @@ SWEP.HeatMul				= 3
 SWEP.CoolMul				= 0
 SWEP.CoolSpeedMul			= 0.5
 
-
 SWEP.HasScope 				= false
 SWEP.ZoomAmount 			= 0.5
 SWEP.HasCrosshair 			= true
@@ -60,9 +59,13 @@ SWEP.HasDual				= true
 SWEP.HasIronSights 			= true
 SWEP.EnableIronCross		= true
 SWEP.HasGoodSights			= true
-SWEP.IronSightTime			= 0.125
+SWEP.IronSightTime			= 0.25
 SWEP.IronSightsPos 			= Vector(0.75, 5, 2)
 SWEP.IronSightsAng 			= Vector(0, 0, 0)
+
+SWEP.CanShootWhileSprinting = true
+SWEP.IronRunPos				= Vector(0,-10,-10)
+SWEP.IronRunAng				= Vector(20,20,0)
 
 SWEP.BurstSpeedAbs			= 1/5
 SWEP.BurstOverride			= 2

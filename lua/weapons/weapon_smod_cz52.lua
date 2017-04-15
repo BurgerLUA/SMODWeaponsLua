@@ -26,17 +26,20 @@ SWEP.UseHands				= false
 SWEP.Primary.Damage			= 35
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= Sound("Weapon_CZ52.Single")
-SWEP.Primary.Cone			= 0.005
+SWEP.Primary.Cone			= 0.0025
 SWEP.Primary.ClipSize		= 8
 SWEP.Primary.SpareClip		= 8*4
 SWEP.Primary.Delay			= 0.15
 SWEP.Primary.Ammo			= "bb_45acp"
 SWEP.Primary.Automatic 		= false
 
-SWEP.RecoilMul				= 1
+SWEP.RecoilMul				= 1.25
 SWEP.SideRecoilMul			= 1
-SWEP.MoveConeMul			= 1
+SWEP.RecoilSpeedMul			= 1.25
+SWEP.MoveConeMul			= 0.75
 SWEP.HeatMul				= 1
+SWEP.CoolMul				= 1
+SWEP.CoolSpeedMul			= 1
 
 SWEP.HasScope 				= false
 SWEP.ZoomAmount 			= 0.5
@@ -58,5 +61,9 @@ SWEP.HasGoodSights			= true
 SWEP.IronSightTime			= 0.125
 SWEP.IronSightsPos 			= Vector(-6, 0, 2)
 SWEP.IronSightsAng 			= Vector(0, 0, 0)
+
+SWEP.CanShootWhileSprinting = true
+SWEP.IronRunPos				= Vector(0,-10,-10)
+SWEP.IronRunAng				= Vector(20,20,0)
 
 SWEP.DamageFalloff			= 2000

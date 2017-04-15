@@ -33,23 +33,27 @@ if CLIENT then
 	language.Add("smod_mauser_ammo","7.92x57mm Mauser")
 end
 
-SWEP.Primary.Damage			= 100
+SWEP.Primary.Damage			= 110
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= Sound("weapons/kar98/kar_shoot.wav")
-SWEP.Primary.Cone			= 0.004
+SWEP.Primary.Cone			= 0
 SWEP.Primary.ClipSize		= 5
 SWEP.Primary.SpareClip		= 5*6
-SWEP.Primary.Delay			= 1.7
+SWEP.Primary.Delay			= 2
 SWEP.Primary.Ammo			= "smod_mauser"
 SWEP.Primary.Automatic 		= false
 
-SWEP.RecoilMul				= 0.2
+SWEP.RecoilMul				= 0.5
 SWEP.SideRecoilMul			= 0.25
-SWEP.MoveConeMul				= 2
+SWEP.RecoilSpeedMul			= 0.5
+SWEP.MoveConeMul			= 2
 SWEP.HeatMul				= 5
+SWEP.CoolMul				= 1
+SWEP.CoolSpeedMul			= 1
+SWEP.MaxHeat				= 1
 
 SWEP.HasScope 				= false
-SWEP.ZoomAmount 			= 1
+SWEP.ZoomAmount 			= 0.5
 SWEP.HasCrosshair 			= true
 SWEP.HasCSSZoom 			= false
 
@@ -66,8 +70,8 @@ SWEP.HasIronSights 			= true
 SWEP.EnableIronCross		= true
 SWEP.HasGoodSights			= true
 SWEP.IronSightTime			= 0.125
-SWEP.IronSightsPos 			= Vector(-4, -1, -1)
-SWEP.IronSightsAng 			= Vector(0, 0.05, 0)
+SWEP.IronSightsPos 			= Vector(-4, -1, 2)
+SWEP.IronSightsAng 			= Vector(-3, 0.05, 0)
 
 SWEP.DamageFalloff			= 1500
 
@@ -75,6 +79,10 @@ SWEP.MeleeSoundMiss			= Sound("Weapon_Knife.Slash")
 SWEP.MeleeSoundWallHit		= Sound("Weapon_Knife.HitWall")
 SWEP.MeleeSoundFleshSmall	= Sound("Weapon_Knife.Hit")
 SWEP.MeleeSoundFleshLarge	= Sound("Weapon_Knife.Stab")
+
+SWEP.CanShootWhileSprinting = false
+SWEP.IronRunPos				= Vector(0,0,0)
+SWEP.IronRunAng				= Vector(-10,0,0)
 
 function SWEP:SpecialFire()
 

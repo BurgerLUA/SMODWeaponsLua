@@ -25,7 +25,7 @@ SWEP.HoldType				= "ar2"
 game.AddAmmoType({name = "ex_launcher"})
 
 if CLIENT then 
-	language.Add("ex_launcher_ammo","20MM HE")
+	language.Add("ex_launcher_ammo","Popcan")
 end
 
 SWEP.Primary.Damage			= 100
@@ -38,10 +38,14 @@ SWEP.Primary.Delay			= 0.25
 SWEP.Primary.Ammo			= "ex_launcher"
 SWEP.Primary.Automatic 		= false
 
-SWEP.RecoilMul 				= 1
-SWEP.SideRecoilMul			= 1
-SWEP.MoveConeMul				= 1
+SWEP.RecoilMul				= 1
+SWEP.SideRecoilMul			= 0.25
+SWEP.RecoilSpeedMul			= 0.75
+SWEP.MoveConeMul			= 2
 SWEP.HeatMul				= 1
+SWEP.CoolMul				= 1
+SWEP.CoolSpeedMul			= 1
+SWEP.MaxHeat				= 5
 
 SWEP.HasScope 				= true
 SWEP.ZoomAmount				= 3
@@ -64,8 +68,12 @@ SWEP.IronSightTime			= 0.25
 SWEP.IronSightsPos 			= Vector(2, 0, 1)
 SWEP.IronSightsAng 			= Vector(0, 0, 0)
 
+SWEP.CanShootWhileSprinting = false
+SWEP.IronRunPos				= Vector(0,0,0)
+SWEP.IronRunAng				= Vector(-10,0,0)
+
 SWEP.DamageFalloff			= 100
-SWEP.AddFOV					= 10
+SWEP.AddFOV					= 20
 
 SWEP.HasHL2Pump				= false
 

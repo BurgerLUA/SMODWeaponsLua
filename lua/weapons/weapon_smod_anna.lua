@@ -33,10 +33,10 @@ if CLIENT then
 	language.Add("ex_4440_ammo",".44-40")
 end
 
-SWEP.Primary.Damage			= 75
+SWEP.Primary.Damage			= 100
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= Sound("Weapon_SMODAnnabelle.Single")
-SWEP.Primary.Cone			= 0
+SWEP.Primary.Cone			= 0.005
 SWEP.Primary.ClipSize		= 15
 SWEP.Primary.SpareClip		= 15*2
 SWEP.Primary.Delay			= 0.35
@@ -45,14 +45,16 @@ SWEP.Primary.Automatic 		= false
 
 --SWEP.ReloadSound			= Sound("weapons/winchester/win_reload1.wav")
 
-SWEP.RecoilMul				= 0.3
+SWEP.RecoilMul				= 1
 SWEP.SideRecoilMul			= 0.5
-SWEP.MoveConeMul				= 0.75
+SWEP.RecoilSpeedMul			= 0.5
+SWEP.MoveConeMul			= 2
 SWEP.HeatMul				= 1
 SWEP.CoolMul				= 2.25
+SWEP.CoolSpeedMul			= 1
 
 SWEP.HasScope 				= false
-SWEP.ZoomAmount 			= 2
+SWEP.ZoomAmount 			= 1
 SWEP.HasCrosshair			= true
 SWEP.HasCSSZoom 			= false
 
@@ -61,15 +63,19 @@ SWEP.HasBoltAction 			= false
 SWEP.HasBurstFire 			= false
 SWEP.HasSilencer 			= false
 SWEP.HasDoubleZoom			= false
-SWEP.HasSideRecoil			= false
+SWEP.HasSideRecoil			= true
 SWEP.HasDryFire				= false
 
 SWEP.HasIronSights 			= true
 SWEP.EnableIronCross		= true
 SWEP.HasGoodSights			= true
-SWEP.IronSightTime			= 0.25
-SWEP.IronSightsPos 			= Vector(-4, 0, 3)
+SWEP.IronSightTime			= 0.5
+SWEP.IronSightsPos 			= Vector(-8, 0, 3)
 SWEP.IronSightsAng 			= Vector(0, 0, 0)
+
+SWEP.CanShootWhileSprinting = false
+SWEP.IronRunPos				= Vector(0,-10,-20)
+SWEP.IronRunAng				= Vector(45,0,0)
 
 SWEP.DamageFalloff			= 3000
 

@@ -32,11 +32,13 @@ SWEP.Primary.Delay			= 1/(600/60)
 SWEP.Primary.Ammo			= "bb_556mm"
 SWEP.Primary.Automatic 		= true
 
-SWEP.RecoilMul				= 1
+SWEP.RecoilMul				= 1.25
 SWEP.SideRecoilMul			= 0.5
+SWEP.RecoilSpeedMul			= 1.25
 SWEP.MoveConeMul			= 2
 SWEP.HeatMul				= 1
-SWEP.CoolMul				= 0.5
+SWEP.CoolMul				= 1
+SWEP.MaxHeat				= 4
 
 SWEP.HasScope 				= true
 SWEP.ZoomAmount 			= 4
@@ -65,14 +67,18 @@ SWEP.HasGoodSights			= false
 SWEP.IronSightsPos 			= Vector(-10, -10, 3)
 SWEP.IronSightsAng 			= Vector(0, 0, 0)
 
-SWEP.IronSightTime			= 0.25
+SWEP.IronSightTime			= 0.5
 SWEP.ZoomDelay				= 0.25
 
 SWEP.ColorOverlay			= Color(0,255,0,20)
 
 SWEP.DamageFalloff			= 4000
 
-SWEP.ShootOffsetStrength	= Angle(0.25,0.25,0)
+SWEP.ShootOffsetStrength	= Angle(0.5,0.5,0)
+
+SWEP.CanShootWhileSprinting = false
+SWEP.IronRunPos				= Vector(-5,-10,-10)
+SWEP.IronRunAng				= Vector(20,20,0)
 
 function SWEP:SpecialConePre(Cone,IsCrosshair)
 	if self:GetPrimaryAmmo() == game.GetAmmoID("bb_762mm") then
@@ -80,17 +86,6 @@ function SWEP:SpecialConePre(Cone,IsCrosshair)
 	end
 	return Cone
 end
-
-
-function SWEP:SpecialConePost(Cone,IsCrosshair)
-
-	local NewCone = Cone*self:GetCoolDown()*0.5
-
-	Cone = math.min(0.1,math.max(NewCone,Cone))
-
-	return Cone
-end
-
 
 SWEP.SpecialAmmo			= {"bb_556mm","bb_762mm"}
 

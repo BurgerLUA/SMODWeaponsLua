@@ -56,9 +56,11 @@ SWEP.LastBulletSound		= Sound("Weapon_Garand.ClipDing")
 
 SWEP.RecoilMul				= 1
 SWEP.SideRecoilMul			= 0.5
-SWEP.MoveConeMul			= 1.5
+SWEP.RecoilSpeedMul			= 1
+SWEP.MoveConeMul			= 2
 SWEP.HeatMul				= 1.5
 SWEP.CoolMul				= 0.6
+SWEP.CoolSpeedMul			= 1
 
 SWEP.HasScope 				= false
 SWEP.ZoomAmount 			= 1
@@ -77,9 +79,13 @@ SWEP.HasSpecialFire			= true
 SWEP.HasIronSights 			= true
 SWEP.EnableIronCross		= true
 SWEP.HasGoodSights			= true
-SWEP.IronSightTime			= 0.25
-SWEP.IronSightsPos 			= Vector(-4.95, 0, 2)
-SWEP.IronSightsAng 			= Vector(0, 0.025, 0)
+SWEP.IronSightTime			= 0.5
+SWEP.IronSightsPos 			= Vector(-4.95, 10, 1)
+SWEP.IronSightsAng 			= Vector(1, -0.1, 0)
+
+SWEP.CanShootWhileSprinting = false
+SWEP.IronRunPos				= Vector(0,-10,-10)
+SWEP.IronRunAng				= Vector(20,20,0)
 
 SWEP.DamageFalloff			= 2000
 

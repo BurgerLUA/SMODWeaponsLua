@@ -9,7 +9,7 @@ SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
 
 SWEP.Cost					= 2500
-SWEP.CSSMoveSpeed			= 220
+SWEP.CSSMoveSpeed			= 240
 
 SWEP.Spawnable				= true
 SWEP.AdminOnly				= false
@@ -32,11 +32,13 @@ SWEP.Primary.Delay			= 1/10
 SWEP.Primary.Ammo			= "bb_556mm"
 SWEP.Primary.Automatic 		= false
 
-SWEP.RecoilMul				= 3
-SWEP.SideRecoilMul			= 1
-SWEP.MoveConeMul			= 2
+SWEP.RecoilMul				= 2
+SWEP.SideRecoilMul			= 0.5
+SWEP.RecoilSpeedMul			= 1.5
+SWEP.MoveConeMul			= 1
 SWEP.HeatMul				= 0.5
 SWEP.CoolMul				= 0.5
+SWEP.CoolSpeedMul			= 1
 
 SWEP.HasScope 				= false
 SWEP.ZoomAmount 			= 1
@@ -55,13 +57,17 @@ SWEP.BurstOverride			= 3
 SWEP.BurstConeMul			= 2
 SWEP.BurstSpeedOverride 	= 0.5
 SWEP.BurstRecoilMul			= 0.25
-SWEP.BurstHeatMul			= 1
+SWEP.BurstHeatMul			= 0.5
 
 SWEP.HasIronSights 			= true
 SWEP.EnableIronCross		= true
 SWEP.HasGoodSights			= true
-SWEP.IronSightTime			= 0.125
-SWEP.IronSightsPos 			= Vector(0, 0, 1)
+SWEP.IronSightTime			= 0.25
+SWEP.IronSightsPos 			= Vector(1, 10, 1)
 SWEP.IronSightsAng 			= Vector(0, 0, 0)
+
+SWEP.CanShootWhileSprinting = false
+SWEP.IronRunPos				= Vector(-10,0,-20)
+SWEP.IronRunAng				= Vector(45,-10,-10)
 
 SWEP.DamageFalloff			= 2000

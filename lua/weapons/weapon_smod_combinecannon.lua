@@ -22,7 +22,7 @@ SWEP.WorldModel				= "models/weapons/w_pulsemg.mdl"
 SWEP.VModelFlip 			= false
 SWEP.HoldType				= "smg"
 
-SWEP.Primary.Damage			= 26
+SWEP.Primary.Damage			= 23
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= Sound("Weapon_PulseMG.Single")
 SWEP.Primary.Cone			= 0.01
@@ -33,9 +33,13 @@ SWEP.Primary.Ammo			= "ar2"
 SWEP.Primary.Automatic 		= true
 
 SWEP.RecoilMul				= 0.5
-SWEP.SideRecoilMul			= 1
+SWEP.SideRecoilMul			= 0.75
+SWEP.RecoilSpeedMul			= 1.5
 SWEP.MoveConeMul			= 2
 SWEP.HeatMul				= 1
+SWEP.CoolMul				= 1
+SWEP.CoolSpeedMul			= 1
+SWEP.MaxHeat				= 5
 
 SWEP.HasScope 				= false
 SWEP.ZoomAmount 			= 0.5
@@ -56,6 +60,10 @@ SWEP.HasGoodSights			= false
 SWEP.IronSightTime			= 0.25
 SWEP.IronSightsPos 			= Vector(-3, 0, 1)
 SWEP.IronSightsAng 			= Vector(0, 0, -7)
+
+SWEP.CanShootWhileSprinting = false
+SWEP.IronRunPos				= Vector(0,-10,-10)
+SWEP.IronRunAng				= Vector(20,20,0)
 
 SWEP.DamageFalloff			= 1500
 

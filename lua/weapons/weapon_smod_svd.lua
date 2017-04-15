@@ -25,17 +25,20 @@ SWEP.HoldType				= "ar2"
 SWEP.Primary.Damage			= 55
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= Sound("Weapon_SVD.Fire")
-SWEP.Primary.Cone			= 0
+SWEP.Primary.Cone			= 0.001
 SWEP.Primary.ClipSize		= 10
 SWEP.Primary.SpareClip		= 10*4
 SWEP.Primary.Delay			= 0.5
 SWEP.Primary.Ammo			= "bb_762mm"
 SWEP.Primary.Automatic 		= true
 
-SWEP.RecoilMul 				= 0.5
+SWEP.RecoilMul				= 1
 SWEP.SideRecoilMul			= 0.5
+SWEP.RecoilSpeedMul			= 0.75
 SWEP.MoveConeMul			= 2
 SWEP.HeatMul				= 1
+SWEP.CoolMul				= 1
+SWEP.MaxHeat				= 1
 
 SWEP.HasScope 				= true
 SWEP.ZoomAmount 			= 9
@@ -53,9 +56,13 @@ SWEP.HasDownRecoil			= false
 SWEP.HasIronSights 			= false
 SWEP.EnableIronCross		= false
 SWEP.HasGoodSights			= false
-SWEP.IronSightTime			= 0.25
+SWEP.IronSightTime			= 0.5
 SWEP.IronSightsPos 			= Vector(-3.921, 0, 1)
 SWEP.IronSightsAng 			= Vector(0, 0, 0)
+
+SWEP.CanShootWhileSprinting = false
+SWEP.IronRunPos				= Vector(0,-10,-10)
+SWEP.IronRunAng				= Vector(20,20,0)
 
 SWEP.AddFOV					= 20
 
