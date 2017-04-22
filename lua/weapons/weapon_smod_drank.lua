@@ -10,7 +10,7 @@ SWEP.Spawnable				= false
 SWEP.AdminOnly				= false
 
 SWEP.Slot					= 0
-SWEP.SlotPos				= 2
+SWEP.SlotPos				= 5 - 1
 
 SWEP.ViewModel 				= "models/weapons/v_p_drink.mdl"
 SWEP.WorldModel				= "models/weapons/w_p_drink.mdl"
