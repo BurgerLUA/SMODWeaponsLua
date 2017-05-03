@@ -3,7 +3,7 @@ if CLIENT then
 	SWEP.WepSelectIcon 		= surface.GetTextureID("vgui/killicons/smod_A35GL")
 end
 
-SWEP.Category				= "Extra Weapons"
+SWEP.Category				= "BurgerBase: SMOD"
 SWEP.PrintName				= "GRENADE LAUNCHER"
 SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
@@ -31,7 +31,7 @@ end
 SWEP.Primary.Damage			= 100
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= Sound("weapons/ar2/npc_ar2_altfire.wav")
-SWEP.Primary.Cone			= 0.0025
+SWEP.Primary.Cone			= 0.01
 SWEP.Primary.ClipSize		= 6
 SWEP.Primary.SpareClip		= 12
 SWEP.Primary.Delay			= 0.25
@@ -49,7 +49,7 @@ SWEP.MaxHeat				= 5
 
 SWEP.HasScope 				= true
 SWEP.ZoomAmount				= 3
-SWEP.HasCrosshair 			= false
+SWEP.HasCrosshair 			= true
 SWEP.HasCSSZoom 			= false
 
 SWEP.HasPumpAction 			= true
@@ -60,23 +60,105 @@ SWEP.HasDoubleZoom			= false
 SWEP.HasSideRecoil			= false
 SWEP.HasDownRecoil			= false
 SWEP.HasDual				= false
-
-SWEP.HasIronSights 			= false
-SWEP.EnableIronCross		= false
-SWEP.HasGoodSights			= false
-SWEP.IronSightTime			= 0.25
-SWEP.IronSightsPos 			= Vector(2, 0, 1)
-SWEP.IronSightsAng 			= Vector(0, 0, 0)
-
 SWEP.CanShootWhileSprinting = false
-SWEP.IronRunPos				= Vector(0,0,0)
-SWEP.IronRunAng				= Vector(-10,0,0)
+SWEP.HasHL2Pump				= false
 
 SWEP.DamageFalloff			= 100
 SWEP.AddFOV					= 20
 
-SWEP.HasHL2Pump				= false
-
-SWEP.BulletEnt				= "ent_smod_launcher"
 SWEP.SourceOverride			= Vector(2,0,-6)
-SWEP.BulletAngOffset		= Angle(90 - 3,0,0)
+SWEP.BulletAngOffset		= Angle(0,0,0)
+SWEP.UseSpecialProjectile	= true
+
+SWEP.HasIronSights 			= false
+SWEP.EnableIronCross		= false
+SWEP.HasGoodSights			= false
+
+SWEP.IronSightTime			= 0.5
+SWEP.ZoomTime				= 0.125
+SWEP.ZoomDelay				= 0.125
+
+SWEP.IronSightsPos 			= Vector(2.24, 0, 1.32)
+SWEP.IronSightsAng			= Vector(0, 0, 0)
+
+SWEP.IronRunPos				= Vector(0,0,0)
+SWEP.IronRunAng				= Vector(-10,0,0)
+
+SWEP.IronMeleePos = Vector(0, 0, -1.81)
+SWEP.IronMeleeAng = Vector(16.18, -40.805, 44.321)
+
+
+
+local NadeModel = Model("models/weapons/ar2_grenade.mdl")
+local NadeSound = Sound("fofgunsounds/melee/axe_hit2.wav")
+
+function SWEP:ModProjectileTable(datatable)
+
+	datatable.direction = datatable.direction*1000
+	datatable.hullsize = 1
+	datatable.resistance = datatable.direction*0.1 + Vector(0,0,200)
+	datatable.dietime = CurTime() + 10
+	
+	datatable.hullsize = 1
+	
+	if CLIENT then
+		datatable.special = ClientsideModel(NadeModel, RENDERGROUP_OPAQUE )
+	end
+
+	datatable.drawfunction = function(datatable)
+		if datatable.special and datatable.special ~= NULL then
+			datatable.special:SetPos(datatable.pos)
+			datatable.special:SetAngles( datatable.direction:GetNormalized():Angle() )
+			datatable.special:DrawModel()
+		end
+	end
+
+	datatable.hitfunction = function(datatable,traceresult)
+		
+		local Victim = traceresult.Entity
+		local Attacker = datatable.owner
+		local Inflictor = datatable.weapon
+		
+		if not IsValid(Attacker) then
+			Attacker = Victim
+		end
+		
+		if not IsValid(Inflictor) then
+			Inflictor = Attacker
+		end
+		
+		local DmgInfo = DamageInfo()
+		DmgInfo:SetDamage( datatable.damage )
+		DmgInfo:SetAttacker( Attacker )
+		DmgInfo:SetInflictor( Inflictor )
+		DmgInfo:SetDamageForce( datatable.direction:GetNormalized() )
+		DmgInfo:SetDamagePosition( datatable.pos )
+		DmgInfo:SetDamageType( DMG_BLAST )
+		
+		util.BlastDamageInfo( DmgInfo, datatable.pos, 512 )
+		
+		if IsFirstTimePredicted() then
+			local effectdata = EffectData()
+			effectdata:SetStart( datatable.pos + Vector(0,0,10)) // not sure if we need a start and origin (endpoint) for this effect, but whatever
+			effectdata:SetOrigin( datatable.pos)
+			effectdata:SetScale( 1 )
+			effectdata:SetRadius( 1 )
+			util.Effect( "Explosion", effectdata)
+		end
+		
+	end
+	
+	datatable.diefunction = function(datatable)
+		if CLIENT then
+			if datatable.special and datatable.special ~= NULL then
+				datatable.special:Remove()
+			end
+		end
+	end
+	
+	
+	
+	return datatable
+
+end
+

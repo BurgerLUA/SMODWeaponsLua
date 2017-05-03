@@ -3,7 +3,7 @@ if CLIENT then
 	SWEP.WepSelectIcon 		= surface.GetTextureID("vgui/killicons/smod_Sawedoff")
 end
 
-SWEP.Category				= "Extra Weapons"
+SWEP.Category				= "BurgerBase: SMOD"
 SWEP.PrintName				= "DOUBLE BARREL"
 SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
@@ -49,26 +49,28 @@ SWEP.HasCSSZoom 			= false
 
 SWEP.HasPumpAction 			= false
 SWEP.HasBoltAction 			= false
-SWEP.HasBurstFire 			= false
+SWEP.HasBurstFire 			= true
 SWEP.HasSilencer 			= false
 SWEP.HasDoubleZoom			= false
 SWEP.HasSideRecoil			= false
 SWEP.HasDownRecoil			= false
+SWEP.CanShootWhileSprinting = true
+SWEP.EnableCustomTracer		= false
 
 SWEP.HasIronSights 			= true
 SWEP.EnableIronCross		= true
 SWEP.HasGoodSights			= true
 SWEP.IronSightTime			= 0.25
+
+SWEP.AddFOV					= 20
+SWEP.DamageFalloff			= 250
+SWEP.PenetrationLossScale	= 10
+
 SWEP.IronSightsPos 			= Vector(-5, -10, 4)
 SWEP.IronSightsAng 			= Vector(0, 0, 0)
 
-SWEP.CanShootWhileSprinting = true
 SWEP.IronRunPos				= Vector(0,-10,-10)
 SWEP.IronRunAng				= Vector(20,20,0)
 
-SWEP.AddFOV					= 20
-
-SWEP.DamageFalloff			= 250
-
-SWEP.PenetrationLossScale	= 10
-
+SWEP.IronMeleePos 			= Vector(-0.805, -12.865, -8.844)
+SWEP.IronMeleeAng 			= Vector(0, 70, -70)

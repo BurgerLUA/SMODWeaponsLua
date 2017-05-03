@@ -3,7 +3,7 @@ if CLIENT then
 	SWEP.WepSelectIcon = surface.GetTextureID("vgui/killicons/smod_m3greasegun")
 end
 
-SWEP.Category				= "Extra Weapons"
+SWEP.Category				= "BurgerBase: SMOD"
 SWEP.PrintName				= "GREASEGUN"
 SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
@@ -22,10 +22,10 @@ SWEP.WorldModel				= "models/weapons/w_grease.mdl"
 SWEP.VModelFlip 			= false
 SWEP.HoldType				= "smg"
 
-SWEP.Primary.Damage			= 25
+SWEP.Primary.Damage			= 30
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= Sound("weapons/grease/greasegun_shoot.wav")
-SWEP.Primary.Cone			= 0.01
+SWEP.Primary.Cone			= 0.005
 SWEP.Primary.ClipSize		= 30
 SWEP.Primary.SpareClip		= 60
 SWEP.Primary.Delay			= 1/(450/60)
@@ -58,11 +58,16 @@ SWEP.HasIronSights 			= true
 SWEP.EnableIronCross		= true
 SWEP.HasGoodSights			= true
 SWEP.IronSightTime			= 0.5
-SWEP.IronSightsPos 			= Vector(-6, 0, 1)
+SWEP.IronSightsPos 			= Vector(-6.08, 0, 1.12)
 SWEP.IronSightsAng 			= Vector(0, 0, 0)
 
 SWEP.CanShootWhileSprinting = false
 SWEP.IronRunPos				= Vector(0,-10,-10)
 SWEP.IronRunAng				= Vector(20,20,0)
 
-SWEP.DamageFalloff			= 900
+SWEP.IronMeleePos = Vector(9.848, -6.633, -6.835)
+SWEP.IronMeleeAng = Vector(0, 70, -34.473)
+
+SWEP.AddFOV					= 0
+
+SWEP.DamageFalloff			= 1000

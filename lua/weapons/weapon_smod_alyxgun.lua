@@ -3,8 +3,8 @@ if CLIENT then
 	SWEP.WepSelectIcon 		= surface.GetTextureID("vgui/killicons/smod_AlyxGun")
 end
 
-SWEP.Category				= "Extra Weapons"
-SWEP.PrintName				= "ALYXGUN"
+SWEP.Category				= "BurgerBase: SMOD"
+SWEP.PrintName				= "Alyx's Gun"
 SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Secondary"
 
@@ -35,7 +35,7 @@ SWEP.Primary.Automatic 		= true
 SWEP.RecoilMul				= 1.5
 SWEP.SideRecoilMul			= 0.75
 SWEP.RecoilSpeedMul			= 0.75
-SWEP.MoveConeMul			= 0.5
+SWEP.MoveConeMul			= 2
 SWEP.HeatMul				= 1.5
 SWEP.CoolMul				= 1
 SWEP.CoolSpeedMul			= 1
@@ -54,15 +54,20 @@ SWEP.HasDoubleZoom			= false
 SWEP.HasSideRecoil			= true
 SWEP.HasDownRecoil			= true
 
+SWEP.CanShootWhileSprinting = true
+SWEP.DamageFalloff			= 1000
+
 SWEP.HasIronSights 			= true
 SWEP.EnableIronCross		= true
 SWEP.HasGoodSights			= false
 SWEP.IronSightTime			= 0.125
-SWEP.IronSightsPos 			= Vector(-3, 0, 1)
-SWEP.IronSightsAng 			= Vector(0, 0, 0)
 
-SWEP.CanShootWhileSprinting = true
 SWEP.IronRunPos				= Vector(0,-10,-20)
 SWEP.IronRunAng				= Vector(45,0,0)
 
-SWEP.DamageFalloff			= 1000
+SWEP.IronSightsPos 			= Vector(-3, 0, 1)
+SWEP.IronSightsAng 			= Vector(0, 0, 0)
+
+SWEP.IronMeleePos 			= Vector(-6.433, -13.468, -20)
+SWEP.IronMeleeAng 			= Vector(70, 0, 0)
+

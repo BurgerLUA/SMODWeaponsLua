@@ -3,7 +3,7 @@ if CLIENT then
 	SWEP.WepSelectIcon 		= surface.GetTextureID("vgui/killicons/smod_OICW")
 end
 
-SWEP.Category				= "Extra Weapons"
+SWEP.Category				= "BurgerBase: SMOD"
 SWEP.PrintName				= "OICW"
 SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
@@ -52,7 +52,14 @@ SWEP.HasSilencer 			= false
 SWEP.HasDoubleZoom			= false
 SWEP.HasSideRecoil			= true
 SWEP.HasDownRecoil			= false
-SWEP.HasSpecialFire			= false
+SWEP.HasSpecialFire			= true
+
+SWEP.CanShootWhileSprinting = false
+
+SWEP.ColorOverlay			= Color(0,255,0,20)
+SWEP.ShootOffsetStrength	= Angle(0.5,0.5,0)
+
+SWEP.DamageFalloff			= 4000
 
 SWEP.BurstOverride			= 3
 SWEP.BurstConeMul			= 2
@@ -64,21 +71,18 @@ SWEP.BurstCoolMul			= 0.75
 SWEP.HasIronSights 			= false
 SWEP.EnableIronCross		= false
 SWEP.HasGoodSights			= false
-SWEP.IronSightsPos 			= Vector(-10, -10, 3)
-SWEP.IronSightsAng 			= Vector(0, 0, 0)
 
 SWEP.IronSightTime			= 0.5
 SWEP.ZoomDelay				= 0.25
 
-SWEP.ColorOverlay			= Color(0,255,0,20)
+SWEP.IronSightsPos 			= Vector(-10, -10, 3)
+SWEP.IronSightsAng 			= Vector(0, 0, 0)
 
-SWEP.DamageFalloff			= 4000
-
-SWEP.ShootOffsetStrength	= Angle(0.5,0.5,0)
-
-SWEP.CanShootWhileSprinting = false
 SWEP.IronRunPos				= Vector(-5,-10,-10)
 SWEP.IronRunAng				= Vector(20,20,0)
+
+SWEP.IronMeleePos = Vector(0.602, -10.252, -2.613)
+SWEP.IronMeleeAng = Vector(-7.739, 33.064, -41.508)
 
 function SWEP:SpecialConePre(Cone,IsCrosshair)
 	if self:GetPrimaryAmmo() == game.GetAmmoID("bb_762mm") then
@@ -90,7 +94,7 @@ end
 SWEP.SpecialAmmo			= {"bb_556mm","bb_762mm"}
 
 function SWEP:SpecialGiveAmmo()
-	self.Owner:GiveAmmo(30,"bb_762mm",false)
+	--self.Owner:GiveAmmo(30,"bb_762mm",false)
 end
 
 function SWEP:HandleShootAnimations()

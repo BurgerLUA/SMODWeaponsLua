@@ -1,4 +1,4 @@
-SWEP.Category				= "Extra Weapons"
+SWEP.Category				= "BurgerBase: SMOD"
 SWEP.PrintName				= "PURPLE DRANK"
 SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Free"
@@ -9,8 +9,8 @@ SWEP.CSSMoveSpeed			= 250
 SWEP.Spawnable				= false
 SWEP.AdminOnly				= false
 
-SWEP.Slot					= 0
-SWEP.SlotPos				= 5 - 1
+SWEP.Slot					= 5 - 1
+SWEP.SlotPos				= 0
 
 SWEP.ViewModel 				= "models/weapons/v_p_drink.mdl"
 SWEP.WorldModel				= "models/weapons/w_p_drink.mdl"

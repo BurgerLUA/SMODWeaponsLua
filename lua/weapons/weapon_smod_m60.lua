@@ -3,7 +3,7 @@ if CLIENT then
 	SWEP.WepSelectIcon 		= surface.GetTextureID("vgui/killicons/smod_M60")
 end
 
-SWEP.Category				= "Extra Weapons"
+SWEP.Category				= "BurgerBase: SMOD"
 SWEP.PrintName				= "M60"
 SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
@@ -22,7 +22,7 @@ SWEP.WorldModel				= "models/weapons/w_m60.mdl"
 SWEP.VModelFlip 			= false
 SWEP.HoldType				= "shotgun"
 
-SWEP.Primary.Damage			= 35
+SWEP.Primary.Damage			= 45
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= Sound("weapons/m60/fire1.wav")
 SWEP.Primary.Cone			= 0.0075
@@ -38,7 +38,7 @@ SWEP.RecoilSpeedMul			= 1.25
 SWEP.MoveConeMul			= 4
 SWEP.HeatMul				= 1
 SWEP.CoolMul				= 2
-SWEP.MaxHeat				= 5
+SWEP.MaxHeat				= 3
 
 SWEP.HasScope 				= false
 SWEP.ZoomAmount 			= 1
@@ -52,18 +52,23 @@ SWEP.HasSilencer 			= false
 SWEP.HasDoubleZoom			= false
 SWEP.HasSideRecoil			= true
 SWEP.HasDownRecoil			= false
+SWEP.CanShootWhileSprinting = false
+
+SWEP.ZoomTime				= 1
+SWEP.AddFOV					= 40
+SWEP.DamageFalloff			= 3000
 
 SWEP.HasIronSights 			= true
 SWEP.EnableIronCross		= true
 SWEP.HasGoodSights			= false
 SWEP.IronSightTime			= 1
-SWEP.IronSightsPos 			= Vector(-3, 20, 1)
+
+SWEP.IronSightsPos 			= Vector(-3, 0, 1)
 SWEP.IronSightsAng 			= Vector(0, 0, -7)
 
-SWEP.ZoomTime				= 1
-
-SWEP.CanShootWhileSprinting = false
 SWEP.IronRunPos				= Vector(0,0,0)
 SWEP.IronRunAng				= Vector(-10,0,0)
 
-SWEP.DamageFalloff			= 3000
+SWEP.IronMeleePos = Vector(3.015, -2.01, 0)
+SWEP.IronMeleeAng = Vector(0, 54.171, -16.885)
+

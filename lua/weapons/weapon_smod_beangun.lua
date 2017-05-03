@@ -3,15 +3,15 @@ if CLIENT then
 	SWEP.WepSelectIcon = surface.GetTextureID("vgui/killicons/smod_SoyBeans")
 end
 
-SWEP.Category				= "Extra Weapons"
-SWEP.PrintName				= "BEAN GUN"
+SWEP.Category				= "BurgerBase: SMOD"
+SWEP.PrintName				= "Bean Gun"
 SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
 
 SWEP.Cost					= 1500
 SWEP.CSSMoveSpeed				= 250
 
-SWEP.Spawnable				= false
+SWEP.Spawnable				= true
 SWEP.AdminOnly				= false
 
 SWEP.Slot					= 2

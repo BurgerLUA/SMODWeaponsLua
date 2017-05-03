@@ -4,7 +4,7 @@ if CLIENT then
 	SWEP.WepSelectIcon 		= surface.GetTextureID("vgui/killicons/smod_motionsensor")
 end
 
-SWEP.Category				= "Extra Weapons"
+SWEP.Category				= "BurgerBase: SMOD"
 SWEP.PrintName				= "TRIPMINE"
 SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Throwable"
@@ -60,6 +60,8 @@ SWEP.CanHolster				= true
 SWEP.Object					= "ent_smod_tripmine"
 
 SWEP.HasPreThrow			= false
+
+SWEP.HasSpecialFire			= false
 
 function SWEP:ThrowObject(object,force)
 

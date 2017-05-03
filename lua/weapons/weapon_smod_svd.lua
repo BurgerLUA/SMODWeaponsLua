@@ -3,7 +3,7 @@ if CLIENT then
 	SWEP.WepSelectIcon 		= surface.GetTextureID("vgui/killicons/smod_SVD")
 end
 
-SWEP.Category				= "Extra Weapons"
+SWEP.Category				= "BurgerBase: SMOD"
 SWEP.PrintName				= "SVD-63"
 SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
@@ -52,23 +52,30 @@ SWEP.HasSilencer 			= false
 SWEP.HasDoubleZoom			= false
 SWEP.HasSideRecoil			= true
 SWEP.HasDownRecoil			= false
+SWEP.CanShootWhileSprinting = false
+
+
+SWEP.CustomScope 			= Material("vgui/svdscope2")
+SWEP.CustomScopeSizeMul 	= 0.75
+
+SWEP.AddFOV					= 20
+SWEP.DamageFalloff			= 4000
+SWEP.ZoomDelay				= 0.25
 
 SWEP.HasIronSights 			= false
 SWEP.EnableIronCross		= false
 SWEP.HasGoodSights			= false
 SWEP.IronSightTime			= 0.5
+
 SWEP.IronSightsPos 			= Vector(-3.921, 0, 1)
 SWEP.IronSightsAng 			= Vector(0, 0, 0)
 
-SWEP.CanShootWhileSprinting = false
 SWEP.IronRunPos				= Vector(0,-10,-10)
 SWEP.IronRunAng				= Vector(20,20,0)
 
-SWEP.AddFOV					= 20
+SWEP.IronMeleePos = Vector(0.602, -10.252, -2.613)
+SWEP.IronMeleeAng = Vector(-7.739, 33.064, -41.508)
 
-SWEP.DamageFalloff			= 4000
 
-SWEP.ZoomDelay				= 0.25
 
-SWEP.CustomScope 			= Material("vgui/svdscope2")
-SWEP.CustomScopeSizeMul 	= 0.75
+

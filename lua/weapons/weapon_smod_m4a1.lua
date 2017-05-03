@@ -3,7 +3,7 @@ if CLIENT then
 	SWEP.WepSelectIcon 		= surface.GetTextureID("vgui/killicons/smod_m4a1")
 end
 
-SWEP.Category				= "Extra Weapons"
+SWEP.Category				= "BurgerBase: SMOD"
 SWEP.PrintName				= "M4A1 MARKSMAN"
 SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
@@ -33,10 +33,10 @@ SWEP.Primary.Ammo			= "bb_556mm"
 SWEP.Primary.Automatic 		= false
 
 SWEP.RecoilMul				= 2
-SWEP.SideRecoilMul			= 0.5
+SWEP.SideRecoilMul			= 0
 SWEP.RecoilSpeedMul			= 1.5
 SWEP.MoveConeMul			= 1
-SWEP.HeatMul				= 0.5
+SWEP.HeatMul				= 2
 SWEP.CoolMul				= 0.5
 SWEP.CoolSpeedMul			= 1
 
@@ -50,24 +50,34 @@ SWEP.HasBoltAction 			= false
 SWEP.HasBurstFire 			= true
 SWEP.HasSilencer 			= false
 SWEP.HasDoubleZoom			= false
-SWEP.HasSideRecoil			= true
-SWEP.HasDownRecoil			= true
+SWEP.HasSideRecoil			= false
+SWEP.HasDownRecoil			= false
+SWEP.CanShootWhileSprinting = false
+
+SWEP.DamageFalloff			= 2000
 
 SWEP.BurstOverride			= 3
 SWEP.BurstConeMul			= 2
 SWEP.BurstSpeedOverride 	= 0.5
 SWEP.BurstRecoilMul			= 0.25
-SWEP.BurstHeatMul			= 0.5
+SWEP.BurstHeatMul			= 0.1
 
 SWEP.HasIronSights 			= true
-SWEP.EnableIronCross		= true
+SWEP.EnableIronCross		= false
 SWEP.HasGoodSights			= true
 SWEP.IronSightTime			= 0.25
-SWEP.IronSightsPos 			= Vector(1, 10, 1)
+
+SWEP.IronSightsPos 			= Vector(2.49, 20, 1.18)
 SWEP.IronSightsAng 			= Vector(0, 0, 0)
 
-SWEP.CanShootWhileSprinting = false
 SWEP.IronRunPos				= Vector(-10,0,-20)
 SWEP.IronRunAng				= Vector(45,-10,-10)
 
-SWEP.DamageFalloff			= 2000
+SWEP.IronMeleePos = Vector(5.025, 3.216, -2.814)
+SWEP.IronMeleeAng = Vector(24.622, -24.623, 23.215)
+
+SWEP.HasIdle	= true
+
+SWEP.VElements = {
+	["element_name"] = { type = "Sprite", sprite = "sprites/eotech", bone = "a_m4", rel = "", pos = Vector(0.004, 2.97, 0), size = { x = 1, y = 1 }, color = Color(255, 255, 255, 255), nocull = true, additive = true, vertexalpha = true, vertexcolor = true, ignorez = false}
+}

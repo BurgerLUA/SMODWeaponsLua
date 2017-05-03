@@ -3,8 +3,8 @@ if CLIENT then
 	SWEP.WepSelectIcon 		= surface.GetTextureID("vgui/killicons/smod_annabelle")
 end
 
-SWEP.Category				= "Extra Weapons"
-SWEP.PrintName				= "MODEL 1892"
+SWEP.Category				= "BurgerBase: SMOD"
+SWEP.PrintName				= "Model 1892"
 SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
 
@@ -14,7 +14,7 @@ SWEP.CSSMoveSpeed			= 220
 SWEP.Spawnable				= true
 SWEP.AdminOnly				= false
 
-SWEP.Slot					= 2
+SWEP.Slot					= 4 - 1
 SWEP.SlotPos				= 1
 
 SWEP.ViewModel 				= "models/weapons/v_annabelle.mdl"
@@ -33,10 +33,10 @@ if CLIENT then
 	language.Add("ex_4440_ammo",".44-40")
 end
 
-SWEP.Primary.Damage			= 100
+SWEP.Primary.Damage			= 90
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= Sound("Weapon_SMODAnnabelle.Single")
-SWEP.Primary.Cone			= 0.005
+SWEP.Primary.Cone			= 0.003
 SWEP.Primary.ClipSize		= 15
 SWEP.Primary.SpareClip		= 15*2
 SWEP.Primary.Delay			= 0.35
@@ -66,19 +66,25 @@ SWEP.HasDoubleZoom			= false
 SWEP.HasSideRecoil			= true
 SWEP.HasDryFire				= false
 
-SWEP.HasIronSights 			= true
-SWEP.EnableIronCross		= true
-SWEP.HasGoodSights			= true
-SWEP.IronSightTime			= 0.5
-SWEP.IronSightsPos 			= Vector(-8, 0, 3)
-SWEP.IronSightsAng 			= Vector(0, 0, 0)
-
+SWEP.HasHL2Pump				= true
 SWEP.CanShootWhileSprinting = false
-SWEP.IronRunPos				= Vector(0,-10,-20)
-SWEP.IronRunAng				= Vector(45,0,0)
 
 SWEP.DamageFalloff			= 3000
 
 SWEP.AddFOV 				= 10
 
-SWEP.HasHL2Pump				= true
+SWEP.HasIronSights 			= true
+SWEP.EnableIronCross		= true
+SWEP.HasGoodSights			= true
+SWEP.IronSightTime			= 0.5
+
+SWEP.MeleeDelay				= 0.1
+
+SWEP.IronMeleePos 			= Vector(0, -100, 0)
+SWEP.IronMeleeAng 			= Vector(-5.628, 35.879, -52.061)
+
+SWEP.IronRunPos				= Vector(0,-10,-20)
+SWEP.IronRunAng				= Vector(45,0,0)
+
+SWEP.IronSightsPos 			= Vector(-8, 0, 3)
+SWEP.IronSightsAng 			= Vector(0, 0, 0)

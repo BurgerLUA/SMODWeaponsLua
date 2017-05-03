@@ -3,7 +3,7 @@ if CLIENT then
 	SWEP.WepSelectIcon = surface.GetTextureID("vgui/killicons/smod_dualcolts")
 end
 
-SWEP.Category				= "Extra Weapons"
+SWEP.Category				= "BurgerBase: SMOD"
 SWEP.PrintName				= "COLT AKIMBO"
 SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Secondary"
@@ -55,17 +55,8 @@ SWEP.HasDoubleZoom			= false
 SWEP.HasSideRecoil			= true
 SWEP.HasDownRecoil			= false
 SWEP.HasDual				= true
-
-SWEP.HasIronSights 			= true
-SWEP.EnableIronCross		= true
-SWEP.HasGoodSights			= true
-SWEP.IronSightTime			= 0.25
-SWEP.IronSightsPos 			= Vector(0.75, 5, 2)
-SWEP.IronSightsAng 			= Vector(0, 0, 0)
-
 SWEP.CanShootWhileSprinting = true
-SWEP.IronRunPos				= Vector(0,-10,-10)
-SWEP.IronRunAng				= Vector(20,20,0)
+SWEP.SideRecoilBasedOnDual	= true
 
 SWEP.BurstSpeedAbs			= 1/5
 SWEP.BurstOverride			= 2
@@ -73,7 +64,19 @@ SWEP.BurstSpeedOverride		= 0
 
 SWEP.DamageFalloff			= 2000
 
-SWEP.SideRecoilBasedOnDual	= true
+SWEP.HasIronSights 			= true
+SWEP.EnableIronCross		= true
+SWEP.HasGoodSights			= true
+SWEP.IronSightTime			= 0.25
+
+SWEP.IronSightsPos 			= Vector(0.75, 5, 2)
+SWEP.IronSightsAng 			= Vector(0, 0, 0)
+
+SWEP.IronRunPos				= Vector(0,-10,-10)
+SWEP.IronRunAng				= Vector(20,20,0)
+
+SWEP.IronMeleePos 			= Vector(0, -30, -20)
+SWEP.IronMeleeAng 			= Vector(70, 0, 0)
 
 
 

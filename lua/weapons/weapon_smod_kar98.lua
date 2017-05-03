@@ -3,7 +3,7 @@ if CLIENT then
 	SWEP.WepSelectIcon 		= surface.GetTextureID("vgui/killicons/smod_Karabiner98")
 end
 
-SWEP.Category				= "Extra Weapons"
+SWEP.Category				= "BurgerBase: SMOD"
 SWEP.PrintName				= "KARABINER 98K"
 SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
@@ -36,7 +36,7 @@ end
 SWEP.Primary.Damage			= 110
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= Sound("weapons/kar98/kar_shoot.wav")
-SWEP.Primary.Cone			= 0
+SWEP.Primary.Cone			= 0.005
 SWEP.Primary.ClipSize		= 5
 SWEP.Primary.SpareClip		= 5*6
 SWEP.Primary.Delay			= 2
@@ -58,7 +58,7 @@ SWEP.HasCrosshair 			= true
 SWEP.HasCSSZoom 			= false
 
 SWEP.HasPumpAction 			= false
-SWEP.HasBoltAction 			= true
+SWEP.HasBoltAction 			= false
 SWEP.HasBurstFire 			= false
 SWEP.HasSilencer 			= false
 SWEP.HasDoubleZoom			= false
@@ -69,7 +69,10 @@ SWEP.HasSpecialFire			= true
 SWEP.HasIronSights 			= true
 SWEP.EnableIronCross		= true
 SWEP.HasGoodSights			= true
-SWEP.IronSightTime			= 0.125
+
+SWEP.IronSightTime			= 1
+SWEP.ZoomTime				= 1
+
 SWEP.IronSightsPos 			= Vector(-4, -1, 2)
 SWEP.IronSightsAng 			= Vector(-3, 0.05, 0)
 
@@ -80,9 +83,14 @@ SWEP.MeleeSoundWallHit		= Sound("Weapon_Knife.HitWall")
 SWEP.MeleeSoundFleshSmall	= Sound("Weapon_Knife.Hit")
 SWEP.MeleeSoundFleshLarge	= Sound("Weapon_Knife.Stab")
 
+SWEP.IronMeleePos 			= Vector(0,10,0)
+SWEP.IronMeleeAng 			= Vector(0,0,0)
+
 SWEP.CanShootWhileSprinting = false
 SWEP.IronRunPos				= Vector(0,0,0)
-SWEP.IronRunAng				= Vector(-10,0,0)
+SWEP.IronRunAng				= Vector(-10,10,0)
+
+SWEP.AddFOV					= 10
 
 function SWEP:SpecialFire()
 

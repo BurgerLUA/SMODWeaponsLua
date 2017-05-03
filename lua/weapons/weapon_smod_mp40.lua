@@ -3,7 +3,7 @@ if CLIENT then
 	SWEP.WepSelectIcon = surface.GetTextureID("vgui/killicons/smod_mp40")
 end
 
-SWEP.Category				= "Extra Weapons"
+SWEP.Category				= "BurgerBase: SMOD"
 SWEP.PrintName				= "MP40"
 SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
@@ -38,7 +38,7 @@ SWEP.RecoilSpeedMul			= 1.25
 SWEP.MoveConeMul			= 1
 SWEP.HeatMul				= 1
 SWEP.CoolMul				= 1
-SWEP.MaxHeat				= 5
+SWEP.MaxHeat				= 4
 
 SWEP.HasScope 				= false
 SWEP.ZoomAmount 			= 0.5
@@ -52,26 +52,29 @@ SWEP.HasSilencer 			= false
 SWEP.HasDoubleZoom			= false
 SWEP.HasSideRecoil			= true
 SWEP.HasDownRecoil			= false
+SWEP.HasSpecialFire			= true
+SWEP.CanShootWhileSprinting = false
+
+SWEP.DamageFalloff			= 1000
 
 SWEP.HasIronSights 			= true
 SWEP.EnableIronCross		= true
 SWEP.HasGoodSights			= true
 SWEP.IronSightTime			= 0.5
-SWEP.IronSightsPos 			= Vector(-4, 0, 1)
+
+SWEP.IronSightsPos 			= Vector(-8.12, 0, 1.24)
 SWEP.IronSightsAng 			= Vector(0, 0, 0)
 
-SWEP.CanShootWhileSprinting = false
 SWEP.IronRunPos				= Vector(0,-10,-10)
 SWEP.IronRunAng				= Vector(20,20,0)
 
-SWEP.DamageFalloff			= 1000
+SWEP.IronMeleePos 			= Vector(0,20,0)
+SWEP.IronMeleeAng 			= Vector(0,0,0)
 
 SWEP.MeleeSoundMiss			= Sound("weapons/foot/foot_fire.wav")
 SWEP.MeleeSoundWallHit		= Sound("weapons/foot/foot_kickwall.wav")
 SWEP.MeleeSoundFleshSmall	= Sound("weapons/foot/foot_kickbody.wav")
 SWEP.MeleeSoundFleshLarge	= Sound("weapons/foot/foot_kickbody.wav")
-
-SWEP.HasSpecialFire			= true
 
 function SWEP:SpecialFire()
 
