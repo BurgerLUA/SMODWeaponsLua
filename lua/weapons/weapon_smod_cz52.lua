@@ -9,7 +9,7 @@ SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Secondary"
 
 SWEP.Cost					= 1500
-SWEP.CSSMoveSpeed			= 230
+SWEP.CSSMoveSpeed			= 245
 
 SWEP.Spawnable				= true
 SWEP.AdminOnly				= false

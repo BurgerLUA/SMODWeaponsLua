@@ -4,12 +4,12 @@ if CLIENT then
 end
 
 SWEP.Category				= "BurgerBase: SMOD"
-SWEP.PrintName				= "KARABINER 98K"
+SWEP.PrintName				= "Kar 98K"
 SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
 
 SWEP.Cost					= 2750
-SWEP.CSSMoveSpeed			= 200
+SWEP.CSSMoveSpeed			= 230
 
 SWEP.Spawnable				= true
 SWEP.AdminOnly				= false
@@ -91,6 +91,8 @@ SWEP.IronRunPos				= Vector(0,0,0)
 SWEP.IronRunAng				= Vector(-10,10,0)
 
 SWEP.AddFOV					= 10
+
+SWEP.MeleeDamageType		= DMG_SLASH
 
 function SWEP:SpecialFire()
 

@@ -4,12 +4,12 @@ if CLIENT then
 end
 
 SWEP.Category				= "BurgerBase: SMOD"
-SWEP.PrintName				= "M1 GARAND"
+SWEP.PrintName				= "M1 Garand"
 SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
 
 SWEP.Cost					= 2750
-SWEP.CSSMoveSpeed			= 220
+SWEP.CSSMoveSpeed			= 230
 
 SWEP.Spawnable				= true
 SWEP.AdminOnly				= false
@@ -118,7 +118,7 @@ end
 SWEP.SpecialAmmo			= {"smod_3006","smod_3006_crap"}
 
 function SWEP:SpecialGiveAmmo()
-	self.Owner:GiveAmmo(80,"smod_3006_crap",false)
+	--self.Owner:GiveAmmo(80,"smod_3006_crap",false)
 end
 
 function SWEP:SpecialDamage(damage)

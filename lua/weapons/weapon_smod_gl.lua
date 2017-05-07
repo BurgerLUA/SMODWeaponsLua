@@ -4,12 +4,12 @@ if CLIENT then
 end
 
 SWEP.Category				= "BurgerBase: SMOD"
-SWEP.PrintName				= "GRENADE LAUNCHER"
+SWEP.PrintName				= "Grenade Launcher"
 SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
 
 SWEP.Cost					= 2000
-SWEP.CSSMoveSpeed			= 200
+SWEP.CSSMoveSpeed			= 220
 
 SWEP.Spawnable				= true
 SWEP.AdminOnly				= false
@@ -28,12 +28,12 @@ if CLIENT then
 	language.Add("ex_launcher_ammo","Popcan")
 end
 
-SWEP.Primary.Damage			= 100
+SWEP.Primary.Damage			= 75
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= Sound("weapons/ar2/npc_ar2_altfire.wav")
 SWEP.Primary.Cone			= 0.01
 SWEP.Primary.ClipSize		= 6
-SWEP.Primary.SpareClip		= 12
+SWEP.Primary.SpareClip		= 0
 SWEP.Primary.Delay			= 0.25
 SWEP.Primary.Ammo			= "ex_launcher"
 SWEP.Primary.Automatic 		= false
@@ -96,69 +96,70 @@ function SWEP:ModProjectileTable(datatable)
 
 	datatable.direction = datatable.direction*1000
 	datatable.hullsize = 1
-	datatable.resistance = datatable.direction*0.1 + Vector(0,0,200)
+	datatable.resistance = datatable.direction*0.1 + Vector(0,0,100)
 	datatable.dietime = CurTime() + 10
+	datatable.id = "launched_grenade"
 	
 	datatable.hullsize = 1
-	
-	if CLIENT then
-		datatable.special = ClientsideModel(NadeModel, RENDERGROUP_OPAQUE )
-	end
 
-	datatable.drawfunction = function(datatable)
-		if datatable.special and datatable.special ~= NULL then
-			datatable.special:SetPos(datatable.pos)
-			datatable.special:SetAngles( datatable.direction:GetNormalized():Angle() )
-			datatable.special:DrawModel()
-		end
-	end
-
-	datatable.hitfunction = function(datatable,traceresult)
-		
-		local Victim = traceresult.Entity
-		local Attacker = datatable.owner
-		local Inflictor = datatable.weapon
-		
-		if not IsValid(Attacker) then
-			Attacker = Victim
-		end
-		
-		if not IsValid(Inflictor) then
-			Inflictor = Attacker
-		end
-		
-		local DmgInfo = DamageInfo()
-		DmgInfo:SetDamage( datatable.damage )
-		DmgInfo:SetAttacker( Attacker )
-		DmgInfo:SetInflictor( Inflictor )
-		DmgInfo:SetDamageForce( datatable.direction:GetNormalized() )
-		DmgInfo:SetDamagePosition( datatable.pos )
-		DmgInfo:SetDamageType( DMG_BLAST )
-		
-		util.BlastDamageInfo( DmgInfo, datatable.pos, 512 )
-		
-		if IsFirstTimePredicted() then
-			local effectdata = EffectData()
-			effectdata:SetStart( datatable.pos + Vector(0,0,10)) // not sure if we need a start and origin (endpoint) for this effect, but whatever
-			effectdata:SetOrigin( datatable.pos)
-			effectdata:SetScale( 1 )
-			effectdata:SetRadius( 1 )
-			util.Effect( "Explosion", effectdata)
-		end
-		
-	end
-	
-	datatable.diefunction = function(datatable)
-		if CLIENT then
-			if datatable.special and datatable.special ~= NULL then
-				datatable.special:Remove()
-			end
-		end
-	end
-	
-	
-	
 	return datatable
 
 end
 
+local datatable = {}
+
+datatable.drawfunction = function(datatable)
+	if datatable.special and datatable.special ~= NULL then
+		datatable.special:SetPos(datatable.pos)
+		datatable.special:SetAngles( datatable.direction:GetNormalized():Angle() )
+		datatable.special:DrawModel()
+	else
+		datatable.special = ClientsideModel(NadeModel, RENDERGROUP_OPAQUE )
+	end
+end
+	
+
+datatable.hitfunction = function(datatable,traceresult)
+	
+	local Victim = traceresult.Entity
+	local Attacker = datatable.owner
+	local Inflictor = datatable.weapon
+	
+	if not IsValid(Attacker) then
+		Attacker = Victim
+	end
+	
+	if not IsValid(Inflictor) then
+		Inflictor = Attacker
+	end
+	
+	local DmgInfo = DamageInfo()
+	DmgInfo:SetDamage( datatable.damage )
+	DmgInfo:SetAttacker( Attacker )
+	DmgInfo:SetInflictor( Inflictor )
+	DmgInfo:SetDamageForce( datatable.direction:GetNormalized() )
+	DmgInfo:SetDamagePosition( datatable.pos )
+	DmgInfo:SetDamageType( DMG_SHOCK )
+	
+	util.BlastDamageInfo( DmgInfo, datatable.pos, 512 )
+	
+	if IsFirstTimePredicted() then
+		local effectdata = EffectData()
+		effectdata:SetStart( datatable.pos + Vector(0,0,10)) // not sure if we need a start and origin (endpoint) for this effect, but whatever
+		effectdata:SetOrigin( datatable.pos)
+		effectdata:SetScale( 1 )
+		effectdata:SetRadius( 1 )
+		util.Effect( "Explosion", effectdata)
+	end
+	
+end
+
+datatable.diefunction = function(datatable)
+	if CLIENT then
+		if datatable.special and datatable.special ~= NULL then
+			datatable.special:Remove()
+		end
+	end
+end
+
+BURGERBASE_RegisterProjectile("launched_grenade",datatable)

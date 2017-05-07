@@ -4,7 +4,7 @@ if CLIENT then
 end
 
 SWEP.Category				= "BurgerBase: SMOD"
-SWEP.PrintName				= "SOY BEANS"
+SWEP.PrintName				= "Soy Beans"
 SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Free"
 

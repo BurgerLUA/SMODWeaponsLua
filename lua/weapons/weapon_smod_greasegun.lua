@@ -4,12 +4,12 @@ if CLIENT then
 end
 
 SWEP.Category				= "BurgerBase: SMOD"
-SWEP.PrintName				= "GREASEGUN"
+SWEP.PrintName				= "Greasegun"
 SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
 
 SWEP.Cost					= 1500
-SWEP.CSSMoveSpeed			= 220
+SWEP.CSSMoveSpeed			= 240
 
 SWEP.Spawnable				= true
 SWEP.AdminOnly				= false

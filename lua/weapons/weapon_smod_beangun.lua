@@ -9,18 +9,19 @@ SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
 
 SWEP.Cost					= 1500
-SWEP.CSSMoveSpeed				= 250
+SWEP.CSSMoveSpeed			= 220
 
 SWEP.Spawnable				= true
 SWEP.AdminOnly				= false
 
-SWEP.Slot					= 2
+SWEP.Slot					= 4 - 1
 SWEP.SlotPos				= 1
 
-SWEP.ViewModel 				= "models/weapons/v_grease.mdl"
-SWEP.WorldModel				= "models/weapons/w_grease.mdl"
+
+SWEP.ViewModel 				= "models/weapons/v_m60.mdl"
+SWEP.WorldModel 			= "models/weapons/w_m60.mdl"
 SWEP.ViewModelFlip 			= false
-SWEP.HoldType				= "slam"
+SWEP.HoldType				= "ar2"
 SWEP.UseHands				= false
 
 game.AddAmmoType({name = "smod_beans2"})
@@ -30,22 +31,23 @@ if CLIENT then
 end
 
 
-SWEP.Primary.Damage			= 10
+SWEP.Primary.Damage			= 25
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= Sound("weapons/grease/greasegun_shoot.wav")
-SWEP.Primary.Cone			= 0.04
-SWEP.Primary.ClipSize		= 30
-SWEP.Primary.SpareClip		= 30
+SWEP.Primary.Cone			= 0.005
+SWEP.Primary.ClipSize		= -1
+SWEP.Primary.SpareClip		= 250
 SWEP.Primary.Delay			= 0.1
 SWEP.Primary.Ammo			= "smod_beans2"
 SWEP.Primary.Automatic 		= true
 
-SWEP.EnableTracers			= false
-
-SWEP.RecoilMul 				= 1
-SWEP.SideRecoilMul			= 1
-SWEP.MoveConeMul				= 0
-SWEP.HeatMul				= 1
+SWEP.RecoilMul				= 1.25
+SWEP.SideRecoilMul			= 0.25
+SWEP.RecoilSpeedMul			= 1.25
+SWEP.MoveConeMul			= 2
+SWEP.HeatMul				= 0.5
+SWEP.CoolMul				= 2
+SWEP.MaxHeat				= 3
 
 SWEP.HasScope 				= false
 SWEP.ZoomAmount				= 0.5
@@ -60,58 +62,121 @@ SWEP.HasDoubleZoom			= false
 SWEP.HasSideRecoil			= false
 SWEP.HasDownRecoil			= false
 SWEP.HasDual				= false
+SWEP.CanShootWhileSprinting = false
+
+SWEP.DamageFalloff			= 3000
+SWEP.AddFOV					= 20
+
+SWEP.UseSpecialProjectile	= true
+SWEP.SourceOverride			= Vector(2,0,-2)
+SWEP.BulletAngOffset		= Angle(-1,0,0)
 
 SWEP.HasIronSights 			= true
-SWEP.EnableIronCross		= false
+SWEP.EnableIronCross		= true
 SWEP.HasGoodSights			= false
-SWEP.IronSightTime			= 0.25
-SWEP.IronSightsPos 			= Vector(-5, 0, 1)
-SWEP.IronSightsAng 			= Vector(0, 0, 0)
+SWEP.IronSightTime			= 1
 
-SWEP.DamageFalloff			= 100
+SWEP.IronSightsPos 			= Vector(-3, 0, 1)
+SWEP.IronSightsAng 			= Vector(0, 0, -7)
+
+SWEP.IronRunPos				= Vector(0,0,0)
+SWEP.IronRunAng				= Vector(-10,0,0)
+
+SWEP.IronMeleePos = Vector(3.015, -2.01, 0)
+SWEP.IronMeleeAng = Vector(0, 54.171, -16.885)
 
 
-function SWEP:PrimaryAttack()
-	
-	if not self:CanPrimaryAttack() then	return end
-	if not self:CanShoot() then return end
-	self:TakePrimaryAmmo(1)
 
-	self:WeaponSound()
-	self:WeaponDelay() -- don't predict, has delay
-	self:WeaponAnimation(self:Clip1(),ACT_VM_PRIMARYATTACK)
-	self.Owner:SetAnimation(PLAYER_ATTACK1)
-	
-	if (IsFirstTimePredicted() or game.SinglePlayer()) then
-			
-		if SERVER then
-			local Shoot = self.Owner:GetShootPos()
-			local Eye= self.Owner:EyeAngles()
-			self:ShootSpicyBean(Shoot, Eye + AngleRand()*0.01 )
-		end
 
-		if (CLIENT or game.SinglePlayer()) then 
-			self:AddRecoil() -- Predict
-		end
+local ArrowModel = Model("models/misc/setubun/soybean.mdl")
+local ArrowSound = Sound("fofgunsounds/bow/hit1.wav")
 
-	end
+SWEP.ViewModelBoneMods = {
+	["Bone71"] = { scale = Vector(0.009, 0.009, 0.009), pos = Vector(0, 0, 0), angle = Angle(0, 0, 0) },
+	["Bone73"] = { scale = Vector(0.009, 0.009, 0.009), pos = Vector(0, 0, 0), angle = Angle(0, 0, 0) },
+	["Bone70"] = { scale = Vector(0.009, 0.009, 0.009), pos = Vector(0, 0, 0), angle = Angle(0, 0, 0) }
+}
+
+SWEP.VElements = {
+	["beans"] = { type = "Model", model = "models/weapons/w_msbomb.mdl", bone = "Bone01", rel = "", pos = Vector(3.635, -20.261, 1.557), angle = Angle(0, 180, 0), size = Vector(1.858, 0.69, 1.014), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} },
+	["beans2"] = { type = "Model", model = "models/misc/setubun/soybean.mdl", bone = "Bone01", rel = "beans", pos = Vector(0.518, 1.557, 0.518), angle = Angle(0, 90, 0), size = Vector(0.5, 0.5, 0.5), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+}
+
+function SWEP:ModProjectileTable(datatable)
+
+	datatable.direction = datatable.direction*3000
+	datatable.hullsize = 4
+	datatable.resistance = (datatable.direction*0.05) + Vector(0,0,25)
+	datatable.dietime = CurTime() + 10
+	datatable.id = "smod_bean"
+
+	return datatable
 
 end
 
-function SWEP:ShootSpicyBean(ShootPos,ShootAng)
 
-	local ent = ents.Create("ent_smod_beans")
-	ent:SetPos(ShootPos)
-	ent:SetAngles(ShootAng + AngleRand())
-	ent.FakeOwner = self.Owner
-	ent:Spawn()
+-- Register Bullet
+local datatable = {}
 	
-	local phys = ent:GetPhysicsObject()
-	if IsValid(phys) then
-		phys:ApplyForceCenter(ShootAng:Forward()*1000 + self.Owner:GetVelocity())
+datatable.drawfunction = function(datatable)
+	if datatable.special and datatable.special ~= NULL then
+		datatable.special:SetPos(datatable.pos)
+		datatable.special:SetAngles( datatable.direction:GetNormalized():Angle() + Angle(math.random(-180,180),math.random(-180,180),math.random(-180,180) ) )
+		datatable.special:DrawModel()
+	else
+		datatable.special = ClientsideModel(ArrowModel, RENDERGROUP_OPAQUE )
+	end
+end
+
+datatable.diefunction = function(datatable)
+	if CLIENT then
+		if datatable.special and datatable.special ~= NULL then
+			datatable.special:Remove()
+		end
+	end
+end
+
+datatable.hitfunction = function(datatable,traceresult)
+
+	local Victim = traceresult.Entity
+	local Attacker = datatable.owner
+	local Inflictor = datatable.weapon
+	
+	if not IsValid(Attacker) then
+		Attacker = Victim
+	end
+	
+	if not IsValid(Inflictor) then
+		Inflictor = Attacker
+	end
+	
+	if Victim and Victim ~= NULL then
+		local DmgInfo = DamageInfo()
+		DmgInfo:SetDamage( datatable.damage )
+		DmgInfo:SetAttacker( Attacker )
+		DmgInfo:SetInflictor( Inflictor )
+		DmgInfo:SetDamageForce( datatable.direction:GetNormalized() )
+		DmgInfo:SetDamagePosition( datatable.pos )
+		DmgInfo:SetDamageType( DMG_BULLET )
+		traceresult.Entity:DispatchTraceAttack( DmgInfo, traceresult )
+	end
+
+	if SERVER and traceresult.HitWorld then
+		--[[
+		local CreatedAmmo = BURGERBASE_FUNC_CreateAmmo(traceresult.HitPos,datatable.direction:GetNormalized():Angle(),"XBowBolt",1,ArrowModel)
+		local Phys = CreatedAmmo:GetPhysicsObject()
+		--if Phys and Phys:IsValid() then
+		--	Phys:EnableMotion(false)
+		--end	
+		CreatedAmmo:EmitSound(ArrowSound)
+		SafeRemoveEntityDelayed(CreatedAmmo,30)
+		--]]
 	end
 	
 end
+
+BURGERBASE_RegisterProjectile("smod_bean",datatable)
+
 
 
 

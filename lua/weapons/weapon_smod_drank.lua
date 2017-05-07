@@ -1,5 +1,5 @@
 SWEP.Category				= "BurgerBase: SMOD"
-SWEP.PrintName				= "PURPLE DRANK"
+SWEP.PrintName				= "Pruple Drank"
 SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Free"
 

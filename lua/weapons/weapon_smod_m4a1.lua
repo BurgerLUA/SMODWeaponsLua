@@ -4,7 +4,7 @@ if CLIENT then
 end
 
 SWEP.Category				= "BurgerBase: SMOD"
-SWEP.PrintName				= "M4A1 MARKSMAN"
+SWEP.PrintName				= "M4A1 Marksman"
 SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
 

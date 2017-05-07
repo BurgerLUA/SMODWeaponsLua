@@ -4,12 +4,12 @@ if CLIENT then
 end
 
 SWEP.Category				= "BurgerBase: SMOD"
-SWEP.PrintName				= "KATANA"
+SWEP.PrintName				= "Katana"
 SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Melee"
 
 SWEP.Cost					= 0
-SWEP.CSSMoveSpeed			= 250
+SWEP.CSSMoveSpeed			= 300
 
 SWEP.Spawnable				= true
 SWEP.AdminOnly				= false
@@ -33,8 +33,8 @@ SWEP.Primary.Damage			= 60
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.ClipSize		= 100
 SWEP.Primary.SpareClip		= 0
-SWEP.Primary.Cone			= 0.025
-SWEP.Primary.Delay			= 1/8
+SWEP.Primary.Cone			= 0.1
+SWEP.Primary.Delay			= 1/10
 SWEP.Primary.Ammo			= "smod_weeb"
 SWEP.Primary.Automatic 		= false 
 
@@ -75,6 +75,8 @@ SWEP.MeleeRange				= 50
 SWEP.MeleeSize 				= 16
 SWEP.EnableBlocking			= true
 SWEP.MeleeDelay				= 0.1
+
+SWEP.MeleeDamageType		= DMG_SLASH
 
 --[[
 
@@ -130,47 +132,56 @@ function SWEP:PrimaryAttack()
 	
 	--self.Owner:SetAnimation(PLAYER_ATTACK1)
 	
+	local Damage = self:SpecialDamage(self.Primary.Damage)
+	
 	if not self:GetIsLeftFire() then
 	
-		if self:SpecialDamage(self.Primary.Damage) >= 100 then
+		if Damage >= 100 then
 			self:SendSequence("misscenter1")
+			--self.Owner:ViewPunch(Angle(Damage*0.05,Damage*0.05,0))
 		else
 			self:SendSequence("hitcenter1")
+			--self.Owner:ViewPunch(Angle(0,Damage*0.05,0))
 		end
-	
 		
-		--local SequenceDelay = self:SendSequencePlayer("h_left_t1")
-		--self:SetNextIdle(CurTime() + SequenceDelay )
+	
 		self:SetIsLeftFire(true)
 		local SequenceDelay = self:GetDelay()
 		self:SetNextPrimaryFire(CurTime() + SequenceDelay)
 		self:SetNextSecondaryFire(CurTime() + SequenceDelay)
 	else
 		self:SendSequence("hitcenter2")
-		--local SequenceDelay = self:SendSequencePlayer("h_right_t1")
-		--self:SetNextIdle(CurTime() + SequenceDelay )
+		--self.Owner:ViewPunch(Angle(0,-Damage*0.05,0))	
 		self:SetIsLeftFire(false)
 		local SequenceDelay = self:GetDelay()
 		self:SetNextPrimaryFire(CurTime() + SequenceDelay)
 		self:SetNextSecondaryFire(CurTime() + SequenceDelay)
 	end
 
-	local Damage = self:SpecialDamage(self.Primary.Damage)
 	
-	self:NewSwing(Damage)
+	
+	local NewDamage = Damage
+	
+	if self:IsBalanced() then
+		NewDamage = NewDamage * 2
+	end
+	
+	self:NewSwing(NewDamage)
 	
 	if !self.Owner:IsOnGround() and Damage >= 90 then
 	
-		self.Owner:SetVelocity( -self:GetVelocity() + self.Owner:GetForward()*600 + Vector(0,0,100) )
-		self.Owner:SetGravity( 0.1 )
+		self.Owner:SetVelocity( -self:GetVelocity() + self.Owner:GetForward()*600 + Vector(0,0,50)	 )
+		self.Owner:ViewPunch(Angle(5,0,0))
+		self.Owner:SetGravity( 0.001 )
 		
 		timer.Simple(0.5,function()
-			local Owner = self.Owner
-			
-			if Owner and Owner:IsValid() then
-				Owner:SetGravity(1)
+			if self and self:IsValid() then
+				local Owner = self.Owner
+				
+				if Owner and Owner:IsValid() then
+					Owner:SetGravity(1)
+				end
 			end
-		
 		end)
 		
 		
@@ -193,24 +204,35 @@ function SWEP:PrimaryAttack()
 			end
 		end
 		
-		self:SetNextPrimaryFire(CurTime() + 1)
+		self:SetNextPrimaryFire(CurTime() + 0.5)
 		 
 	end
 
-	
-	
-	
-	if CLIENT and IsFirstTimePredicted() then
+	if IsFirstTimePredicted() then
 
 		self.LastDamageTable[#self.LastDamageTable+1] = math.floor(Damage)
 		
 		if #self.LastDamageTable > 3 then
 			table.remove(self.LastDamageTable,1)
 		end
-		
+
 	end
+	
+	
 
 end
+
+function SWEP:IsBalanced()
+
+	local Highest = math.max(self.LastDamageTable[1],self.LastDamageTable[2],self.LastDamageTable[3], self:SpecialDamage(self.Primary.Damage) )
+	local Lowest = math.min(self.LastDamageTable[1],self.LastDamageTable[2],self.LastDamageTable[3])
+
+	return Lowest ~= 0 and Highest ~= 100 and math.abs(Highest - Lowest) < 5
+
+end
+
+
+
 
 SWEP.LastDamageTable = {0,0,0}
 
@@ -219,7 +241,30 @@ function SWEP:SpecialDamage(damage)
 	return damage
 end
 
+function SWEP:SpecialConePost(Cone,IsCrosshair)
+
+	if self:IsBalanced() then
+		Cone = 0
+	else
+		Cone = Cone * ( (100 - self:SpecialDamage(self.Primary.Damage))/100 )
+	end
+	
+	
+	
+	return Cone
+end
+
 function SWEP:PostSwing(HitEntity,Damage)
+
+	--[[
+	if self:GetIsLeftFire() then
+		self.Owner:ViewPunch(Angle(0,5,0))	
+	else
+		self.Owner:ViewPunch(Angle(0,-5,0))	
+	end
+	--]]
+
+
 	self:SetSpecialFloat(0)
 end
 
@@ -250,11 +295,19 @@ end
 
 function SWEP:SpareThink()
 
-	self:SetSpecialFloat( math.Clamp(self:GetSpecialFloat() + FrameTime(),0,10) )
+	local Add = FrameTime()
 	
-	local IsBlocking = (self:GetSpecialFloat() < 0.25) or ( self.Owner:KeyDown(IN_ATTACK2) ) --and (self:GetNextPrimaryFire() + self.IronSightTime) <= CurTime())
+	if self.Owner:IsOnGround() then
+		Add = Add*2
+	end
+
+	self:SetSpecialFloat( math.Clamp(self:GetSpecialFloat() + Add,0,10) )
 	
-	self:SetIsBlocking( IsBlocking )
+	local IsBlocking = (self:GetSpecialFloat() < 0.25) or ( self.Owner:KeyDown(IN_ATTACK2) )
+	
+	--self:SetIsBlocking( IsBlocking )
+	
+	--print(IsBlocking)
 
 	if self.Owner:IsOnGround() then
 		self:SetSpecialInt(1)
@@ -276,6 +329,7 @@ function SWEP:SpareThink()
 			NewVelocity = NewVelocity + self.Owner:GetForward()*-200
 		end
 		self.Owner:SetVelocity(NewVelocity + Vector(0,0,400) - CurrentVelocity )
+		self.Owner:ViewPunch(Angle(5,0,0))
 		self:SetSpecialInt(0)
 	end
 	
@@ -298,12 +352,12 @@ function SWEP:SpareThink()
 			--self.MeleeRange	= 50
 		end	
 	elseif IsBlocking then
-		self.CSSMoveSpeed = 250*0.25
+		self.CSSMoveSpeed = 300*0.25
 		--self.MeleeSize = 16
 		--self.MeleeRange	= 50
 		self:SetHoldType("slam")
 	else
-		self.CSSMoveSpeed = 250
+		self.CSSMoveSpeed = 300
 		--self.MeleeSize = 16
 		--self.MeleeRange	= 50
 		self:SetHoldType(self.HoldType)
@@ -329,6 +383,7 @@ end
 
 function SWEP:AddDurability(amount)
 
+	--[[
 	self:SetClip1( math.Clamp(self:Clip1() + amount,0,100) )
 
 	if self:Clip1() <= 0 then
@@ -337,6 +392,7 @@ function SWEP:AddDurability(amount)
 			self.Owner:StripWeapon(self:GetClass())
 		end
 	end
+	--]]
 	
 	
 	--[[
@@ -378,34 +434,22 @@ function KATANA_ScalePlayerDamage(victim,hitgroup,dmginfo)
 	local WeaponAttacker = dmginfo:GetInflictor()
 
 	if Weapon and Weapon ~= NULL and Weapon:GetClass() == "weapon_smod_katana" then
-	
-		local VictimKeyDown = Weapon:GetIsBlocking()
-		
-		local ShouldProceed = true
-		
+
+		local Goal = 0.25
+
 		if attacker:IsPlayer() and attacker:GetActiveWeapon() and attacker:GetActiveWeapon():IsValid() then
 			WeaponAttacker = attacker:GetActiveWeapon()
-			
 			if WeaponAttacker:IsScripted() and (WeaponAttacker.Base == "weapon_burger_core_base" or WeaponAttacker.BurgerBase) then
-				if WeaponAttacker.Primary.NumShots > 1 then
-					ShouldProceed = false
-				end
+				Goal = Goal / WeaponAttacker.Primary.NumShots
 			end
 		end
 
-		if ShouldProceed and VictimKeyDown and Weapon:GetNextSecondaryFire() <= CurTime() then
 		
-			if hitgroup == HITGROUP_RIGHTARM and Damage >= 50 then
-			
-				victim:EmitSound("physics/metal/metal_sheet_impact_soft2.wav")
-				
-				if SERVER then
-					CSS_DropWeapon(victim,Weapon)
-				end
-				
-				return true
-			
-			elseif (hitgroup == HITGROUP_LEFTLEG or hitgroup == HITGROUP_RIGHTLEG) and !victim:Crouching() then
+		local VictimKeyDown = Weapon:IsBalanced() or (Weapon:GetSpecialFloat() < Goal) or victim:GetGravity() < 0.01
+
+		if VictimKeyDown then
+
+			if (hitgroup == HITGROUP_LEFTLEG or hitgroup == HITGROUP_RIGHTLEG) and !victim:Crouching() then
 			
 			
 			elseif hitgroup == HITGROUP_HEAD and victim:Crouching() then
@@ -425,7 +469,7 @@ function KATANA_ScalePlayerDamage(victim,hitgroup,dmginfo)
 				
 				local Yaw = math.abs(NewAngles.y)
 				
-				if Yaw < 30 then
+				if Yaw < 30 or victim:GetGravity() < 0.01 then
 					
 					if Damage > 1 then
 						Weapon:ShootBullet(Damage, 1, Weapon:HandleCone(Weapon.Primary.Cone,false), victim:GetShootPos(), victim:GetAimVector(), attacker)
@@ -481,9 +525,14 @@ function SWEP:DrawSpecial(Cone)
 		draw.SimpleText( "JUMP RDY", "TargetID", BasePosX - 5, BasePosY - 25, Color( 255, 255, 255, 255 ),TEXT_ALIGN_LEFT,TEXT_ALIGN_TOP )
 	end
 	
+	local ColorTable = Color(255,255,255,255)
+	
+	if self:IsBalanced() then
+		ColorTable = Color(0,255,0,255)
+	end
 	
 	for num,value in pairs(self.LastDamageTable) do
-		draw.SimpleText( value .. "%", "TargetID", BasePosX + w - 5, BasePosY + 5 + 20*4 - num*20, Color( 255, 255, 255, 255 ),TEXT_ALIGN_RIGHT,TEXT_ALIGN_TOP )
+		draw.SimpleText( value .. "%", "TargetID", BasePosX + w - 5, BasePosY + 5 + 20*4 - num*20, ColorTable,TEXT_ALIGN_RIGHT,TEXT_ALIGN_TOP )
 	end
 	
 	

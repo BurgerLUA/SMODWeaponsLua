@@ -4,12 +4,12 @@ if CLIENT then
 end
 
 SWEP.Category				= "BurgerBase: SMOD"
-SWEP.PrintName				= "FLAMETHROWER"
+SWEP.PrintName				= "Flamethrower"
 SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
 
 SWEP.Cost					= 2000
-SWEP.CSSMoveSpeed			= 200
+SWEP.CSSMoveSpeed			= 220
 
 SWEP.Spawnable				= true
 SWEP.AdminOnly				= false
@@ -20,7 +20,7 @@ SWEP.SlotPos				= 1
 SWEP.ViewModel 				= "models/weapons/v_flamethrower.mdl"
 SWEP.WorldModel				= "models/weapons/w_flamethrower.mdl"
 SWEP.VModelFlip 			= false
-SWEP.HoldType				= "crossbow"
+SWEP.HoldType				= "ar2"
 
 game.AddAmmoType({name = "ex_gas"})
 
@@ -28,23 +28,20 @@ if CLIENT then
 	language.Add("ex_gas_ammo","Gas")
 end
 
-SWEP.Primary.Damage			= 10
+SWEP.Primary.Damage			= 20
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= nil
 SWEP.Primary.Cone			= .0025
 SWEP.Primary.ClipSize		= -1
-SWEP.Primary.SpareClip		= 500
-SWEP.Primary.Delay			= ( 1/(600/60) )
+SWEP.Primary.SpareClip		= 300
+SWEP.Primary.Delay			= ( 1/(1200/60) )
 SWEP.Primary.Ammo			= "ex_gas"
 SWEP.Primary.Automatic 		= true
 
 SWEP.RecoilMul				= 1
 SWEP.SideRecoilMul			= 0.25
-SWEP.MoveConeMul				= 1.25
-SWEP.HeatMul				= 0.5
-
-SWEP.BurstConeMul			= 0.5
-SWEP.BurstRecoilMul			= 0.5
+SWEP.MoveConeMul			= 0
+SWEP.HeatMul				= 0
 
 SWEP.HasScope 				= false
 SWEP.ZoomAmount 			= 0.25
@@ -60,7 +57,7 @@ SWEP.HasSideRecoil			= true
 SWEP.HasDownRecoil			= false
 SWEP.HasDryFire				= false
 
-SWEP.DamageFalloff			= 1000
+SWEP.DamageFalloff			= 400
 
 SWEP.CanShootWhileSprinting = false
 
@@ -161,22 +158,26 @@ function SWEP:PrimaryAttack()
 	if self:GetNextPrimaryFire() > CurTime() then return end
 	if self.Owner:GetAmmoCount(self.Primary.Ammo) < 1 then return end
 	
-	if self:GetSpecialFloat() < 3 then
-		self:TakePrimaryAmmo(1)
+	local Limit = 5
+	
+	--[[
+	if self:GetSpecialFloat() < Limit then
+		self:TakePrimaryAmmo( 1 )
 	end
+	--]]
 
-	self:SetSpecialFloat( math.Clamp(self:GetSpecialFloat() + 1,0,3) )
+	self:SetSpecialFloat( math.Clamp(self:GetSpecialFloat() + Limit,0,Limit) )
 	self:SetNextPrimaryFire(CurTime() + self.Primary.Delay*0.5)
 	
 end
 
-local NextThink = 0
+
 
 local ShootSound = Sound("weapons/flamethrower/fire.wav")
 
 function SWEP:SpareThink()
 
-	if NextThink <= CurTime() then
+	if self:GetGrenadeExplosion() <= CurTime() then
 	
 		if self:GetSpecialFloat() > 0 then
 		
@@ -186,7 +187,7 @@ function SWEP:SpareThink()
 				self:EmitGunSound(ShootSound)
 			end
 		
-		
+			--self:TakePrimaryAmmo( 1 )
 			self:ShootGun()
 			self:SetSpecialFloat(self:GetSpecialFloat() - 1)
 		else
@@ -196,14 +197,34 @@ function SWEP:SpareThink()
 				self:EmitGunSound(ShootSound)
 			end
 		end
+
+		self:SetGrenadeExplosion(CurTime() + self.Primary.Delay)
 		
-		
-		
-		
-		
-		NextThink = CurTime() + self.Primary.Delay
 	end
 
+end
+
+function SWEP:SpecialHolster()
+	if self.Special_CustomLoopingSound then
+		self.Special_CustomLoopingSound:Stop()
+		self.Special_CustomLoopingSound = nil
+		self:EmitGunSound(ShootSound)
+	end
+end
+
+
+function SWEP:ShootGun()
+
+	self:HandleShootAnimations() -- don't predict, has animations
+	self:TakePrimaryAmmo(1)
+	self:PreShootBullet() -- don't predict
+
+	if IsFirstTimePredicted() or IsSingleplayer then
+		self:AfterZoom()
+		self:AddRecoil()
+		self:WeaponSound()
+	end
+	
 end
 
 
@@ -222,85 +243,84 @@ end
 
 function SWEP:ModProjectileTable(datatable)
 
-	local Decay = 1
-	local SizeIncrease = 5
-
 	datatable.direction = datatable.direction*500
 	datatable.hullsize = 1
 	datatable.resistance = datatable.direction*0.5
-	datatable.dietime = CurTime() + Decay
+	datatable.dietime = CurTime() + 1
+	datatable.id = "flamethrower"
 	
-	datatable.hullsize = 128
-	
-	datatable.drawfunction = function(datatable)
-	
-		if not datatable.customrandom then
-			datatable.customrandom = math.random(1,1000)
-			--print(datatable.customrandom)
-		end
-	
-	
-		local Timer = (math.floor( (CurTime() + datatable.customrandom)*20) % 4) + 1
-		
-		local SizeMul = ( 1 - (datatable.dietime - CurTime()) /  Decay  ) * SizeIncrease
-		
-		local DrawMaterail = nil
-		
-		if Timer == 1 then
-			DrawMaterail = Material1
-		elseif Timer == 2 then
-			DrawMaterail = Material2
-		elseif Timer == 3 then
-			DrawMaterail = Material3
-		elseif Timer == 4 then
-			DrawMaterail = Material4
-		elseif Timer == 5 then
-			DrawMaterail = Material5
-		end
-		
-		render.SetMaterial( DrawMaterail )
-		render.DrawSprite( datatable.pos,4 + 16*SizeMul,4 + 16*SizeMul,Color(255,255,255,255) )
+	datatable.hullsize = 32
 
-	end
-
-	datatable.hitfunction = function(datatable,traceresult)
-	
-		local Victim = traceresult.Entity
-		local Attacker = datatable.owner
-		local Inflictor = datatable.weapon
-		
-		if not IsValid(Attacker) then
-			Attacker = Victim
-		end
-		
-		if not IsValid(Inflictor) then
-			Inflictor = Attacker
-		end
-		
-		if Victim and Victim ~= NULL then
-			local DmgInfo = DamageInfo()
-			DmgInfo:SetDamage( datatable.damage )
-			DmgInfo:SetAttacker( Attacker )
-			DmgInfo:SetInflictor( Inflictor )
-			DmgInfo:SetDamageForce( datatable.direction:GetNormalized() )
-			DmgInfo:SetDamagePosition( datatable.pos )
-			DmgInfo:SetDamageType( DMG_BURN )
-			traceresult.Entity:DispatchTraceAttack( DmgInfo, traceresult )
-			
-			if SERVER then
-				if !Victim:IsOnFire() then
-					Victim:Ignite(3,128)
-				end
-			end
-			
-		end
-		
-
-		
-	end
-	
-	
-	
 	return datatable
 
 end
+
+local datatable = {}
+
+datatable.drawfunction = function(datatable)
+	
+	if not datatable.customrandom then
+		datatable.customrandom = math.random(1,1000)
+	end
+
+	local Timer = (math.floor( (CurTime() + datatable.customrandom)*20) % 4) + 1
+	
+	local SizeMul = ( 1 - (datatable.dietime - CurTime()) /  1  ) * 5
+	
+	local DrawMaterail = nil
+	
+	if Timer == 1 then
+		DrawMaterail = Material1
+	elseif Timer == 2 then
+		DrawMaterail = Material2
+	elseif Timer == 3 then
+		DrawMaterail = Material3
+	elseif Timer == 4 then
+		DrawMaterail = Material4
+	elseif Timer == 5 then
+		DrawMaterail = Material5
+	end
+	
+	render.SetMaterial( DrawMaterail )
+	render.DrawSprite( datatable.pos,4 + 16*SizeMul,4 + 16*SizeMul,Color(255,255,255,255) )
+
+end
+
+datatable.hitfunction = function(datatable,traceresult)
+
+	local Victim = traceresult.Entity
+	local Attacker = datatable.owner
+	local Inflictor = datatable.weapon
+	
+	if not IsValid(Attacker) then
+		Attacker = Victim
+	end
+	
+	if not IsValid(Inflictor) then
+		Inflictor = Attacker
+	end
+	
+	if Victim and Victim ~= NULL then
+		local DmgInfo = DamageInfo()
+		DmgInfo:SetDamage( datatable.damage )
+		DmgInfo:SetAttacker( Attacker )
+		DmgInfo:SetInflictor( Inflictor )
+		DmgInfo:SetDamageForce( datatable.direction:GetNormalized() )
+		DmgInfo:SetDamagePosition( datatable.pos )
+		DmgInfo:SetDamageType( DMG_BURN )
+		traceresult.Entity:DispatchTraceAttack( DmgInfo, traceresult )
+		
+		if SERVER then
+			if !Victim:IsOnFire() then
+				Victim:Ignite(3,128)
+			end
+		end
+		
+	end
+	
+
+	
+end
+
+BURGERBASE_RegisterProjectile("flamethrower",datatable)
+
