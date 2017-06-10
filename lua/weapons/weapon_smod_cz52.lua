@@ -173,3 +173,9 @@ function SWEP:WeaponAnimation(clip,animation)
 		self:SendWeaponAnimation(animation)
 	end
 end
+
+SWEP.AnimationRateTable = {}
+SWEP.AnimationRateTable[ACT_VM_RELOAD] = 0.75
+
+SWEP.SequenceDurationAdd = {}
+SWEP.SequenceDurationAdd[ACT_VM_RELOAD] = -0.1

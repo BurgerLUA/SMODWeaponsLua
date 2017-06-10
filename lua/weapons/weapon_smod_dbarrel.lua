@@ -74,3 +74,10 @@ SWEP.IronRunAng				= Vector(20,20,0)
 
 SWEP.IronMeleePos 			= Vector(-0.805, -12.865, -8.844)
 SWEP.IronMeleeAng 			= Vector(0, 70, -70)
+
+
+SWEP.AnimationRateTable = {}
+SWEP.AnimationRateTable[ACT_VM_RELOAD] = 1.5
+
+SWEP.SequenceDurationAdd = {}
+SWEP.SequenceDurationAdd[ACT_VM_RELOAD] = -0.1

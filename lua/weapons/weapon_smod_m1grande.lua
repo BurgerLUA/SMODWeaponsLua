@@ -109,7 +109,7 @@ function SWEP:SpecialFire()
 	if self:GetNextPrimaryFire() > CurTime() then return end
 	
 	self:SetNextPrimaryFire(CurTime() + 0.75)
-	self:WeaponAnimation(self:Clip1(),ACT_VM_SECONDARYATTACK)
+	self:WeaponAnimation(100,ACT_VM_SECONDARYATTACK)
 	self.Owner:DoAnimationEvent( ACT_GMOD_GESTURE_MELEE_SHOVE_2HAND )
 	self:NewSwing(75)
 
@@ -148,3 +148,9 @@ function SWEP:SpecialConePre(cone)
 	end
 	return cone
 end
+
+SWEP.AnimationRateTable = {}
+SWEP.AnimationRateTable[ACT_VM_RELOAD] = 1.5
+
+SWEP.SequenceDurationAdd = {}
+SWEP.SequenceDurationAdd[ACT_VM_RELOAD] = -0.1

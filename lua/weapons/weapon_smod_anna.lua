@@ -33,13 +33,13 @@ if CLIENT then
 	language.Add("ex_4440_ammo",".44-40")
 end
 
-SWEP.Primary.Damage			= 90
+SWEP.Primary.Damage			= 55
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= Sound("Weapon_SMODAnnabelle.Single")
 SWEP.Primary.Cone			= 0.003
 SWEP.Primary.ClipSize		= 15
 SWEP.Primary.SpareClip		= 15*2
-SWEP.Primary.Delay			= 0.35
+SWEP.Primary.Delay			= 0.3
 SWEP.Primary.Ammo			= "ex_4440"
 SWEP.Primary.Automatic 		= false
 
@@ -49,9 +49,9 @@ SWEP.RecoilMul				= 1
 SWEP.SideRecoilMul			= 0.5
 SWEP.RecoilSpeedMul			= 0.5
 SWEP.MoveConeMul			= 2
-SWEP.HeatMul				= 1
-SWEP.CoolMul				= 2.25
-SWEP.CoolSpeedMul			= 1
+SWEP.HeatMul				= 4
+SWEP.CoolMul				= 1
+SWEP.CoolSpeedMul			= 0.75
 
 SWEP.HasScope 				= false
 SWEP.ZoomAmount 			= 1
@@ -71,7 +71,7 @@ SWEP.CanShootWhileSprinting = false
 
 SWEP.DamageFalloff			= 3000
 
-SWEP.AddFOV 				= 10
+SWEP.AddFOV 				= 0
 
 SWEP.HasIronSights 			= true
 SWEP.EnableIronCross		= true
@@ -86,5 +86,63 @@ SWEP.IronMeleeAng 			= Vector(-5.628, 35.879, -52.061)
 SWEP.IronRunPos				= Vector(0,-10,-20)
 SWEP.IronRunAng				= Vector(45,0,0)
 
-SWEP.IronSightsPos 			= Vector(-8, 0, 3)
+SWEP.IronSightsPos 			= Vector(-8, 20, 3)
 SWEP.IronSightsAng 			= Vector(0, 0, 0)
+
+--[[
+1:
+		act	=	181
+		actname	=	ACT_VM_PRIMARYATTACK
+		id	=	1
+2:
+		act	=	172
+		actname	=	ACT_VM_DRAW
+		id	=	2
+3:
+		act	=	173
+		actname	=	ACT_VM_HOLSTER
+		id	=	3
+4:
+		act	=	267
+		actname	=	ACT_SHOTGUN_RELOAD_START
+		id	=	4
+5:
+		act	=	183
+		actname	=	ACT_VM_RELOAD
+		id	=	5
+6:
+		act	=	268
+		actname	=	ACT_SHOTGUN_RELOAD_FINISH
+		id	=	6
+7:
+		act	=	269
+		actname	=	ACT_SHOTGUN_PUMP
+		id	=	7
+8:
+		act	=	186
+		actname	=	ACT_VM_DRYFIRE
+		id	=	8
+--------------------
+0	=	idle
+1	=	fire01
+2	=	draw1
+3	=	holster
+4	=	reload1
+5	=	reload2
+6	=	reload3
+7	=	lever
+8	=	dryfire
+--]]
+
+
+SWEP.AnimationRateTable = {}
+SWEP.AnimationRateTable[ACT_VM_PRIMARYATTACK] = 1.25
+SWEP.AnimationRateTable[ACT_SHOTGUN_PUMP] = 1.25
+SWEP.AnimationRateTable[ACT_VM_RELOAD] = 1.5
+SWEP.AnimationRateTable[ACT_SHOTGUN_RELOAD_START] = 1.5
+SWEP.AnimationRateTable[ACT_SHOTGUN_RELOAD_FINISH] = 1.5
+
+SWEP.SequenceDurationAdd = {}
+SWEP.SequenceDurationAdd[ACT_SHOTGUN_PUMP] = -0.05
+
+

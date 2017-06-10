@@ -10,7 +10,7 @@ ENT.BounceSound = Sound("AlyxEMP.Charge")
 ENT.ExplodeSound = Sound("AlyxEMP.Discharge")
 ENT.DebrisSound = Sound("BaseGrenade.Explode")
 
-ENT.Range = 200
+ENT.Range = 1000
 
 AddCSLuaFile()
 
@@ -54,7 +54,7 @@ function ENT:PhysicsCollide(data, physobj)
 	if self.Hit then return end
 
 	if data.HitEntity:GetClass() == "worldspawn" or data.HitEntity:GetPhysicsObject():IsValid() then 
-		if data.HitEntity:GetClass() == self:GetClass() then return end
+		if data.HitEntity:GetClass() == self:GetClass() or data.HitEntity:IsPlayer() then return end
 	
 		self.HitP = data.HitPos
 		self.HitN = data.HitNormal
@@ -140,7 +140,7 @@ end
 function ENT:Think()
 
 	if SERVER then
-		if not self.FakeOwner:IsValid() then self:Remove() return end
+		if not self.FakeOwner:IsValid() or !self.FakeOwner:Alive() then self:Remove() return end
 		
 		if not self.Hit then return end
 
@@ -203,7 +203,7 @@ function ENT:Detonate(pos)
 		effectdata:SetOrigin( pos )
 		effectdata:SetScale( 1 )
 	util.Effect( "Explosion", effectdata )	
-	util.BlastDamage(self, self.FakeOwner, pos, self.Range, 75)
+	util.BlastDamage(self, self.FakeOwner, pos, 250, 75)
 	
 	self.Pos1 = self.HitP + self.HitN
 	self.Pos2 = self.HitP - self.HitN

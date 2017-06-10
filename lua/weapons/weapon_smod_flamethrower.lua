@@ -40,8 +40,11 @@ SWEP.Primary.Automatic 		= true
 
 SWEP.RecoilMul				= 1
 SWEP.SideRecoilMul			= 0.25
+SWEP.RecoilSpeedMul			= 0.75
 SWEP.MoveConeMul			= 0
-SWEP.HeatMul				= 0
+SWEP.HeatMul				= 1
+SWEP.CoolMul				= 1
+SWEP.CoolSpeedMul			= 4
 
 SWEP.HasScope 				= false
 SWEP.ZoomAmount 			= 0.25
@@ -66,6 +69,9 @@ SWEP.EnableIronCross		= true
 SWEP.HasGoodSights			= true
 SWEP.IronSightTime			= 1
 
+SWEP.IronShootPos = Vector(-6.04, 5, -1.241)
+SWEP.IronShootAng = Vector(0, 0, 0)
+
 SWEP.IronSightsPos 			= Vector(0, 0, 0)
 SWEP.IronSightsAng 			= Vector(0, 0, 0)
 
@@ -74,6 +80,8 @@ SWEP.IronRunAng				= Vector(20,20,0)
 
 SWEP.IronMeleePos 			= Vector(-0.805, -12.865, -8.844)
 SWEP.IronMeleeAng 			= Vector(0, 70, -70)
+
+SWEP.UseMuzzle				= true
 
 --[[
 1:
@@ -155,6 +163,7 @@ function SWEP:PrimaryAttack()
 
 	if not self:CanPrimaryAttack() then	return end
 	if self:IsBusy() then return end
+	if not self:CanShoot() then return end
 	if self:GetNextPrimaryFire() > CurTime() then return end
 	if self.Owner:GetAmmoCount(self.Primary.Ammo) < 1 then return end
 	
@@ -212,12 +221,26 @@ function SWEP:SpecialHolster()
 	end
 end
 
+function SWEP:OnRemove()
+	if self.Special_CustomLoopingSound then
+		self.Special_CustomLoopingSound:Stop()
+		self.Special_CustomLoopingSound = nil
+		self:EmitGunSound(ShootSound)
+	end
+end
 
+--[[
 function SWEP:ShootGun()
 
 	self:HandleShootAnimations() -- don't predict, has animations
 	self:TakePrimaryAmmo(1)
-	self:PreShootBullet() -- don't predict
+	
+	local Damage = self:SpecialDamage(self.Primary.Damage)
+	local Shots = self:SpecialShots(self.Primary.NumShots)
+	local Cone = self:HandleCone(self.Primary.Cone,false,false)
+	
+	SWEP:AddHeat()
+	self:PreShootBullet(Damage,Shots,Cone) -- don't predict
 
 	if IsFirstTimePredicted() or IsSingleplayer then
 		self:AfterZoom()
@@ -226,7 +249,7 @@ function SWEP:ShootGun()
 	end
 	
 end
-
+--]]
 
 SWEP.UseSpecialProjectile	= true
 SWEP.SourceOverride = Vector(3,0,-5)
@@ -243,14 +266,13 @@ end
 
 function SWEP:ModProjectileTable(datatable)
 
-	datatable.direction = datatable.direction*500
-	datatable.hullsize = 1
+	datatable.direction = datatable.direction*1000
+	datatable.hullsize = 16
+	datatable.usehull = true
 	datatable.resistance = datatable.direction*0.5
 	datatable.dietime = CurTime() + 1
 	datatable.id = "flamethrower"
 	
-	datatable.hullsize = 32
-
 	return datatable
 
 end
@@ -265,7 +287,7 @@ datatable.drawfunction = function(datatable)
 
 	local Timer = (math.floor( (CurTime() + datatable.customrandom)*20) % 4) + 1
 	
-	local SizeMul = ( 1 - (datatable.dietime - CurTime()) /  1  ) * 5
+	local SizeMul = ( 1 - (datatable.dietime - CurTime()) /  1  ) * 10
 	
 	local DrawMaterail = nil
 	
@@ -308,17 +330,8 @@ datatable.hitfunction = function(datatable,traceresult)
 		DmgInfo:SetDamageForce( datatable.direction:GetNormalized() )
 		DmgInfo:SetDamagePosition( datatable.pos )
 		DmgInfo:SetDamageType( DMG_BURN )
-		traceresult.Entity:DispatchTraceAttack( DmgInfo, traceresult )
-		
-		if SERVER then
-			if !Victim:IsOnFire() then
-				Victim:Ignite(3,128)
-			end
-		end
-		
+		traceresult.Entity:DispatchTraceAttack( DmgInfo, traceresult )	
 	end
-	
-
 	
 end
 

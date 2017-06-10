@@ -22,7 +22,7 @@ SWEP.WorldModel				= "models/weapons/W_Alyx_Gun.mdl"
 SWEP.VModelFlip 			= false
 SWEP.HoldType				= "revolver"
 
-SWEP.Primary.Damage			= 20
+SWEP.Primary.Damage			= 16
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= Sound("Weapon_AlyxGun.Single")
 SWEP.Primary.Cone			= 0.0035
@@ -55,7 +55,7 @@ SWEP.HasSideRecoil			= true
 SWEP.HasDownRecoil			= true
 
 SWEP.CanShootWhileSprinting = true
-SWEP.DamageFalloff			= 1000
+SWEP.DamageFalloff			= 1200
 
 SWEP.HasIronSights 			= true
 SWEP.EnableIronCross		= true
@@ -70,4 +70,10 @@ SWEP.IronSightsAng 			= Vector(0, 0, 0)
 
 SWEP.IronMeleePos 			= Vector(-6.433, -13.468, -20)
 SWEP.IronMeleeAng 			= Vector(70, 0, 0)
+
+SWEP.AnimationRateTable = {}
+SWEP.AnimationRateTable[ACT_VM_RELOAD] = 0.8
+
+SWEP.SequenceDurationAdd = {}
+SWEP.SequenceDurationAdd[ACT_VM_RELOAD] = -0.1
 

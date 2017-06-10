@@ -28,12 +28,12 @@ if CLIENT then
 	language.Add("ex_launcher_ammo","Popcan")
 end
 
-SWEP.Primary.Damage			= 75
+SWEP.Primary.Damage			= 50
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= Sound("weapons/ar2/npc_ar2_altfire.wav")
 SWEP.Primary.Cone			= 0.01
 SWEP.Primary.ClipSize		= 6
-SWEP.Primary.SpareClip		= 0
+SWEP.Primary.SpareClip		= 6
 SWEP.Primary.Delay			= 0.25
 SWEP.Primary.Ammo			= "ex_launcher"
 SWEP.Primary.Automatic 		= false
@@ -66,7 +66,7 @@ SWEP.HasHL2Pump				= false
 SWEP.DamageFalloff			= 100
 SWEP.AddFOV					= 20
 
-SWEP.SourceOverride			= Vector(2,0,-6)
+SWEP.UseMuzzle				= true
 SWEP.BulletAngOffset		= Angle(0,0,0)
 SWEP.UseSpecialProjectile	= true
 
@@ -117,7 +117,6 @@ datatable.drawfunction = function(datatable)
 		datatable.special = ClientsideModel(NadeModel, RENDERGROUP_OPAQUE )
 	end
 end
-	
 
 datatable.hitfunction = function(datatable,traceresult)
 	
@@ -145,7 +144,7 @@ datatable.hitfunction = function(datatable,traceresult)
 	
 	if IsFirstTimePredicted() then
 		local effectdata = EffectData()
-		effectdata:SetStart( datatable.pos + Vector(0,0,10)) // not sure if we need a start and origin (endpoint) for this effect, but whatever
+		effectdata:SetStart( datatable.pos + Vector(0,0,10))
 		effectdata:SetOrigin( datatable.pos)
 		effectdata:SetScale( 1 )
 		effectdata:SetRadius( 1 )
@@ -163,3 +162,14 @@ datatable.diefunction = function(datatable)
 end
 
 BURGERBASE_RegisterProjectile("launched_grenade",datatable)
+
+
+SWEP.AnimationRateTable = {}
+SWEP.AnimationRateTable[ACT_VM_PRIMARYATTACK] = 0.75
+SWEP.AnimationRateTable[ACT_SHOTGUN_PUMP] = 0.75
+SWEP.AnimationRateTable[ACT_VM_RELOAD] = 0.5
+SWEP.AnimationRateTable[ACT_SHOTGUN_RELOAD_START] = 0.75
+SWEP.AnimationRateTable[ACT_SHOTGUN_RELOAD_FINISH] = 0.75
+
+SWEP.SequenceDurationAdd = {}
+SWEP.SequenceDurationAdd[ACT_VM_RELOAD] = 0.25

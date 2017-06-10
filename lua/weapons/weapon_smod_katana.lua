@@ -33,8 +33,8 @@ SWEP.Primary.Damage			= 60
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.ClipSize		= 100
 SWEP.Primary.SpareClip		= 0
-SWEP.Primary.Cone			= 0.1
-SWEP.Primary.Delay			= 1/10
+SWEP.Primary.Cone			= 0.05
+SWEP.Primary.Delay			= 1/5
 SWEP.Primary.Ammo			= "smod_weeb"
 SWEP.Primary.Automatic 		= false 
 
@@ -77,6 +77,8 @@ SWEP.EnableBlocking			= true
 SWEP.MeleeDelay				= 0.1
 
 SWEP.MeleeDamageType		= DMG_SLASH
+
+SWEP.HeatMul				= 0
 
 --[[
 
@@ -138,13 +140,9 @@ function SWEP:PrimaryAttack()
 	
 		if Damage >= 100 then
 			self:SendSequence("misscenter1")
-			--self.Owner:ViewPunch(Angle(Damage*0.05,Damage*0.05,0))
 		else
 			self:SendSequence("hitcenter1")
-			--self.Owner:ViewPunch(Angle(0,Damage*0.05,0))
 		end
-		
-	
 		self:SetIsLeftFire(true)
 		local SequenceDelay = self:GetDelay()
 		self:SetNextPrimaryFire(CurTime() + SequenceDelay)
@@ -168,7 +166,7 @@ function SWEP:PrimaryAttack()
 	
 	self:NewSwing(NewDamage)
 	
-	if !self.Owner:IsOnGround() and Damage >= 90 then
+	if !self.Owner:IsOnGround() and self:GetPower() >= 100 then
 	
 		self.Owner:SetVelocity( -self:GetVelocity() + self.Owner:GetForward()*600 + Vector(0,0,50)	 )
 		self.Owner:ViewPunch(Angle(5,0,0))
@@ -210,7 +208,7 @@ function SWEP:PrimaryAttack()
 
 	if IsFirstTimePredicted() then
 
-		self.LastDamageTable[#self.LastDamageTable+1] = math.floor(Damage)
+		self.LastDamageTable[#self.LastDamageTable+1] = math.floor(self:GetPower())
 		
 		if #self.LastDamageTable > 3 then
 			table.remove(self.LastDamageTable,1)
@@ -223,21 +221,19 @@ function SWEP:PrimaryAttack()
 end
 
 function SWEP:IsBalanced()
-
-	local Highest = math.max(self.LastDamageTable[1],self.LastDamageTable[2],self.LastDamageTable[3], self:SpecialDamage(self.Primary.Damage) )
+	local Highest = math.max(self.LastDamageTable[1],self.LastDamageTable[2],self.LastDamageTable[3], math.floor(self:GetPower()) )
 	local Lowest = math.min(self.LastDamageTable[1],self.LastDamageTable[2],self.LastDamageTable[3])
-
 	return Lowest ~= 0 and Highest ~= 100 and math.abs(Highest - Lowest) < 5
-
 end
-
-
-
 
 SWEP.LastDamageTable = {0,0,0}
 
+function SWEP:GetPower()
+	return math.Clamp(60 * (self:GetSpecialFloat()^0.3),0,110) - 10
+end
+
 function SWEP:SpecialDamage(damage)
-	damage = math.Clamp(damage * (self:GetSpecialFloat()^0.3),0,110) - 10
+	damage = damage * (self:GetPower()/100)
 	return damage
 end
 
@@ -248,23 +244,12 @@ function SWEP:SpecialConePost(Cone,IsCrosshair)
 	else
 		Cone = Cone * ( (100 - self:SpecialDamage(self.Primary.Damage))/100 )
 	end
-	
-	
-	
+
 	return Cone
+	
 end
 
 function SWEP:PostSwing(HitEntity,Damage)
-
-	--[[
-	if self:GetIsLeftFire() then
-		self.Owner:ViewPunch(Angle(0,5,0))	
-	else
-		self.Owner:ViewPunch(Angle(0,-5,0))	
-	end
-	--]]
-
-
 	self:SetSpecialFloat(0)
 end
 
@@ -295,19 +280,23 @@ end
 
 function SWEP:SpareThink()
 
+	local IsBlocking = (self:GetSpecialFloat() < 0.25) or ( self.Owner:KeyDown(IN_ATTACK2) )
+
 	local Add = FrameTime()
 	
-	if self.Owner:IsOnGround() then
+	if self.Owner:KeyDown(IN_ATTACK2) then
+		Add = Add*-1
+	elseif self.Owner:IsOnGround() then
 		Add = Add*2
 	end
+	
 
-	self:SetSpecialFloat( math.Clamp(self:GetSpecialFloat() + Add,0,10) )
 	
-	local IsBlocking = (self:GetSpecialFloat() < 0.25) or ( self.Owner:KeyDown(IN_ATTACK2) )
+
+
+	self:SetSpecialFloat( math.Clamp(self:GetSpecialFloat() + Add,0,8) )
 	
-	--self:SetIsBlocking( IsBlocking )
 	
-	--print(IsBlocking)
 
 	if self.Owner:IsOnGround() then
 		self:SetSpecialInt(1)
@@ -342,7 +331,7 @@ function SWEP:SpareThink()
 	end
 
 	if self:GetNextMelee() >= CurTime() and not IsBlocking then
-		if self:SpecialDamage(self.Primary.Damage) >= 100 then
+		if self:GetPower() >= 100 then
 			self.CSSMoveSpeed = 1200
 			--self.MeleeSize = 120
 			--self.MeleeRange	= 100
@@ -417,13 +406,25 @@ function SWEP:Deploy()
 end
 
 function SWEP:BlockDamage(Damage,Attacker)
+
 	self.Owner:SetAnimation(PLAYER_ATTACK1)
 	self:SendWeaponAnim(ACT_VM_HITCENTER)
 	self:EmitGunSound(self.MeleeSoundMiss)
 	self.Owner:EmitSound(Sound("FX_RicochetSound.Ricochet"))
-	self:SetNextPrimaryFire(CurTime() + self.Primary.Delay*0.5)
-	--self:SetNextSecondaryFire(CurTime() + self.Primary.Delay*0.25)
-	self:AddDurability(- math.ceil(Damage*0.1) )
+
+	if Attacker and Attacker ~= NULL then
+		local AttackerWeapon = Attacker:GetActiveWeapon()
+		if AttackerWeapon and AttackerWeapon ~= NULL and AttackerWeapon.WeaponType == "Melee" then
+			local Delay = 1
+			self:SetNextPrimaryFire(CurTime() + Delay*0.5)
+			self:SetNextSecondaryFire(CurTime() + Delay*0.5)
+			AttackerWeapon:SetNextPrimaryFire(CurTime() + Delay)
+			AttackerWeapon:SetNextSecondaryFire(CurTime() + Delay)
+		end
+	end
+	
+	--self:AddDurability(- math.ceil(Damage*0.1) )
+	
 end
 
 function KATANA_ScalePlayerDamage(victim,hitgroup,dmginfo)
@@ -435,6 +436,7 @@ function KATANA_ScalePlayerDamage(victim,hitgroup,dmginfo)
 
 	if Weapon and Weapon ~= NULL and Weapon:GetClass() == "weapon_smod_katana" then
 
+		--[[
 		local Goal = 0.25
 
 		if attacker:IsPlayer() and attacker:GetActiveWeapon() and attacker:GetActiveWeapon():IsValid() then
@@ -443,9 +445,12 @@ function KATANA_ScalePlayerDamage(victim,hitgroup,dmginfo)
 				Goal = Goal / WeaponAttacker.Primary.NumShots
 			end
 		end
-
+		--]]
 		
-		local VictimKeyDown = Weapon:IsBalanced() or (Weapon:GetSpecialFloat() < Goal) or victim:GetGravity() < 0.01
+		local NormalBlock = (Weapon:GetSpecialFloat() > 0 and Weapon:GetIsBlocking())
+		
+		
+		local VictimKeyDown = Weapon:IsBalanced() or ( victim:GetGravity() < 0.01 and victim:GetGravity() ~= 0 ) or NormalBlock
 
 		if VictimKeyDown then
 
@@ -469,12 +474,12 @@ function KATANA_ScalePlayerDamage(victim,hitgroup,dmginfo)
 				
 				local Yaw = math.abs(NewAngles.y)
 				
-				if Yaw < 30 or victim:GetGravity() < 0.01 then
+				if Yaw < 30 or ( victim:GetGravity() < 0.01 and victim:GetGravity() ~= 0 ) then
 					
 					if Damage > 1 then
 						Weapon:ShootBullet(Damage, 1, Weapon:HandleCone(Weapon.Primary.Cone,false), victim:GetShootPos(), victim:GetAimVector(), attacker)
 					end
-					
+
 					Weapon:BlockDamage(Damage)
 					
 					return true
@@ -506,7 +511,7 @@ function SWEP:DrawSpecial(Cone)
 	local h = 20
 		local BorderSize = 10
 	
-	local DamageMul = math.Clamp(self:SpecialDamage(self.Primary.Damage)/100,0,1)
+	local DamageMul = math.Clamp(self:GetPower()/100,0,1)
 	local BasePosX = x/2 - w/2
 	local BasePosY = y*0.75 - MovementBullshit*100
 
@@ -517,7 +522,7 @@ function SWEP:DrawSpecial(Cone)
 	
 	draw.SimpleText( math.floor(DamageMul*100) .. "%", "TargetID", BasePosX + w - 5, BasePosY, Color( 255, 255, 255, 255 ),TEXT_ALIGN_RIGHT,TEXT_ALIGN_TOP )
 	
-	if DamageMul >= 0.9 then
+	if DamageMul >= 1 then
 		draw.SimpleText( "DASH RDY", "TargetID", BasePosX + w - 5, BasePosY - 25, Color( 255, 255, 255, 255 ),TEXT_ALIGN_RIGHT,TEXT_ALIGN_TOP )
 	end
 	
