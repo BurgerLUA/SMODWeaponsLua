@@ -132,23 +132,27 @@ datatable.hitfunction = function(datatable,traceresult)
 		Inflictor = Attacker
 	end
 	
-	local DmgInfo = DamageInfo()
-	DmgInfo:SetDamage( datatable.damage )
-	DmgInfo:SetAttacker( Attacker )
-	DmgInfo:SetInflictor( Inflictor )
-	DmgInfo:SetDamageForce( datatable.direction:GetNormalized() )
-	DmgInfo:SetDamagePosition( datatable.pos )
-	DmgInfo:SetDamageType( DMG_SHOCK )
+	if IsValid(Attacker) and IsValid(Inflictor) then
 	
-	util.BlastDamageInfo( DmgInfo, datatable.pos, 512 )
+		local DmgInfo = DamageInfo()
+		DmgInfo:SetDamage( datatable.damage )
+		DmgInfo:SetAttacker( Attacker )
+		DmgInfo:SetInflictor( Inflictor )
+		DmgInfo:SetDamageForce( datatable.direction:GetNormalized() )
+		DmgInfo:SetDamagePosition( traceresult.HitPos )
+		DmgInfo:SetDamageType( DMG_SHOCK )
+		util.BlastDamageInfo( DmgInfo, traceresult.HitPos, 512 )
+		
+		if IsFirstTimePredicted() then
+			local effectdata = EffectData()
+			effectdata:SetStart( traceresult.HitPos + datatable.direction:GetNormalized()*100)
+			effectdata:SetOrigin( traceresult.HitPos)
+			effectdata:SetScale( 1 )
+			effectdata:SetRadius( 1 )
+			util.Effect( "Explosion", effectdata)
+		end
+		
 	
-	if IsFirstTimePredicted() then
-		local effectdata = EffectData()
-		effectdata:SetStart( datatable.pos + Vector(0,0,10))
-		effectdata:SetOrigin( datatable.pos)
-		effectdata:SetScale( 1 )
-		effectdata:SetRadius( 1 )
-		util.Effect( "Explosion", effectdata)
 	end
 	
 end

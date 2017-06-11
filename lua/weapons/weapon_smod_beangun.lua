@@ -149,7 +149,7 @@ datatable.hitfunction = function(datatable,traceresult)
 		Inflictor = Attacker
 	end
 	
-	if Victim and Victim ~= NULL then
+	if IsValid(Attacker) and IsValid(Victim) and IsValid(Inflictor) then
 		local DmgInfo = DamageInfo()
 		DmgInfo:SetDamage( datatable.damage )
 		DmgInfo:SetAttacker( Attacker )

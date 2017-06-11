@@ -22,21 +22,21 @@ SWEP.WorldModel				= "models/weapons/w_svd.mdl"
 SWEP.VModelFlip 			= false
 SWEP.HoldType				= "ar2"
 
-SWEP.Primary.Damage			= 55
+SWEP.Primary.Damage			= 60
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= Sound("Weapon_SVD.Fire")
-SWEP.Primary.Cone			= 0.001
+SWEP.Primary.Cone			= 0.0005
 SWEP.Primary.ClipSize		= 10
 SWEP.Primary.SpareClip		= 10*4
 SWEP.Primary.Delay			= 0.5
 SWEP.Primary.Ammo			= "bb_762mm"
 SWEP.Primary.Automatic 		= true
 
-SWEP.RecoilMul				= 1
-SWEP.SideRecoilMul			= 0.5
+SWEP.RecoilMul				= 0.5
+SWEP.SideRecoilMul			= 0.1
 SWEP.RecoilSpeedMul			= 0.75
 SWEP.MoveConeMul			= 2
-SWEP.HeatMul				= 1
+SWEP.HeatMul				= 0.5
 SWEP.CoolMul				= 1
 SWEP.MaxHeat				= 1
 
