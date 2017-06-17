@@ -25,7 +25,7 @@ SWEP.HoldType				= "ar2"
 game.AddAmmoType({name = "ex_launcher"})
 
 if CLIENT then 
-	language.Add("ex_launcher_ammo","Popcan")
+	language.Add("ex_launcher_ammo","Grenade Launcher Ammo")
 end
 
 SWEP.Primary.Damage			= 50
