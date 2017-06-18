@@ -32,6 +32,8 @@ SWEP.Primary.Delay			= 1/(800/60)
 SWEP.Primary.Ammo			= "ar2"
 SWEP.Primary.Automatic 		= true
 
+SWEP.GetMagModel			= Model("models/weapons/magazines/smod_mag_pulsemg.mdl")
+
 SWEP.RecoilMul				= 1
 SWEP.SideRecoilMul			= 0.75
 SWEP.RecoilSpeedMul			= 1.5

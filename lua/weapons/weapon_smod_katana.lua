@@ -132,7 +132,7 @@ function SWEP:PrimaryAttack()
 	if self:GetNextPrimaryFire() > CurTime() then return end
 	if self.Owner:KeyDown(IN_ATTACK2) then return end
 	
-	--self.Owner:SetAnimation(PLAYER_ATTACK1)
+	self.Owner:SetAnimation(PLAYER_ATTACK1)
 	
 	local Damage = self:SpecialDamage(self.Primary.Damage)
 	
@@ -265,7 +265,6 @@ function SWEP:SpecialDelay(Delay)
 end
 --]]
 
-
 function SWEP:Reload()
 
 	if SERVER then
@@ -275,12 +274,11 @@ function SWEP:Reload()
 		end
 	end
 
-
 end
 
 function SWEP:SpareThink()
 
-	local IsBlocking = (self:GetSpecialFloat() < 0.25) or ( self.Owner:KeyDown(IN_ATTACK2) )
+	local IsBlocking = ( self.Owner:KeyDown(IN_ATTACK2) ) or (self:GetSpecialFloat() < 0.25)
 
 	local Add = FrameTime()
 	
@@ -289,14 +287,8 @@ function SWEP:SpareThink()
 	elseif self.Owner:IsOnGround() then
 		Add = Add*2
 	end
-	
-
-	
-
 
 	self:SetSpecialFloat( math.Clamp(self:GetSpecialFloat() + Add,0,8) )
-	
-	
 
 	if self.Owner:IsOnGround() then
 		self:SetSpecialInt(1)
@@ -321,9 +313,7 @@ function SWEP:SpareThink()
 		self.Owner:ViewPunch(Angle(5,0,0))
 		self:SetSpecialInt(0)
 	end
-	
-	
-	
+
 	if self:GetNextPrimaryFire() + 1 <= CurTime() then
 		if self:GetIsLeftFire() then
 			self:SetIsLeftFire(false)
@@ -333,36 +323,17 @@ function SWEP:SpareThink()
 	if self:GetNextMelee() >= CurTime() and not IsBlocking then
 		if self:GetPower() >= 100 then
 			self.CSSMoveSpeed = 1200
-			--self.MeleeSize = 120
-			--self.MeleeRange	= 100
 		else
 			self.CSSMoveSpeed = 600
-			--self.MeleeSize = 60
-			--self.MeleeRange	= 50
 		end	
 	elseif IsBlocking then
-		self.CSSMoveSpeed = 300*0.25
-		--self.MeleeSize = 16
-		--self.MeleeRange	= 50
+	
+		self.CSSMoveSpeed = 300*0.5
 		self:SetHoldType("slam")
 	else
 		self.CSSMoveSpeed = 300
-		--self.MeleeSize = 16
-		--self.MeleeRange	= 50
 		self:SetHoldType(self.HoldType)
 	end
-
-	--[[
-	if SERVER then
-		if self.Owner:KeyDown(IN_ATTACK2) and self:GetNextSecondaryFire() <= CurTime() then
-			self:SetIsBlocking( true )
-			self:SetHoldType("slam")
-		else
-			self:SetHoldType(self.HoldType)
-			self:SetIsBlocking( false )
-		end
-	end
-	--]]
 
 end
 
@@ -433,24 +404,22 @@ function KATANA_ScalePlayerDamage(victim,hitgroup,dmginfo)
 	local Weapon = victim:GetActiveWeapon()
 	local Damage = dmginfo:GetDamage()
 	local WeaponAttacker = dmginfo:GetInflictor()
-
-	if Weapon and Weapon ~= NULL and Weapon:GetClass() == "weapon_smod_katana" then
-
-		--[[
-		local Goal = 0.25
-
-		if attacker:IsPlayer() and attacker:GetActiveWeapon() and attacker:GetActiveWeapon():IsValid() then
-			WeaponAttacker = attacker:GetActiveWeapon()
-			if WeaponAttacker:IsScripted() and (WeaponAttacker.Base == "weapon_burger_core_base" or WeaponAttacker.BurgerBase) then
-				Goal = Goal / WeaponAttacker.Primary.NumShots
-			end
+	
+	if attacker and attacker ~= NULL then
+		local Temp = attacker:GetActiveWeapon()
+		if Temp and Temp ~= NULL then
+			WeaponAttacker = Temp
 		end
-		--]]
-		
+	end
+	
+	
+
+	if Weapon and Weapon ~= NULL and Weapon:GetClass() == "weapon_smod_katana" and WeaponAttacker and WeaponAttacker ~= NULL and WeaponAttacker.Primary and WeaponAttacker.Primary.NumShots <= 3 then
+
 		local NormalBlock = (Weapon:GetSpecialFloat() > 0 and Weapon:GetIsBlocking())
 		
 		
-		local VictimKeyDown = Weapon:IsBalanced() or ( victim:GetGravity() < 0.01 and victim:GetGravity() ~= 0 ) or NormalBlock
+		local VictimKeyDown = (Weapon:IsBalanced() or ( victim:GetGravity() < 0.01 and victim:GetGravity() ~= 0 ) or NormalBlock)
 
 		if VictimKeyDown then
 

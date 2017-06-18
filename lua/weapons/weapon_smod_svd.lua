@@ -22,6 +22,8 @@ SWEP.WorldModel				= "models/weapons/w_svd.mdl"
 SWEP.VModelFlip 			= false
 SWEP.HoldType				= "ar2"
 
+SWEP.GetMagModel			= Model("models/weapons/magazines/smod_mag_SVD.mdl")
+
 SWEP.Primary.Damage			= 60
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= Sound("Weapon_SVD.Fire")

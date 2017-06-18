@@ -22,26 +22,28 @@ SWEP.WorldModel				= "models/weapons/w_flamethrower.mdl"
 SWEP.VModelFlip 			= false
 SWEP.HoldType				= "ar2"
 
+SWEP.IsPowerWeapon			= true
+
 game.AddAmmoType({name = "ex_gas"})
 
 if CLIENT then 
 	language.Add("ex_gas_ammo","Gas")
 end
 
-SWEP.Primary.Damage			= 20
+SWEP.Primary.Damage			= 10
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= nil
-SWEP.Primary.Cone			= .0025
+SWEP.Primary.Cone			= 0.005
 SWEP.Primary.ClipSize		= -1
 SWEP.Primary.SpareClip		= 300
-SWEP.Primary.Delay			= ( 1/(1200/60) )
+SWEP.Primary.Delay			= ( 1/(2000/60) )
 SWEP.Primary.Ammo			= "ex_gas"
 SWEP.Primary.Automatic 		= true
 
 SWEP.RecoilMul				= 1
 SWEP.SideRecoilMul			= 0.25
 SWEP.RecoilSpeedMul			= 0.75
-SWEP.MoveConeMul			= 0
+SWEP.MoveConeMul			= 0.5
 SWEP.HeatMul				= 1
 SWEP.CoolMul				= 1
 SWEP.CoolSpeedMul			= 4

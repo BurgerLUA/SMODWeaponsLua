@@ -36,18 +36,18 @@ end
 SWEP.Primary.Damage			= 110
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= Sound("weapons/kar98/kar_shoot.wav")
-SWEP.Primary.Cone			= 0.005
+SWEP.Primary.Cone			= 0
 SWEP.Primary.ClipSize		= 5
 SWEP.Primary.SpareClip		= 5*6
-SWEP.Primary.Delay			= 2
+SWEP.Primary.Delay			= 2 * (1/1.5)
 SWEP.Primary.Ammo			= "smod_mauser"
-SWEP.Primary.Automatic 		= false
+SWEP.Primary.Automatic 		= true
 
 SWEP.RecoilMul				= 0.5
 SWEP.SideRecoilMul			= 0.25
 SWEP.RecoilSpeedMul			= 0.5
-SWEP.MoveConeMul			= 2
-SWEP.HeatMul				= 5
+SWEP.MoveConeMul			= 1
+SWEP.HeatMul				= 3
 SWEP.CoolMul				= 1
 SWEP.CoolSpeedMul			= 1
 SWEP.MaxHeat				= 1
@@ -103,6 +103,15 @@ function SWEP:SpecialFire()
 	self:SetNextPrimaryFire(CurTime() + 1)
 	self:WeaponAnimation(self:Clip1(),ACT_VM_SECONDARYATTACK)
 	self.Owner:DoAnimationEvent( ACT_GMOD_GESTURE_MELEE_SHOVE_2HAND )
-	self:NewSwing(90)
+	self:NewSwing(100)
 
 end
+
+SWEP.AnimationRateTable = {}
+SWEP.AnimationRateTable[ACT_VM_PRIMARYATTACK] = 1.5
+SWEP.AnimationRateTable[ACT_VM_RELOAD] = 1.25
+
+--[[
+SWEP.SequenceDurationAdd = {}
+SWEP.SequenceDurationAdd[ACT_SHOTGUN_PUMP] = -0.05
+--]]

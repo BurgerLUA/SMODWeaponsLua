@@ -22,6 +22,9 @@ SWEP.WorldModel				= "models/weapons/w_grease.mdl"
 SWEP.VModelFlip 			= false
 SWEP.HoldType				= "smg"
 
+
+SWEP.GetMagModel			= Model("models/weapons/magazines/smod_mag_M3Greasegun.mdl")
+
 SWEP.Primary.Damage			= 30
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= Sound("weapons/grease/greasegun_shoot.wav")

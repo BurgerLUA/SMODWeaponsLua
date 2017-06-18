@@ -22,6 +22,8 @@ SWEP.WorldModel				= "models/weapons/w_m4a1.mdl"
 SWEP.ViewModelFlip 			= true
 SWEP.HoldType				= "ar2"
 
+SWEP.GetMagModel			= Model("models/weapons/magazines/smod_mag_M4A1.mdl")
+
 SWEP.Primary.Damage			= 30
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Sound			= Sound("weapons/m4a1/m4sil-1.wav")
