@@ -34,6 +34,10 @@ SWEP.Primary.Delay			= 1/(600/60)
 SWEP.Primary.Ammo			= "bb_556mm"
 SWEP.Primary.Automatic 		= true
 
+SWEP.Secondary.Ammo			= "SMG1_Grenade"
+SWEP.Secondary.ClipSize		= -1
+SWEP.Secondary.SpareClip	= 3
+
 SWEP.RecoilMul				= 1.25
 SWEP.SideRecoilMul			= 0.5
 SWEP.RecoilSpeedMul			= 1.25
@@ -143,6 +147,54 @@ function SWEP:SpareThink()
 	if self:GetPrimaryAmmo() == game.GetAmmoID("bb_762mm") and self:GetIsBurst() then
 		self:SetIsBurst( false )
 	end
+
+end
+
+
+
+function SWEP:CanQuickThrow()
+	return false
+end
+
+SWEP.UseMuzzle = true
+
+function SWEP:QuickThrowOverride()
+
+	if self:GetNextPrimaryFire() > CurTime() then return end
+	if self:GetNextSecondaryFire() > CurTime() then return end
+	if self:IsBusy() then return end
+	if !self:HasSecondaryAmmoToFire() then return end
+	
+	self:TakeSecondaryAmmo(1)
+
+	self.Owner:SetAnimation(PLAYER_ATTACK1)
+	self:WeaponAnimation(self:Clip1(),ACT_VM_SECONDARYATTACK)
+
+	if (IsFirstTimePredicted() or game.SinglePlayer()) then
+		if (CLIENT or game.SinglePlayer()) then 
+			self:AddRecoil() -- Predict
+		end
+
+		self:ShootProjectile(50, 1, 0, self.Owner:GetShootPos(), self.Owner:GetAimVector(),true)
+		
+		self:EmitGunSound("weapons/ar2/ar2_altfire.wav")
+	end
+	
+	self:SetNextPrimaryFire(CurTime() + self.Primary.Delay*10*2)
+	
+end
+
+function SWEP:ModProjectileTable(datatable)
+
+	datatable.direction = datatable.direction*800
+	datatable.hullsize = 1
+	datatable.resistance = datatable.direction*0.1 + Vector(0,0,200)
+	datatable.dietime = CurTime() + 10
+	datatable.id = "launched_grenade"
+	
+	datatable.hullsize = 1
+
+	return datatable
 
 end
 

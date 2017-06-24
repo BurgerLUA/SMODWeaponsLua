@@ -87,16 +87,11 @@ SWEP.IronRunAng				= Vector(-10,0,0)
 SWEP.IronMeleePos = Vector(0, 0, -1.81)
 SWEP.IronMeleeAng = Vector(16.18, -40.805, 44.321)
 
-
-
-local NadeModel = Model("models/weapons/ar2_grenade.mdl")
-local NadeSound = Sound("fofgunsounds/melee/axe_hit2.wav")
-
 function SWEP:ModProjectileTable(datatable)
 
-	datatable.direction = datatable.direction*1000
+	datatable.direction = datatable.direction*800
 	datatable.hullsize = 1
-	datatable.resistance = datatable.direction*0.1 + Vector(0,0,100)
+	datatable.resistance = datatable.direction*0.1 + Vector(0,0,200)
 	datatable.dietime = CurTime() + 10
 	datatable.id = "launched_grenade"
 	
@@ -105,68 +100,6 @@ function SWEP:ModProjectileTable(datatable)
 	return datatable
 
 end
-
-local datatable = {}
-
-datatable.drawfunction = function(datatable)
-	if datatable.special and datatable.special ~= NULL then
-		datatable.special:SetPos(datatable.pos)
-		datatable.special:SetAngles( datatable.direction:GetNormalized():Angle() )
-		datatable.special:DrawModel()
-	else
-		datatable.special = ClientsideModel(NadeModel, RENDERGROUP_OPAQUE )
-	end
-end
-
-datatable.hitfunction = function(datatable,traceresult)
-	
-	local Victim = traceresult.Entity
-	local Attacker = datatable.owner
-	local Inflictor = datatable.weapon
-	
-	if not IsValid(Attacker) then
-		Attacker = Victim
-	end
-	
-	if not IsValid(Inflictor) then
-		Inflictor = Attacker
-	end
-	
-	if IsValid(Attacker) and IsValid(Inflictor) then
-	
-		local DmgInfo = DamageInfo()
-		DmgInfo:SetDamage( datatable.damage )
-		DmgInfo:SetAttacker( Attacker )
-		DmgInfo:SetInflictor( Inflictor )
-		DmgInfo:SetDamageForce( datatable.direction:GetNormalized() )
-		DmgInfo:SetDamagePosition( traceresult.HitPos )
-		DmgInfo:SetDamageType( DMG_SHOCK )
-		util.BlastDamageInfo( DmgInfo, traceresult.HitPos, 512 )
-		
-		if IsFirstTimePredicted() then
-			local effectdata = EffectData()
-			effectdata:SetStart( traceresult.HitPos + datatable.direction:GetNormalized()*100)
-			effectdata:SetOrigin( traceresult.HitPos)
-			effectdata:SetScale( 1 )
-			effectdata:SetRadius( 1 )
-			util.Effect( "Explosion", effectdata)
-		end
-		
-	
-	end
-	
-end
-
-datatable.diefunction = function(datatable)
-	if CLIENT then
-		if datatable.special and datatable.special ~= NULL then
-			datatable.special:Remove()
-		end
-	end
-end
-
-BURGERBASE_RegisterProjectile("launched_grenade",datatable)
-
 
 SWEP.AnimationRateTable = {}
 SWEP.AnimationRateTable[ACT_VM_PRIMARYATTACK] = 0.75
