@@ -26,20 +26,20 @@ SWEP.GetMagModel			= Model("models/weapons/magazines/smod_mag_M4A1.mdl")
 
 SWEP.Primary.Damage			= 30
 SWEP.Primary.NumShots		= 1
-SWEP.Primary.Sound			= Sound("weapons/m4a1/m4sil-1.wav")
+SWEP.Primary.Sound			= Sound("weapons/m4a1/m4a1-1.wav")
 SWEP.Primary.Cone			= 0.00125
 SWEP.Primary.ClipSize		= 30
 SWEP.Primary.SpareClip		= 90
-SWEP.Primary.Delay			= 1/10
+SWEP.Primary.Delay			= 0.09
 SWEP.Primary.Ammo			= "bb_556mm"
 SWEP.Primary.Automatic 		= false
 
-SWEP.RecoilMul				= 2
-SWEP.SideRecoilMul			= 0
-SWEP.RecoilSpeedMul			= 1.5
-SWEP.MoveConeMul			= 0.5
-SWEP.HeatMul				= 2
-SWEP.CoolMul				= 0.5
+SWEP.RecoilMul				= 1
+SWEP.SideRecoilMul			= 0.5
+SWEP.RecoilSpeedMul			= 1.25
+SWEP.MoveConeMul			= 0.1
+SWEP.HeatMul				= 1
+SWEP.CoolMul				= 1
 SWEP.CoolSpeedMul			= 1
 
 SWEP.HasScope 				= false
@@ -60,7 +60,7 @@ SWEP.DamageFalloff			= 2000
 
 SWEP.BurstOverride			= 3
 SWEP.BurstConeMul			= 2
-SWEP.BurstSpeedOverride 	= 0.5
+SWEP.BurstSpeedOverride 	= 1
 SWEP.BurstRecoilMul			= 0.5
 SWEP.BurstHeatMul			= 0.5
 SWEP.BurstSpeedAbs			= 0.4

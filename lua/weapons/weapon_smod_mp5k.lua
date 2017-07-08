@@ -3,7 +3,7 @@ if CLIENT then
 	SWEP.WepSelectIcon 		= surface.GetTextureID("vgui/killicons/ew2_bishot")
 end
 
-SWEP.Category				= "BurgerBase: Extras"
+SWEP.Category				= "BurgerBase: SMOD"
 SWEP.PrintName				= "MP5k"
 SWEP.Base					= "weapon_burger_core_base"
 SWEP.WeaponType				= "Primary"
@@ -31,7 +31,7 @@ SWEP.Primary.Cone			= 0.0025
 SWEP.Primary.ClipSize		= 20
 SWEP.Primary.SpareClip		= 20*8
 SWEP.Primary.Delay			= 1/(900/60)
-SWEP.Primary.Ammo			= "bb_762mm"
+SWEP.Primary.Ammo			= "bb_9mm"
 SWEP.Primary.Automatic 		= true
 
 SWEP.Secondary.Ammo			= "SMG1_Grenade"
@@ -67,10 +67,10 @@ SWEP.DamageFalloff			= 3000
 SWEP.HasIronSights 			= true
 SWEP.EnableIronCross		= true
 SWEP.HasGoodSights			= false
-SWEP.IronSightTime			= 0.5
-SWEP.ZoomTime				= 0.5
+SWEP.IronSightTime			= 0.25
+SWEP.ZoomTime				= 0.25
 
-SWEP.IronSightsPos 			= Vector(-6.64, 20, 1)
+SWEP.IronSightsPos 			= Vector(-5.64, 20, 0)
 SWEP.IronSightsAng			= Vector(2.5, 0, 0)
 
 SWEP.IronRunPos 			= Vector(0, -3, 0)

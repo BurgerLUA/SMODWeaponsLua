@@ -1,3 +1,13 @@
+//SMOD STG 44-----------------------------------------------------------
+local SMODstbl = {}
+SMODstbl["channel"] = 1
+SMODstbl["level"] = "140"
+SMODstbl["volume"] = "0.9"
+SMODstbl["CompatibilityAttenuation"] = "1"
+SMODstbl["pitch"] = "98,102"
+SMODstbl["sound"] = {"weapons/stg44/stg44-fire.wav"}
+SMODstbl["name"] = "Weapon_STG44.Fire"
+
 //SMOD A35 Grenade Launcher------------------------------------------------
 local SMODstbl = {}
 SMODstbl["channel"] = 1
@@ -659,7 +669,6 @@ SMODstbl["name"] = "Weapon_SVD.Magin"
 
 sound.Add(SMODstbl)
 
-
 local SMODstbl = {}
 SMODstbl["channel"] = 3
 SMODstbl["level"] = "75"
@@ -668,5 +677,39 @@ SMODstbl["CompatibilityAttenuation"] = "1"
 SMODstbl["pitch"] = "98,105"
 SMODstbl["sound"] = {"weapons/oicw/oicw_reload.wav"}
 SMODstbl["name"] = "Weapon_SVD.Lens"
+
+sound.Add(SMODstbl)
+
+-- MP5
+local SMODstbl = {}
+SMODstbl["channel"] = 3
+SMODstbl["level"] = "75"
+SMODstbl["volume"] = "0.9"
+SMODstbl["CompatibilityAttenuation"] = "1"
+SMODstbl["pitch"] = "98,105"
+SMODstbl["sound"] = {"weapons/mp5/mp5_clipout.wav"}
+SMODstbl["name"] = "Weapon_MP5.Clipout"
+
+sound.Add(SMODstbl)
+
+local SMODstbl = {}
+SMODstbl["channel"] = 3
+SMODstbl["level"] = "75"
+SMODstbl["volume"] = "0.9"
+SMODstbl["CompatibilityAttenuation"] = "1"
+SMODstbl["pitch"] = "98,105"
+SMODstbl["sound"] = {"weapons/mp5/mp5_clipin.wav"}
+SMODstbl["name"] = "Weapon_MP5.Clipin"
+
+sound.Add(SMODstbl)
+
+local SMODstbl = {}
+SMODstbl["channel"] = 3
+SMODstbl["level"] = "75"
+SMODstbl["volume"] = "0.9"
+SMODstbl["CompatibilityAttenuation"] = "1"
+SMODstbl["pitch"] = "98,105"
+SMODstbl["sound"] = {"weapons/mp5/mp5_slideback.wav"}
+SMODstbl["name"] = "Weapon_MP5.SlideBack"
 
 sound.Add(SMODstbl)
